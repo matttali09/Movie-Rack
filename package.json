@@ -1,0 +1,31 @@
+{
+  "name": "movie-rack",
+  "version": "1.0.0",
+  "description": "Movie Debunker User based program using express handlebars, node, and sequalize",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matttali09/Movie-Rack.git"
+  },
+  "keywords": [
+    "express-handlebars",
+    "node",
+    "sequalize"
+  ],
+  "author": "Matt Taliancich",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matttali09/Movie-Rack/issues"
+  },
+  "homepage": "https://github.com/matttali09/Movie-Rack#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0",
+    "mysql2": "^1.6.4",
+    "sequelize": "^4.42.0"
+  }
+}
