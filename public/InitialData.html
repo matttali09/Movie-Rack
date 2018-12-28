@@ -7,39 +7,29 @@
   <title>Movie Rack Initial Data</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-
-    <!-- Google Fonts Link -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Muli:300,400,600,700"
-      rel="stylesheet"
-    />
+  <!-- Reset CSS -->
+  <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/reset.css" />
+  <!-- Materialize CSS CDN link. Compiled and minified-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
 
   <!-- Materialize Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <!-- Local CSS -->
   <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/main.css" />
 
-    <!-- Materialize Icons -->
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
+  <!-- Google Fonts Link -->
+  <link href="https://fonts.googleapis.com/css?family=Muli:400,600,700" rel="stylesheet" />
+
   </head>
   <body>
     <!-- ========================= Nav Bar =======================-->
     <nav>
       <div class="nav-wrapper">
-        <a href="#!" class="brand-logo"
-          ><div id="navLogoBox">
-            <img
-              id="navLogo"
-              src="assets/images/MovieRackLogo.png"
-              alt="Movie Rack Logo"
-            /></div
-        ></a>
-        <a href="#" data-target="mobile-demo" class="sidenav-trigger"
-          ><i class="material-icons">menu</i></a
-        >
+        <a href="#!" class="brand-logo">
+          <div id="navLogoBox">
+            <img id="navLogo" src="assets/images/MovieRackLogo.png" alt="Movie Rack Logo" /></div>
+        </a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
           <li><a href="#">Home</a></li>
           <li><a href="#">Rate</a></li>
@@ -47,6 +37,12 @@
         </ul>
       </div>
     </nav>
+  
+    <ul class="sidenav" id="mobile-demo">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Rate</a></li>
+      <li><a href="#">Login</a></li>
+    </ul>
 
 
   
