@@ -2,6 +2,26 @@
 /* Orange: F7941D */
 /* Light Blue 59D8E5 */
 /* Red: D64700 */
+/* font-family: 'Muli', sans-serif; */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Muli", sans-serif;
+  font-weight: 700;
+  color: white;
+  line-height: 120%;
+}
+
+p {
+  font-family: "Muli", sans-serif;
+  font-weight: 300;
+  line-height: 150%;
+  color: white;
+}
 
 #navLogo {
   height: 35px;
@@ -16,15 +36,19 @@
   background-color: #2f3738;
 }
 
-/* body {
-    background: url("../images/adult-couple-dating-951290-scld.jpg") no-repeat
-      center center fixed;
-    background-size: cover; */
-    /* background-repeat: no-repeat; */
-/* background-color: black; */
- 
 body {
-  background: url("../images/pexels-photo-436413.jpeg") no-repeat center center 
+  background: url("../images/pexels-photo-436413.jpeg") no-repeat center center
     fixed;
   background-size: cover;
+}
+
+.mainContent {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+  margin-top: 2em;
+  padding: 2em;
+}
+
+.formWrapP {
+  background-color: white;
+  padding: 1em;
 }

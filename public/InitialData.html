@@ -7,53 +7,73 @@
   <title>Movie Rack Initial Data</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Reset CSS -->
-  <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/reset.css" />
-  <!-- Materialize CSS CDN link. Compiled and minified-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+
+    <!-- Google Fonts Link -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Muli:300,400,600,700"
+      rel="stylesheet"
+    />
 
   <!-- Materialize Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <!-- Local CSS -->
   <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/main.css" />
 
-  <!-- Google Fonts Link -->
-  <link href="https://fonts.googleapis.com/css?family=Muli:400,600,700" rel="stylesheet" />
+    <!-- Materialize Icons -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- ========================= Nav Bar =======================-->
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#!" class="brand-logo"
+          ><div id="navLogoBox">
+            <img
+              id="navLogo"
+              src="assets/images/MovieRackLogo.png"
+              alt="Movie Rack Logo"
+            /></div
+        ></a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"
+          ><i class="material-icons">menu</i></a
+        >
+        <ul class="right hide-on-med-and-down">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Rate</a></li>
+          <li><a href="#">Login</a></li>
+        </ul>
+      </div>
+    </nav>
+
 
   
 </head>
 
-<body>
-  <!-- ========================= Nav Bar -->
-  <nav>
-    <div class="nav-wrapper">
-      <a href="#!" class="brand-logo">
-        <div id="navLogoBox">
-          <img id="navLogo" src="assets/images/MovieRackLogo.png" alt="Movie Rack Logo" /></div>
-      </a>
-      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Rate</a></li>
-        <li><a href="#">Login</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <ul class="sidenav" id="mobile-demo">
-    <li><a href="#">Home</a></li>
-    <li><a href="#">Rate</a></li>
-    <li><a href="#">Login</a></li>
-  </ul>
-
-  <!-- ====================================== Main Content ==================================================== -->
-  <div class="container">
-    <div class="mainContent">
-
+    <!-- ====================================== Main Content ==================================================== -->
+    <div class="container">
+      <div class="row">
+        <div class="mainContent col s12">
+          <div class="col s12">
+            <h4>MOVIE RATINGS BY REAL PEOPLE</h4>
+            <p>
+              Hello, we are a group of students at the UCF Coding Bootcamp.
+              We’re learning how to build web applications and need your help
+              populating a database for a project we’re workin on. You will NOT
+              be asked for any personal data. Just rate the movies below. If you
+              haven’t seen them, that’s OK. You can pretend. Thank you for your
+              help.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- ======================================== JavaScript Links =========================================== -->
+
 
   <!-- Jquery CDN Link -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -64,5 +84,6 @@
   <!-- Local Javascript -->
   <script src="./assets/js/main.js"></script>
 </body>
+
 
 </html>
