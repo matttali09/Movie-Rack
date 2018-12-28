@@ -1,0 +1,30 @@
+/* Dark Grey: 2F3738 */
+/* Orange: F7941D */
+/* Light Blue 59D8E5 */
+/* Red: D64700 */
+
+#navLogo {
+  height: 35px;
+}
+
+#navLogoBox {
+  margin-top: 0.25em;
+  margin-left: 0.25em;
+}
+
+.nav-wrapper {
+  background-color: #2f3738;
+}
+
+/* body {
+    background: url("../images/adult-couple-dating-951290-scld.jpg") no-repeat
+      center center fixed;
+    background-size: cover; */
+    /* background-repeat: no-repeat; */
+/* background-color: black; */
+ 
+body {
+  background: url("../images/pexels-photo-436413.jpeg") no-repeat center center 
+    fixed;
+  background-size: cover;
+}
