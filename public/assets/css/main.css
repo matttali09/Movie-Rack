@@ -45,10 +45,49 @@ body {
 .mainContent {
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
   margin-top: 2em;
-  padding: 2em;
+  padding: 1em;
 }
 
-.formWrapP {
+.formWrap {
   background-color: white;
   padding: 1em;
+  color: black;
+  margin: 1em auto;
+  
+}
+
+.mvImg {
+  width: 100px;
+}
+
+.mvImgWrap {
+  margin-top: 1em;
+}
+.mvTitle h5 {
+  color: #d64700;
+  font-size: 1.5em;
+  font-weight: 700;
+}
+.mvTitle p {
+  color: black;
+  line-height: 115%;
+}
+.formP {
+    color: #2F3738;
+    text-align: center;
+    margin-top:1em;
+    font-weight: 700;
+   
+}
+
+.btn {
+    background-color: #F7941D;
+}
+
+.formWrap .row{
+    margin-bottom: .5em
+}
+
+.btn {
+    margin-bottom: .5em;
 }
