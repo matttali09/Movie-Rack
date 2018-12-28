@@ -91,3 +91,14 @@ body {
 .btn {
     margin-bottom: .5em;
 }
+
+.carousel { 
+  overflow: visible;
+  }
+
+  .bottom-form {
+    transition: width 5s;
+    width: auto;
+  }
+
+
