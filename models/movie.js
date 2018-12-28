@@ -8,7 +8,7 @@ module.exports = function (sequelize, DataTypes) {
             }
         },
         year_released: {
-            type: DataTypes.TEXT,
+            type: DataTypes.STRING,
             allowNull: false,
             len: [1]
         },
