@@ -1,6 +1,10 @@
 /* Dark Grey: 2F3738 */
-/* Orange: F7941D */
-/* Light Blue 59D8E5 */
+/* Dark Blue Grey: #17607D */
+/* Dark Dark Blue Grey #002A4A */
+/* Med Grey: #647678 */
+/* Light Grey: #9FBCBF */
+/* Orange: #F7941D */
+/* Light Blue #59D8E5 */
 /* Red: D64700 */
 /* font-family: 'Muli', sans-serif; */
 
@@ -14,6 +18,10 @@ h6 {
   font-weight: 700;
   color: white;
   line-height: 120%;
+}
+
+h6 {
+  font-size: 1.25rem;
 }
 
 p {
@@ -53,7 +61,6 @@ body {
   padding: 1em;
   color: black;
   margin: 1em auto;
-  
 }
 
 .mvImg {
@@ -73,32 +80,46 @@ body {
   line-height: 115%;
 }
 .formP {
-    color: #2F3738;
-    text-align: center;
-    margin-top:1em;
-    font-weight: 700;
-   
+  color: #2f3738;
+  text-align: center;
+  margin-top: 1em;
+  font-weight: 700;
 }
 
-.btn {
-    background-color: #F7941D;
+#locationBtn {
+  background-color: #647678;
+  margin-top: 1em;
+  margin-right: 1em;
 }
 
-.formWrap .row{
-    margin-bottom: .5em
+#submitBtn {
+  background-color: #17607d;
+  margin-top: 1em;
 }
 
-.btn {
-    margin-bottom: .5em;
+.formWrap .row {
+  margin-bottom: 0.5em;
 }
 
-.carousel { 
+.carousel {
   overflow: visible;
-  }
-
-  .bottom-form {
-    transition: width 5s;
-    width: auto;
-  }
+}
 
 
+.bottom-form {
+  transition: width 5s;
+  width: auto;
+}
+
+#footer {
+  background-color: #647678;
+}
+
+
+#footer p {
+  font-weight:300;
+}
+#footerLogo {
+  width: 175px;
+  margin-top: 0.5em;
+}
