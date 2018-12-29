@@ -53,6 +53,7 @@ body {
 .mainContent {
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
   margin-top: 2em;
+  margin-bottom: 1em;
   padding: 1em;
 }
 

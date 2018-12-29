@@ -64,54 +64,150 @@ function carouselAjax(data) {
     console.table(data);
     for (let i = 0; i < data.length; i++) {
         // make the carousel anchor tag
+        let carousel = $("<div>").addClass("carousel")
         let carouselItem = $("<a>").addClass("carousel-item").attr("href", "#one!");
 
-        // make the the image tag
-        let image = $("<img>").addClass("modal-trigger").attr("src", data[i].poster).attr("href", "#modal"+i);
+        // make the the image tag and append it to the carousel item and the item to the carousel div
+        let image1 = $("<img>").addClass("modal-trigger").attr("src", data[i].poster).attr("href", "#modal" + i);
+        carouselItem.append(image1);
+        carousel.append(carouselItem)
 
-        // make the drop box
-        let modal = $("<div>").addClass("modal").attr("id", "modal"+i);
-        let title = $("<p>").addClass("card-title activator grey-text text-darken-4").attr("id", "title").text(data[i].Title);
-        modal.append(title);
+        // make the modal
+        let modal = $("<div>").addClass("modal").attr("id", "modal" + i);
+        let formWrap = $("<div>").addClass("formWrap col s12");
+        let row1 = $("<div>").addClass("row");
+        let imgWrap = $("<div>").addClass("col s4 m2 mvImgWrap");
+        let image2 = $("<img>").addClass("mvImg").attr("src", data[i].poster);
+        let titleWrap = $("<div>").addClass("col s8 m10 mvTitle");
+        let title = $("<h5>").attr("id", "title").text(data[i].Title);
+        let formCol = $("<div>").addClass("col col s8 m10");
+        let form = $("<form>").attr("action", "#");
+        let sliderParagraph = $("<p>").addClass("formP").text("Use slider to rate movie");
+        let sliderWrap = $("<div>").addClass("range-field");
+        let slider = $("<p>").attr({
+            type: "range",
+            id: "test5",
+            min: "0",
+            max: "100",
+        });
+        let row2 = $("<div>").addClass("row");
+        let inputField = $("<div>").addClass("input-field col s12");
+        let nameField = $("<input>").addClass("validate").attr({
+            placeholder: "Name (optional)",
+            id: "name",
+            type: "text",
+        });
+        let ageField = $("<input>").addClass("validate").attr({
+            placeholder: "Age (required)",
+            id: "age",
+            type: "text",
+            required: true
+        });
+        let locationButton = $("<button>").addClass("waves-effect waves-light btn locationBtn").attr("id", "locationBtn").html("<i class='material-icons right'>add_location</i>Location");
+        let locationDisplay = $("<p>").attr("id", "coord");
+        let submitButton = $("<button>").addClass("btn waves-effect waves-light").attr({
+            id: "submitBtn",
+            type: "submit",
+            name: "action",
+        }).html("<i class='material-icons right'>send</i>Submit");
+        let modalFooter = $("<div>").addClass("modal-footer").html("<a href='#!' class='modal-close waves-effect waves-green btn-flat'>Close</a>");
+
+        // append all data to the rows in correct order for the modal
+        imgWrap.append(image2)
+        titleWrap.append(title);
+        sliderWrap.append(slider);
+        inputField.append(nameField);
+        inputField.append(ageField);
+        inputField.append(locationButton);
+        inputField.append(locationDisplay);
+        inputField.append(submitButton);
+        row2.append(inputField)
+        form.append(sliderParagraph);
+        form.append(sliderWrap);
+        form.append(row2)
+        formCol.append(form);
+        row1.append(imgWrap);
+        row1.append(titleWrap);
+        formWrap.append(row1);
+        modal.append(formWrap);
+        modal.append(modalFooter);
 
         // put the content on the DOM
-        carouselItem.append(image);
-        carouselItem.append(dropBox);
-        $("#carousel").append(carouselItem);
-        $("#modalArea").append(modal);
+        $("#carousel").append(carousel);
+        $("#carousel").append(modal);
     }
 };
 
 // function to display a single movie
 function displayMovie(data) {
     console.table(data);
-    for (let i = 0; i < data.length; i++) {
-        // make the card div
-        let column = $("<div>").addClass("col s6 m6");
-        let card = $("<div>").addClass("card medium");
+    // verify the user inputed a movie title that could be found
+    if (data) {
+        for (let i = 0; i < data.length; i++) {
+            // make the form div
+            let formWrap = $("<div>").addClass("formWrap col s12");
+            let row1 = $("<div>").addClass("row");
+            let imgWrap = $("<div>").addClass("col s4 m2 mvImgWrap");
+            let image2 = $("<img>").addClass("mvImg").attr("src", data[i].poster);
+            let titleWrap = $("<div>").addClass("col s8 m10 mvTitle");
+            let title = $("<h5>").attr("id", "title").text(data[i].Title);
+            let formCol = $("<div>").addClass("col col s8 m10");
+            let form = $("<form>").attr("action", "#");
+            let sliderParagraph = $("<p>").addClass("formP").text("Use slider to rate movie");
+            let sliderWrap = $("<div>").addClass("range-field");
+            let slider = $("<p>").attr({
+                type: "range",
+                id: "test5",
+                min: "0",
+                max: "100",
+            });
+            let row2 = $("<div>").addClass("row");
+            let inputField = $("<div>").addClass("input-field col s12");
+            let nameField = $("<input>").addClass("validate").attr({
+                placeholder: "Name (optional)",
+                id: "name",
+                type: "text",
+            });
+            let ageField = $("<input>").addClass("validate").attr({
+                placeholder: "Age (required)",
+                id: "age",
+                type: "text",
+                required: true
+            });
+            let locationButton = $("<button>").addClass("waves-effect waves-light btn locationBtn").attr("id", "locationBtn").html("<i class='material-icons right'>add_location</i>Location");
+            let locationDisplay = $("<p>").attr("id", "coord");
+            let submitButton = $("<button>").addClass("btn waves-effect waves-light").attr({
+                id: "submitBtn",
+                type: "submit",
+                name: "action",
+            }).html("<i class='material-icons right'>send</i>Submit");
 
-        // make the div for the image
-        let cardImage = $("<div>").addClass("card-image waves-effect waves-block waves-light");
-        let image = $("<img>").addClass("activator").attr("src", data[i].poster);
-        let fav = $("<a>").addClass("btn-floating halfway-fab waves-effect waves-light red").attr("href", "#");
-        let favicon = $("<i>").addClass("material-icons favorites").text("star");
-        fav.append(favicon);
-        cardImage.append(image);
-        cardImage.append(fav);
+            // append the content together
+            imgWrap.append(image2)
+            titleWrap.append(title);
+            sliderWrap.append(slider);
+            inputField.append(nameField);
+            inputField.append(ageField);
+            inputField.append(locationButton);
+            inputField.append(locationDisplay);
+            inputField.append(submitButton);
+            row2.append(inputField)
+            form.append(sliderParagraph);
+            form.append(sliderWrap);
+            form.append(row2)
+            formCol.append(form);
+            row1.append(imgWrap);
+            row1.append(titleWrap);
+            formWrap.append(row1);
 
-        // make the card content
-        let cardContent = $("<div>").addClass("card-content");
-        let title = $("<p>").addClass("card-title activator grey-text text-darken-4").text(data[i].Title);
-        let link = $("<a>").attr("href", data[i].source_url).text("Get the recipe!");
-        cardContent.append(title);
-        cardContent.append(link);
-
-        // put the content on the DOM
-        card.append(cardImage);
-        card.append(cardContent);
-        column.append(card);
-        $("#recipe-results").append(column);
+            // put the content on the DOM
+            $("#search").html(formWrap);
+        };
     }
+    // alert if data could not be found
+    else {
+        alert("The movie you searched for could not be found");
+    };
 };
 
 // ======================================================================================
@@ -123,12 +219,12 @@ function getLocation() {
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
-            // set the values of the location
+            // set the values of the location and display them
             myLat = parseFloat(position.coords.latitude);
             myLong = parseFloat(position.coords.longitude);
             $("#coord").html("Latitude: " + myLat + "<br>Longitude: " + myLong);
 
-            // adds the map to the site
+            // adds a map to the site for use later
             mapboxgl.accessToken = 'pk.eyJ1Ijoid2lucGlsZGV1IiwiYSI6ImNqcDJzbnd1aDAwam8zd3BlejczaWwxa2EifQ.bLD5Bdgv8hiiXbaAIqjLdA';
             map = new mapboxgl.Map({
                 container: 'map',
@@ -154,12 +250,8 @@ $("#submit-movie").on("click", function (event) {
     // grab the movie-name for the query
     movieName = $("#movie-name").val().trim();
 
-    // show the results area
-    // $("#recipes").css("display", "block");
-    // $("#restaurants").css("display", "block");
-
-    // run the ajax calls
-    movieAjax();
+    // run the ajax calls and display function
+    searchMovie();
 });
 
 $("#submit").on("click", function (event) {
@@ -170,38 +262,38 @@ $("#submit").on("click", function (event) {
     var newReview = {
         title: $("#title").val(),
         year_released: $("#year-released").val(),
-        movie_img_html: $(""),
+        movie_img_html: $("#movie-img").attr("src"),
         rating: $("#test5").val(),
         review: $("#review").val().trim()
-      };
-      
-      // Send the POST request.
-      $.ajax("/api/movies", {
+    };
+
+    // Send the POST request.
+    $.ajax("/api/movies", {
         type: "POST",
         data: newReview
-      }).then(
-        function() {
-          console.log("created new movie rating");
-          // Reload the page to get the updated list
-          location.reload();
+    }).then(
+        function () {
+            console.log("created new movie rating");
+            // Reload the page to get the updated list
+            location.reload();
         }
-      );
-      
-      var newUser = {
+    );
+
+    var newUser = {
         name: $("name").val().trim(),
         age: $("age").val().trim()
-      };
-      
-      $.ajax("/api/users", {
+    };
+
+    $.ajax("/api/users", {
         type: "POST",
         data: newUser
-      }).then(
-        function() {
-          console.log("created new user");
-          // Reload the page to get the updated list
-          location.reload();
+    }).then(
+        function () {
+            console.log("created new user");
+            // Reload the page to get the updated list
+            location.reload();
         }
-      );
+    );
 
 });
 
@@ -209,4 +301,4 @@ $("#submit").on("click", function (event) {
 runCarousel();
 
 // function to run getloction if loc button is clicked
-$("#loc").on("click", getLocation);
+$("#locationBtn").on("click", getLocation);
