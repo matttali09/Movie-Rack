@@ -96,9 +96,5 @@ body {
   overflow: visible;
   }
 
-  .bottom-form {
-    transition: width 5s;
-    width: auto;
-  }
-
+  
 
