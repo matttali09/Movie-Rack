@@ -53,7 +53,6 @@ body {
   padding: 1em;
   color: black;
   margin: 1em auto;
-  
 }
 
 .mvImg {
@@ -73,32 +72,32 @@ body {
   line-height: 115%;
 }
 .formP {
-    color: #2F3738;
-    text-align: center;
-    margin-top:1em;
-    font-weight: 700;
-   
+  color: #2f3738;
+  text-align: center;
+  margin-top: 1em;
+  font-weight: 700;
 }
 
-.btn {
-    background-color: #F7941D;
+#submitBtn {
+  background-color: #f7941d;
+  margin-top: 1em;
 }
 
-.formWrap .row{
-    margin-bottom: .5em
+#locationBtn {
+  background-color: #59D8E5;
+  margin-top: 1em;
+  margin-right: 1em;
 }
 
-.btn {
-    margin-bottom: .5em;
+.formWrap .row {
+  margin-bottom: 0.5em;
 }
 
-.carousel { 
+.carousel {
   overflow: visible;
-  }
+}
 
-  .bottom-form {
-    transition: width 5s;
-    width: auto;
-  }
-
-
+.bottom-form {
+  transition: width 5s;
+  width: auto;
+}
