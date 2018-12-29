@@ -1,11 +1,12 @@
 $(document).ready(function() {
   $(".sidenav").sidenav();
   $('.carousel').carousel();
+  $('.modal').modal();
   $("#carouselClick").click(function(){
     $("#movieFormAquaman").animate({
-      opacity: '0.8',
-      height: '200px',
-      width: '700px'
+      opacity: '0.9',
+      height: '296px',
+      width: '400px'
     });
   });
 });
