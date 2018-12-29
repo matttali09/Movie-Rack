@@ -2,6 +2,7 @@
 /* Dark Blue Grey: #17607D */
 /* Dark Dark Blue Grey #002A4A */
 /* Med Grey: #647678 */
+/* Light Grey: #9FBCBF */
 /* Orange: #F7941D */
 /* Light Blue #59D8E5 */
 /* Red: D64700 */
@@ -17,6 +18,10 @@ h6 {
   font-weight: 700;
   color: white;
   line-height: 120%;
+}
+
+h6 {
+  font-size: 1.25rem;
 }
 
 p {
@@ -88,7 +93,7 @@ body {
 }
 
 #submitBtn {
-  background-color: #17607D;
+  background-color: #17607d;
   margin-top: 1em;
 }
 
@@ -107,4 +112,12 @@ body {
 
 #footer {
   background-color: #647678;
+}
+
+#footer p {
+  font-weight:300;
+}
+#footerLogo {
+  width: 175px;
+  margin-top: 0.5em;
 }
