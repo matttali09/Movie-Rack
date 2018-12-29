@@ -1,5 +1,6 @@
 /* Dark Grey: 2F3738 */
 /* Dark Blue Grey: #17607D */
+/* Dark Dark Blue Grey #002A4A */
 /* Med Grey: #647678 */
 /* Orange: #F7941D */
 /* Light Blue #59D8E5 */
@@ -102,4 +103,8 @@ body {
 .bottom-form {
   transition: width 5s;
   width: auto;
+}
+
+#footer {
+  background-color: #647678;
 }
