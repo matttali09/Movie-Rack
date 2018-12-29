@@ -2,19 +2,19 @@ module.exports = function (sequelize, DataTypes) {
     var Movie = sequelize.define("Movie", {
         title: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
             validate: {
                 len: [1, 255]
             }
         },
         year_released: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
             len: [1]
         },
         movie_img_html: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
             validate: {
                 len: [1, 255]
             }
@@ -25,7 +25,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         review: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
             validate: {
                 len: [1, 255]
             }
