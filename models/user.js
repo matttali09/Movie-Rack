@@ -8,13 +8,13 @@ module.exports = function (sequelize, DataTypes) {
                 len: [1, 255]
             }
         },
-        age:{
+        age: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        gender: {
+        geolocation: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
             validate: {
                 len: [1, 255]
             }

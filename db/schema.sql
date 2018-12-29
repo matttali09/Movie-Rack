@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS movieRack;
 CREATE DATABASE movieRack;
 USE movieRack;
 
-CREATE TABLE USER
+CREATE TABLE User
 (
 	id int NOT NULL AUTO_INCREMENT,
 	name varchar(255) NULL,
@@ -11,7 +11,7 @@ CREATE TABLE USER
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE MOVIE (
+CREATE TABLE Movie (
 	id int NOT NULL AUTO_INCREMENT,
 	title varchar(255) NOT NULL,
 	year_released varchar(10) NOT NULL,
