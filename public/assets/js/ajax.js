@@ -58,25 +58,23 @@ function runCarousel() {
         });
     };
 }
-
+// .text(data[i].Title);
 // function for dynamically apply the carousel items
 function carouselAjax(data) {
     console.table(data);
     for (let i = 0; i < data.length; i++) {
-        // make the carousel anchor tag
+        // make the carousel anchor tag and image with href to modal
         let carouselItem = $("<a>").addClass("carousel-item").attr("href", "#one!");
+        let image = $("<img>").addClass("modal-trigger").attr("src", data[i].poster).attr("href", "#modal"+i);
 
-        // make the the image tag
-        let image = $("<img>").attr("src", data[i].poster);
-
-        // make the drop box
-        let dropBox = $("<div>").addClass("card-content");
-        let title = $("<p>").addClass("card-title activator grey-text text-darken-4").attr("id", "title").text(data[i].Title);
-        dropBox.append(title);
+        // make the modals
+        let modalBox = $("<div>").addClass("modal");
+        let form = $("<form>").attr("action", "#")
+        modalBox.append(title);
 
         // put the content on the DOM
         carouselItem.append(image);
-        carouselItem.append(dropBox);
+        $("#modals").append(modalBox);
         $("#carousel").append(carouselItem);
     }
 };
