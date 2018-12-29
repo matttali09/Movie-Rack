@@ -1,6 +1,8 @@
 /* Dark Grey: 2F3738 */
-/* Orange: F7941D */
-/* Light Blue 59D8E5 */
+/* Dark Blue Grey: #17607D */
+/* Med Grey: #647678 */
+/* Orange: #F7941D */
+/* Light Blue #59D8E5 */
 /* Red: D64700 */
 /* font-family: 'Muli', sans-serif; */
 
@@ -78,15 +80,15 @@ body {
   font-weight: 700;
 }
 
-#submitBtn {
-  background-color: #f7941d;
-  margin-top: 1em;
-}
-
 #locationBtn {
-  background-color: #59D8E5;
+  background-color: #647678;
   margin-top: 1em;
   margin-right: 1em;
+}
+
+#submitBtn {
+  background-color: #17607D;
+  margin-top: 1em;
 }
 
 .formWrap .row {
