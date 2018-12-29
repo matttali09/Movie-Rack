@@ -105,6 +105,7 @@ body {
   overflow: visible;
 }
 
+
 .bottom-form {
   transition: width 5s;
   width: auto;
@@ -113,6 +114,7 @@ body {
 #footer {
   background-color: #647678;
 }
+
 
 #footer p {
   font-weight:300;
