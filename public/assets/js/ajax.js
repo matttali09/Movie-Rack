@@ -67,17 +67,18 @@ function carouselAjax(data) {
         let carouselItem = $("<a>").addClass("carousel-item").attr("href", "#one!");
 
         // make the the image tag
-        let image = $("<img>").attr("src", data[i].poster);
+        let image = $("<img>").addClass("modal-trigger").attr("src", data[i].poster).attr("href", "#modal"+i);
 
         // make the drop box
-        let dropBox = $("<div>").addClass("card-content");
+        let modal = $("<div>").addClass("modal").attr("id", "modal"+i);
         let title = $("<p>").addClass("card-title activator grey-text text-darken-4").attr("id", "title").text(data[i].Title);
-        dropBox.append(title);
+        modal.append(title);
 
         // put the content on the DOM
         carouselItem.append(image);
         carouselItem.append(dropBox);
         $("#carousel").append(carouselItem);
+        $("#modalArea").append(modal);
     }
 };
 
@@ -165,13 +166,42 @@ $("#submit").on("click", function (event) {
     // stop the default behavior
     event.preventDefault();
 
-    // grab the information from the form and store it in variables.
-    var title = $("#title").val();
-    var name = $("#name").val().trim();
-    var age = $("#age").val().trim();
-    var
-
-    // 
+    // grab the information from the form for Movie review data and store it in variables.
+    var newReview = {
+        title: $("#title").val(),
+        year_released: $("#year-released").val(),
+        movie_img_html: $(""),
+        rating: $("#test5").val(),
+        review: $("#review").val().trim()
+      };
+      
+      // Send the POST request.
+      $.ajax("/api/movies", {
+        type: "POST",
+        data: newReview
+      }).then(
+        function() {
+          console.log("created new movie rating");
+          // Reload the page to get the updated list
+          location.reload();
+        }
+      );
+      
+      var newUser = {
+        name: $("name").val().trim(),
+        age: $("age").val().trim()
+      };
+      
+      $.ajax("/api/users", {
+        type: "POST",
+        data: newUser
+      }).then(
+        function() {
+          console.log("created new user");
+          // Reload the page to get the updated list
+          location.reload();
+        }
+      );
 
 });
 
