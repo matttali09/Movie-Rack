@@ -12,7 +12,7 @@ let topMovies = [
   "Venom",
   "The+House+With+A+Clock+In+Its+Walls",
   "The+Godfather",
-  "Avengers+Infinity+Wars"
+  "Avengers+Infinity+War"
 ];
 // initialize a movie name var to be recieved from submit
 let movieName = "";
@@ -55,34 +55,36 @@ function runCarousel() {
 
       // add the results to the HTML page
       carouselAjax(resp);
+      $(".modal-trigger").attr("href", "#modal" + i);
+      $(".modal").attr("id", "modal" + i);
     });
   };
 }
 
 // function for dynamically apply the carousel items
 function carouselAjax(data) {
-  console.table(data);
+  // confirm data being recieved
+  console.log(data);
 
   // set div's that should not be applied more than once
   let carousel = $("<div>").addClass("carousel")
 
-  for (let i = 0; i < data.length; i++) {
     // make the carousel anchor tag
     let carouselItem = $("<a>").addClass("carousel-item").attr("href", "#one!");
 
     // make the the image tag and append it to the carousel item and the item to the carousel div
-    let image1 = $("<img>").addClass("modal-trigger").attr("src", data[i].poster).attr("href", "#modal" + i);
+    let image1 = $("<img>").addClass("modal-trigger").attr("src", data.poster);
     carouselItem.append(image1);
     carousel.append(carouselItem)
 
     // make the modal
-    let modal = $("<div>").addClass("modal").attr("id", "modal" + i);
+    let modal = $("<div>").addClass("modal");
     let formWrap = $("<div>").addClass("formWrap col s12");
     let row1 = $("<div>").addClass("row");
     let imgWrap = $("<div>").addClass("col s4 m2 mvImgWrap");
-    let image2 = $("<img>").addClass("mvImg").attr("src", data[i].poster);
+    let image2 = $("<img>").addClass("mvImg").attr("src", data.poster);
     let titleWrap = $("<div>").addClass("col s8 m10 mvTitle");
-    let title = $("<h5>").attr("id", "title").text(data[i].Title);
+    let title = $("<h5>").attr("id", "title").text(data.Title);
     let formCol = $("<div>").addClass("col col s8 m10");
     let form = $("<form>").attr("action", "#");
     let sliderParagraph = $("<p>").addClass("formP").text("Use slider to rate movie");
@@ -138,7 +140,7 @@ function carouselAjax(data) {
     // put the content on the DOM
     $("#carousel").append(carousel);
     $("#carousel").append(modal);
-  }
+    console.log("this ran")
 };
 
 // function to display a single movie

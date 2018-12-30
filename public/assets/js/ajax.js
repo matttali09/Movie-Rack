@@ -61,7 +61,9 @@ function runCarousel() {
 
 // function for dynamically apply the carousel items
 function carouselAjax(data) {
-    console.table(data);
+    // confirm that data is being received
+    console.log(data);
+
     for (let i = 0; i < data.length; i++) {
         // make the carousel anchor tag
         let carousel = $("<div>").addClass("carousel")
@@ -135,6 +137,7 @@ function carouselAjax(data) {
         // put the content on the DOM
         $("#carousel").append(carousel);
         $("#carousel").append(modal);
+        console.log("this ran"+i)
     }
 };
 
