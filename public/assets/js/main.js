@@ -17,7 +17,8 @@ let topMovies = [
 // initialize a movie name var to be recieved from submit
 let movieName = "";
 
-function movieAjax() {
+// ajax functiion for a single movie
+function searchMovie() {
   let ombdAPIkey = "apikey=trilogy";
   let ombdQueryURL = "https://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&" + ombdAPIkey;
 
@@ -55,46 +56,128 @@ function runCarousel() {
 
       // add the results to the HTML page
       carouselAjax(resp);
-      $(".modal-trigger").attr("href", "#modal" + i);
-      $(".modal").attr("id", "modal" + i);
+
     });
   };
+  // $('.modal').modal('destroy');
+  // $('.modal').modal();
 }
+
+
+
 
 // function for dynamically apply the carousel items
 function carouselAjax(data) {
   // confirm data being recieved
   console.log(data);
+  console.log(data.Title);
+  console.log(data.Poster);
 
-  // set div's that should not be applied more than once
-  let carousel = $("<div>").addClass("carousel")
 
-    // make the carousel anchor tag
-    let carouselItem = $("<a>").addClass("carousel-item").attr("href", "#one!");
+  // create a random number to make sure the number applied is dynamic between 1/1000 to make chance of double approx 1%
+  let randomNum = Math.round(Math.random() * 1000)
 
-    // make the the image tag and append it to the carousel item and the item to the carousel div
-    let image1 = $("<img>").addClass("modal-trigger").attr("src", data.poster);
-    carouselItem.append(image1);
-    carousel.append(carouselItem)
+  // make the carousel anchor tag
+  let carouselDiv = $("<div>").addClass("carousel-item-div");
+  let carouselItem = $("<a>").addClass("carousel-item").attr("href", "#");
 
-    // make the modal
-    let modal = $("<div>").addClass("modal");
+  // make the the image tag and append it to the carousel item and the item to the carousel div
+  let image1 = $("<img>").addClass("modal-trigger").attr("src", data.Poster).attr("href", "#modal" + randomNum);
+  carouselItem.append(image1);
+  carouselDiv.append(carouselItem)
+
+  // make the modal
+  let modal = $("<div>").addClass("modal").attr("id", "modal" + randomNum);
+  let formWrap = $("<div>").addClass("formWrap col s12");
+  let row1 = $("<div>").addClass("row");
+  let imgWrap = $("<div>").addClass("col s4 m2 mvImgWrap");
+  let image2 = $("<img>").addClass("mvImg").attr("src", data.Poster);
+  let titleWrap = $("<div>").addClass("col s8 m10 mvTitle");
+  let title = $("<h5>").attr("id", "title").text(data.Title);
+  let yearP = $("<p>").addClass("year-released").text(data.Released)
+  let formCol = $("<div>").addClass("col col s8 m10");
+  let form = $("<form>").attr("action", "#");
+  let sliderParagraph = $("<p>").addClass("formP").text("Use slider to rate movie");
+  let slider = $("<p>").addClass("range-field").html("<input type='range' id='test5' min='0' max='100' />");
+  let row2 = $("<div>").addClass("row");
+  let inputField = $("<div>").addClass("input-field col s12");
+  let nameField = $("<input>").addClass("validate").attr({
+    placeholder: "Name (optional)",
+    id: "name",
+    type: "text",
+  });
+  let ageField = $("<input>").addClass("validate").attr({
+    placeholder: "Age (required)",
+    id: "age",
+    type: "text",
+    required: true
+  });
+  let reviewField = $("<textarea>").addClass("materialize-textarea").attr({
+    placeholder: "Your Review (optional)",
+    id: "review",
+    "data-length": "255",
+    maxlength: "255"
+  })
+  let locationButton = $("<button>").addClass("waves-effect waves-light btn locationBtn").attr("id", "locationBtn").html("<i class='material-icons right'>add_location</i>Location");
+  let locationDisplay = $("<p>").attr("id", "coord");
+  let submitButton = $("<button>").addClass("btn waves-effect waves-light").attr({
+    id: "submitBtn",
+    type: "submit",
+    name: "action",
+  }).html("<i class='material-icons right'>send</i>Submit");
+  let modalFooter = $("<div>").addClass("modal-footer").html("<a href='#!' class='modal-close waves-effect waves-green btn-flat'>Close</a>");
+
+  // append all data to the rows in correct order for the modal
+  imgWrap.append(image2);
+  title.append(yearP);
+  titleWrap.append(title);
+  inputField.append(nameField);
+  inputField.append(ageField);
+  inputField.append(reviewField);
+  inputField.append(locationButton);
+  inputField.append(locationDisplay);
+  inputField.append(submitButton);
+  row2.append(inputField)
+  form.append(sliderParagraph);
+  form.append(slider);
+  form.append(row2)
+  formCol.append(form);
+  row1.append(imgWrap);
+  row1.append(titleWrap);
+  row1.append(formCol);
+  formWrap.append(row1);
+  modal.append(formWrap);
+  modal.append(modalFooter);
+
+  // put the content on the DOM
+  console.log(carouselDiv.html());
+  $('.carousel').append(carouselDiv);
+  $('.carousel').carousel();
+  $("#carousel-container").append(modal);
+  $('.modal').modal();
+  $('.modal').modal('destroy');
+  $('.modal').modal();
+  $('input#input_text, textarea#review').characterCounter();
+  console.log("this ran")
+};
+
+// function to display a single movie
+function displayMovie(data) {
+  console.table(data);
+  // verify the user inputed a movie title that could be found
+  if (data) {
+    // make the form div
     let formWrap = $("<div>").addClass("formWrap col s12");
     let row1 = $("<div>").addClass("row");
     let imgWrap = $("<div>").addClass("col s4 m2 mvImgWrap");
-    let image2 = $("<img>").addClass("mvImg").attr("src", data.poster);
+    let image2 = $("<img>").addClass("mvImg").attr("src", data.Poster);
     let titleWrap = $("<div>").addClass("col s8 m10 mvTitle");
     let title = $("<h5>").attr("id", "title").text(data.Title);
+    let yearP = $("<p>").addClass("year-released").text(data.Released)
     let formCol = $("<div>").addClass("col col s8 m10");
     let form = $("<form>").attr("action", "#");
     let sliderParagraph = $("<p>").addClass("formP").text("Use slider to rate movie");
-    let sliderWrap = $("<div>").addClass("range-field");
-    let slider = $("<p>").attr({
-      type: "range",
-      id: "test5",
-      min: "0",
-      max: "100",
-    });
+    let slider = $("<p>").addClass("range-field").html("<input type='range' id='test5' min='0' max='100' />");
     let row2 = $("<div>").addClass("row");
     let inputField = $("<div>").addClass("input-field col s12");
     let nameField = $("<input>").addClass("validate").attr({
@@ -108,6 +191,12 @@ function carouselAjax(data) {
       type: "text",
       required: true
     });
+    let reviewField = $("<textarea>").addClass("materialize-textarea").attr({
+      placeholder: "Your Review (optional)",
+      id: "review",
+      "data-length": "255",
+      maxlength: "255"
+    })
     let locationButton = $("<button>").addClass("waves-effect waves-light btn locationBtn").attr("id", "locationBtn").html("<i class='material-icons right'>add_location</i>Location");
     let locationDisplay = $("<p>").attr("id", "coord");
     let submitButton = $("<button>").addClass("btn waves-effect waves-light").attr({
@@ -115,99 +204,29 @@ function carouselAjax(data) {
       type: "submit",
       name: "action",
     }).html("<i class='material-icons right'>send</i>Submit");
-    let modalFooter = $("<div>").addClass("modal-footer").html("<a href='#!' class='modal-close waves-effect waves-green btn-flat'>Close</a>");
 
-    // append all data to the rows in correct order for the modal
-    imgWrap.append(image2)
+    // append the content together
+    imgWrap.append(image2);
+    title.append(yearP);
     titleWrap.append(title);
-    sliderWrap.append(slider);
     inputField.append(nameField);
     inputField.append(ageField);
+    inputField.append(reviewField);
     inputField.append(locationButton);
     inputField.append(locationDisplay);
     inputField.append(submitButton);
     row2.append(inputField)
     form.append(sliderParagraph);
-    form.append(sliderWrap);
+    form.append(slider);
     form.append(row2)
     formCol.append(form);
     row1.append(imgWrap);
     row1.append(titleWrap);
+    row1.append(formCol);
     formWrap.append(row1);
-    modal.append(formWrap);
-    modal.append(modalFooter);
 
     // put the content on the DOM
-    $("#carousel").append(carousel);
-    $("#carousel").append(modal);
-    console.log("this ran")
-};
-
-// function to display a single movie
-function displayMovie(data) {
-  console.table(data);
-  // verify the user inputed a movie title that could be found
-  if (data) {
-    for (let i = 0; i < data.length; i++) {
-      // make the form div
-      let formWrap = $("<div>").addClass("formWrap col s12");
-      let row1 = $("<div>").addClass("row");
-      let imgWrap = $("<div>").addClass("col s4 m2 mvImgWrap");
-      let image2 = $("<img>").addClass("mvImg").attr("src", data[i].poster);
-      let titleWrap = $("<div>").addClass("col s8 m10 mvTitle");
-      let title = $("<h5>").attr("id", "title").text(data[i].Title);
-      let formCol = $("<div>").addClass("col col s8 m10");
-      let form = $("<form>").attr("action", "#");
-      let sliderParagraph = $("<p>").addClass("formP").text("Use slider to rate movie");
-      let sliderWrap = $("<div>").addClass("range-field");
-      let slider = $("<p>").attr({
-        type: "range",
-        id: "test5",
-        min: "0",
-        max: "100",
-      });
-      let row2 = $("<div>").addClass("row");
-      let inputField = $("<div>").addClass("input-field col s12");
-      let nameField = $("<input>").addClass("validate").attr({
-        placeholder: "Name (optional)",
-        id: "name",
-        type: "text",
-      });
-      let ageField = $("<input>").addClass("validate").attr({
-        placeholder: "Age (required)",
-        id: "age",
-        type: "text",
-        required: true
-      });
-      let locationButton = $("<button>").addClass("waves-effect waves-light btn locationBtn").attr("id", "locationBtn").html("<i class='material-icons right'>add_location</i>Location");
-      let locationDisplay = $("<p>").attr("id", "coord");
-      let submitButton = $("<button>").addClass("btn waves-effect waves-light").attr({
-        id: "submitBtn",
-        type: "submit",
-        name: "action",
-      }).html("<i class='material-icons right'>send</i>Submit");
-
-      // append the content together
-      imgWrap.append(image2)
-      titleWrap.append(title);
-      sliderWrap.append(slider);
-      inputField.append(nameField);
-      inputField.append(ageField);
-      inputField.append(locationButton);
-      inputField.append(locationDisplay);
-      inputField.append(submitButton);
-      row2.append(inputField)
-      form.append(sliderParagraph);
-      form.append(sliderWrap);
-      form.append(row2)
-      formCol.append(form);
-      row1.append(imgWrap);
-      row1.append(titleWrap);
-      formWrap.append(row1);
-
-      // put the content on the DOM
-      $("#search").html(formWrap);
-    };
+    $("#search").append(formWrap);
   }
   // alert if data could not be found
   else {
@@ -250,18 +269,11 @@ function getLocation() {
 $(document).ready(function () {
   // carousel control
   $(".sidenav").sidenav();
-  $('.carousel').carousel();
-  $('.modal').modal();
-  $("#carouselClick").click(function () {
-    $("#movieFormAquaman").animate({
-      opacity: '0.9',
-      height: '296px',
-      width: '400px'
-    });
-  });
+
+
 
   // function to get the information from submit button
-  $("#submit-movie").on("click", function (event) {
+  $("#search-movie").on("click", function (event) {
     // stop the default behavior
     event.preventDefault();
 
@@ -315,10 +327,12 @@ $(document).ready(function () {
 
   });
 
-  // run the function for the carousel
-  runCarousel();
+
+
 
   // function to run getloction if loc button is clicked
   $("#locationBtn").on("click", getLocation);
 
 });
+// run the function for the carousel
+runCarousel();

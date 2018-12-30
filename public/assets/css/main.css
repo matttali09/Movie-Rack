@@ -41,6 +41,13 @@ p {
 .nav-wrapper {
   background-color: #2f3738;
 }
+.sidenav {
+  background-color: #2f3738;
+}
+.sidenav li>a  {
+  background-color: #000000;
+  color: rgba(255, 255, 255, 0.8);
+}
 
 /* body styling */
 body {
@@ -77,6 +84,10 @@ body {
   color: black;
   line-height: 115%;
 }
+.year-released {
+  float: right;
+  text-align: right;
+}
 .formP {
   color: #2f3738;
   text-align: center;
@@ -111,4 +122,11 @@ body {
 #footerLogo {
   width: 175px;
   margin-top: 0.5em;
+}
+
+/* Media Queries */
+@media screen and (max-width: 633px){
+  #footer {
+      text-align: center;
+  }
 }
