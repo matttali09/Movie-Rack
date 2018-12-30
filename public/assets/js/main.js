@@ -98,7 +98,7 @@ function carouselAjax(data) {
   let formCol = $("<div>").addClass("col col s8 m10");
   let form = $("<form>").attr("action", "#");
   let sliderParagraph = $("<p>").addClass("formP").text("Use slider to rate movie");
-  let slider = $("<p>").addClass("range-field").html("<input type='range' id='test5' min='0' max='100' />");
+  let slider = $("<p>").addClass("range-field").html("<input type='range' id='rating' min='0' max='100' />");
   let row2 = $("<div>").addClass("row");
   let inputField = $("<div>").addClass("input-field col s12");
   let nameField = $("<input>").addClass("validate").attr({
@@ -177,7 +177,7 @@ function displayMovie(data) {
     let formCol = $("<div>").addClass("col col s8 m10");
     let form = $("<form>").attr("action", "#");
     let sliderParagraph = $("<p>").addClass("formP").text("Use slider to rate movie");
-    let slider = $("<p>").addClass("range-field").html("<input type='range' id='test5' min='0' max='100' />");
+    let slider = $("<p>").addClass("range-field").html("<input type='range' id='rating' min='0' max='100' />");
     let row2 = $("<div>").addClass("row");
     let inputField = $("<div>").addClass("input-field col s12");
     let nameField = $("<input>").addClass("validate").attr({
@@ -293,7 +293,7 @@ $(document).ready(function () {
       title: $("#title").val(),
       year_released: $("#year-released").val(),
       movie_img_html: $("#movie-img").attr("src"),
-      rating: $("#test5").val(),
+      rating: $("#rating").val(),
       review: $("#review").val().trim()
     };
 
