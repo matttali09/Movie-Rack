@@ -8,6 +8,7 @@
 /* Red: D64700 */
 /* font-family: 'Muli', sans-serif; */
 
+/* Typeography */
 h1,
 h2,
 h3,
@@ -19,11 +20,9 @@ h6 {
   color: white;
   line-height: 120%;
 }
-
 h6 {
   font-size: 1.25rem;
 }
-
 p {
   font-family: "Muli", sans-serif;
   font-weight: 300;
@@ -31,42 +30,48 @@ p {
   color: white;
 }
 
+/* nav styling */
 #navLogo {
   height: 35px;
 }
-
 #navLogoBox {
   margin-top: 0.25em;
   margin-left: 0.25em;
 }
-
 .nav-wrapper {
   background-color: #2f3738;
 }
+.sidenav {
+  background-color: #2f3738;
+}
+.sidenav li>a  {
+  background-color: #000000;
+  color: rgba(255, 255, 255, 0.8);
+}
 
+/* body styling */
 body {
   background: url("../images/pexels-photo-436413.jpeg") no-repeat center center
     fixed;
   background-size: cover;
 }
-
 .mainContent {
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
   margin-top: 2em;
+  margin-bottom: 1em;
   padding: 1em;
 }
 
+/* Form Styling */
 .formWrap {
   background-color: white;
   padding: 1em;
   color: black;
   margin: 1em auto;
 }
-
 .mvImg {
   width: 100px;
 }
-
 .mvImgWrap {
   margin-top: 1em;
 }
@@ -79,47 +84,49 @@ body {
   color: black;
   line-height: 115%;
 }
+.year-released {
+  float: right;
+  text-align: right;
+}
 .formP {
   color: #2f3738;
   text-align: center;
   margin-top: 1em;
   font-weight: 700;
 }
-
 #locationBtn {
   background-color: #647678;
   margin-top: 1em;
   margin-right: 1em;
 }
-
 #submitBtn {
   background-color: #17607d;
   margin-top: 1em;
 }
-
 .formWrap .row {
   margin-bottom: 0.5em;
 }
 
+/* carousel styling */
 .carousel {
-  overflow: visible;
+  overflow: hidden;
 }
 
-
-.bottom-form {
-  transition: width 5s;
-  width: auto;
-}
-
+/* footer styling */
 #footer {
   background-color: #647678;
 }
-
-
 #footer p {
   font-weight:300;
 }
 #footerLogo {
   width: 175px;
   margin-top: 0.5em;
+}
+
+/* Media Queries */
+@media screen and (max-width: 633px){
+  #footer {
+      text-align: center;
+  }
 }
