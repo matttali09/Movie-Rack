@@ -1,5 +1,5 @@
 // ======================================================================================
-// Ajax LOGIC
+// Globals
 // ======================================================================================
 // array of top 10 movies and to be displayed when page loads
 let topMovies = [
@@ -17,6 +17,13 @@ let topMovies = [
 // initialize a movie name var to be recieved from submit
 let movieName = "";
 
+// initialize lat and long vars for geolocate
+var myLat;
+var mylong;
+
+// ======================================================================================
+// Ajax Logic
+// ======================================================================================
 // ajax functiion for a single movie
 function searchMovie() {
   let ombdAPIkey = "apikey=trilogy";
@@ -118,6 +125,7 @@ function carouselAjax(data) {
     "data-length": "255",
     maxlength: "255"
   })
+  let btnDiv = $("<div>").addClass("btn-div");
   let locationButton = $("<button>").addClass("waves-effect waves-light btn locationBtn").attr("id", "locationBtn").html("<i class='material-icons right'>add_location</i>Location");
   let locationDisplay = $("<p>").attr("id", "coord");
   let submitButton = $("<button>").addClass("btn waves-effect waves-light").attr({
@@ -130,14 +138,15 @@ function carouselAjax(data) {
   // append all data to the rows in correct order for the modal
   imgWrap.append(image2);
   title.append(yearP);
+  btnDiv.append(locationButton);
+  btnDiv.append(locationDisplay);
+  btnDiv.append(submitButton);
   titleWrap.append(title);
   inputField.append(nameField);
   inputField.append(ageField);
   inputField.append(reviewField);
-  inputField.append(locationButton);
-  inputField.append(locationDisplay);
-  inputField.append(submitButton);
-  row2.append(inputField)
+  row2.append(inputField);
+  row2.append(btnDiv);
   form.append(sliderParagraph);
   form.append(slider);
   form.append(row2)
@@ -197,6 +206,7 @@ function displayMovie(data) {
       "data-length": "255",
       maxlength: "255"
     })
+    let btnDiv = $("<div>").addClass("btn-div");
     let locationButton = $("<button>").addClass("waves-effect waves-light btn locationBtn").attr("id", "locationBtn").html("<i class='material-icons right'>add_location</i>Location");
     let locationDisplay = $("<p>").attr("id", "coord");
     let submitButton = $("<button>").addClass("btn waves-effect waves-light").attr({
@@ -208,17 +218,18 @@ function displayMovie(data) {
     // append the content together
     imgWrap.append(image2);
     title.append(yearP);
+    btnDiv.append(locationButton);
+    btnDiv.append(locationDisplay);
+    btnDiv.append(submitButton);
     titleWrap.append(title);
     inputField.append(nameField);
     inputField.append(ageField);
     inputField.append(reviewField);
-    inputField.append(locationButton);
-    inputField.append(locationDisplay);
-    inputField.append(submitButton);
-    row2.append(inputField)
+    row2.append(inputField);
+    row2.append(btnDiv);
     form.append(sliderParagraph);
     form.append(slider);
-    form.append(row2)
+    form.append(row2);
     formCol.append(form);
     row1.append(imgWrap);
     row1.append(titleWrap);
@@ -226,7 +237,9 @@ function displayMovie(data) {
     formWrap.append(row1);
 
     // put the content on the DOM
+
     $("#search").append(formWrap);
+    $('input#input_text, textarea#review').characterCounter();
   }
   // alert if data could not be found
   else {
@@ -269,8 +282,6 @@ function getLocation() {
 $(document).ready(function () {
   // carousel control
   $(".sidenav").sidenav();
-
-
 
   // function to get the information from submit button
   $("#search-movie").on("click", function (event) {
