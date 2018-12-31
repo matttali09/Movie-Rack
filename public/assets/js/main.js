@@ -35,9 +35,9 @@ function searchMovie() {
     dataType: "json"
   }).then(function (resp) {
     // confirm there is data received
-    console.log(`ombd results:`);
-    console.log(ombdQueryURL);
-    console.log(resp);
+    // console.log(`ombd results:`);
+    // console.log(ombdQueryURL);
+    // console.log(resp);
 
     // add the results to the HTML page
     displayMovie(resp);
@@ -57,17 +57,15 @@ function runCarousel() {
       dataType: "json"
     }).then(function (resp) {
       // confirm there is data received
-      console.log(`ombd results:`);
-      console.log(ombdQueryURL);
-      console.log(resp);
+      // console.log(`ombd results:`);
+      // console.log(ombdQueryURL);
+      // console.log(resp);
 
       // add the results to the HTML page
       carouselAjax(resp);
 
     });
   };
-  // $('.modal').modal('destroy');
-  // $('.modal').modal();
 }
 
 
@@ -75,11 +73,6 @@ function runCarousel() {
 
 // function for dynamically apply the carousel items
 function carouselAjax(data) {
-  // confirm data being recieved
-  console.log(data);
-  console.log(data.Title);
-  console.log(data.Poster);
-
 
   // create a random number to make sure the number applied is dynamic between 1/1000 to make chance of double approx 1%
   let randomNum = Math.round(Math.random() * 1000)
@@ -103,7 +96,7 @@ function carouselAjax(data) {
   let title = $("<h5>").attr("id", "title").text(data.Title);
   let yearP = $("<p>").addClass("year-released").text(data.Released)
   let formCol = $("<div>").addClass("col col s8 m10");
-  let form = $("<form>").attr("action", "#");
+  let form = $("<form>").attr("action", "api-route").attr("method", "post").addClass("ajax");
   let sliderParagraph = $("<p>").addClass("formP").text("Use slider to rate movie");
   let slider = $("<p>").addClass("range-field").html("<input type='range' id='rating' min='0' max='100' />");
   let row2 = $("<div>").addClass("row");
@@ -111,27 +104,35 @@ function carouselAjax(data) {
   let nameField = $("<input>").addClass("validate").attr({
     placeholder: "Name (optional)",
     id: "name",
+    name: "name",
     type: "text",
   });
   let ageField = $("<input>").addClass("validate").attr({
     placeholder: "Age (required)",
     id: "age",
+    name: "age",
     type: "text",
     required: true
   });
   let reviewField = $("<textarea>").addClass("materialize-textarea").attr({
     placeholder: "Your Review (optional)",
     id: "review",
+    name: "review",
     "data-length": "255",
     maxlength: "255"
   })
   let btnDiv = $("<div>").addClass("btn-div");
-  let locationButton = $("<button>").addClass("waves-effect waves-light btn locationBtn").attr("id", "locationBtn").html("<i class='material-icons right'>add_location</i>Location");
+  let locationButton = $("<button>").addClass("waves-effect waves-light btn locationBtn").attr({
+    id: "locationBtn",
+    type: "button",
+    value: "#",
+    name: "loc"
+  }).html("<i class='material-icons right'>add_location</i>Location");
   let locationDisplay = $("<p>").attr("id", "coord");
   let submitButton = $("<button>").addClass("btn waves-effect waves-light").attr({
     id: "submitBtn",
     type: "submit",
-    name: "action",
+    value: "send",
   }).html("<i class='material-icons right'>send</i>Submit");
   let modalFooter = $("<div>").addClass("modal-footer").html("<a href='#!' class='modal-close waves-effect waves-green btn-flat'>Close</a>");
 
@@ -146,10 +147,10 @@ function carouselAjax(data) {
   inputField.append(ageField);
   inputField.append(reviewField);
   row2.append(inputField);
-  row2.append(btnDiv);
   form.append(sliderParagraph);
   form.append(slider);
-  form.append(row2)
+  form.append(row2);
+  form.append(btnDiv);
   formCol.append(form);
   row1.append(imgWrap);
   row1.append(titleWrap);
@@ -159,20 +160,22 @@ function carouselAjax(data) {
   modal.append(modalFooter);
 
   // put the content on the DOM
-  console.log(carouselDiv.html());
   $('.carousel').append(carouselDiv);
   $('.carousel').carousel();
   $("#carousel-container").append(modal);
+
+  // reinitialize listeners
   $('.modal').modal();
   $('.modal').modal('destroy');
   $('.modal').modal();
   $('input#input_text, textarea#review').characterCounter();
-  console.log("this ran")
+  locationBtnFun();
+  submitInfo();
 };
 
 // function to display a single movie
 function displayMovie(data) {
-  console.table(data);
+
   // verify the user inputed a movie title that could be found
   if (data) {
     // make the form div
@@ -184,7 +187,7 @@ function displayMovie(data) {
     let title = $("<h5>").attr("id", "title").text(data.Title);
     let yearP = $("<p>").addClass("year-released").text(data.Released)
     let formCol = $("<div>").addClass("col col s8 m10");
-    let form = $("<form>").attr("action", "#");
+    let form = $("<form>").attr("action", "api-route").attr("method", "post").addClass("ajax");
     let sliderParagraph = $("<p>").addClass("formP").text("Use slider to rate movie");
     let slider = $("<p>").addClass("range-field").html("<input type='range' id='rating' min='0' max='100' />");
     let row2 = $("<div>").addClass("row");
@@ -192,27 +195,35 @@ function displayMovie(data) {
     let nameField = $("<input>").addClass("validate").attr({
       placeholder: "Name (optional)",
       id: "name",
+      name: "name",
       type: "text",
     });
     let ageField = $("<input>").addClass("validate").attr({
       placeholder: "Age (required)",
       id: "age",
+      name: "age",
       type: "text",
       required: true
     });
     let reviewField = $("<textarea>").addClass("materialize-textarea").attr({
       placeholder: "Your Review (optional)",
       id: "review",
+      name: "review",
       "data-length": "255",
       maxlength: "255"
     })
     let btnDiv = $("<div>").addClass("btn-div");
-    let locationButton = $("<button>").addClass("waves-effect waves-light btn locationBtn").attr("id", "locationBtn").html("<i class='material-icons right'>add_location</i>Location");
+    let locationButton = $("<button>").addClass("waves-effect waves-light btn locationBtn").attr({
+      id: "locationBtn",
+      type: "button",
+      value: "#",
+      name: "loc"
+    }).html("<i class='material-icons right'>add_location</i>Location");
     let locationDisplay = $("<p>").attr("id", "coord");
     let submitButton = $("<button>").addClass("btn waves-effect waves-light").attr({
       id: "submitBtn",
       type: "submit",
-      name: "action",
+      value: "send",
     }).html("<i class='material-icons right'>send</i>Submit");
 
     // append the content together
@@ -226,10 +237,10 @@ function displayMovie(data) {
     inputField.append(ageField);
     inputField.append(reviewField);
     row2.append(inputField);
-    row2.append(btnDiv);
     form.append(sliderParagraph);
     form.append(slider);
     form.append(row2);
+    form.append(btnDiv);
     formCol.append(form);
     row1.append(imgWrap);
     row1.append(titleWrap);
@@ -237,9 +248,12 @@ function displayMovie(data) {
     formWrap.append(row1);
 
     // put the content on the DOM
-
     $("#search").append(formWrap);
+
+    // reset page listeners
     $('input#input_text, textarea#review').characterCounter();
+    locationBtnFun();
+    submitInfo();
   }
   // alert if data could not be found
   else {
@@ -253,23 +267,27 @@ function displayMovie(data) {
 // function that checks to see if GPS capability is available and then create the map
 function getLocation() {
   event.preventDefault();
-
+  console.log("getLocation start:")
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
       // set the values of the location and display them
       myLat = parseFloat(position.coords.latitude);
       myLong = parseFloat(position.coords.longitude);
-      $("#coord").html("Latitude: " + myLat + "<br>Longitude: " + myLong);
+      console.log("Latitude: " + myLat + " Longitude: " + myLong);
+      
+      // update text
+      $("form.ajax p[id=coord]").html("Latitude: " + myLat + "<br>Longitude: " + myLong);
+      $("form.ajax p[id=coord]").html("Latitude: " + myLat + "<br>Longitude: " + myLong);
 
       // adds a map to the site for use later
-      mapboxgl.accessToken = 'pk.eyJ1Ijoid2lucGlsZGV1IiwiYSI6ImNqcDJzbnd1aDAwam8zd3BlejczaWwxa2EifQ.bLD5Bdgv8hiiXbaAIqjLdA';
-      map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v10',
-        zoom: 13,
-        center: [myLong, myLat]
-      });
-      map.addControl(new mapboxgl.NavigationControl());
+      // mapboxgl.accessToken = 'pk.eyJ1Ijoid2lucGlsZGV1IiwiYSI6ImNqcDJzbnd1aDAwam8zd3BlejczaWwxa2EifQ.bLD5Bdgv8hiiXbaAIqjLdA';
+      // map = new mapboxgl.Map({
+      //   container: 'map',
+      //   style: 'mapbox://styles/mapbox/streets-v10',
+      //   zoom: 13,
+      //   center: [myLong, myLat]
+      // });
+      // map.addControl(new mapboxgl.NavigationControl());
     });
   } else {
     $("#coord").text("Geolocation is not supported by this browser.");
@@ -284,7 +302,7 @@ $(document).ready(function () {
   $(".sidenav").sidenav();
 
   // function to get the information from submit button
-  $("#search-movie").on("click", function (event) {
+  $(this).on("click", "#search-movie", function (event) {
     // stop the default behavior
     event.preventDefault();
 
@@ -295,54 +313,72 @@ $(document).ready(function () {
     searchMovie();
   });
 
-  $("#submit").on("click", function (event) {
-    // stop the default behavior
-    event.preventDefault();
-
-    // grab the information from the form for Movie review data and store it in variables.
-    var newReview = {
-      title: $("#title").val(),
-      year_released: $("#year-released").val(),
-      movie_img_html: $("#movie-img").attr("src"),
-      rating: $("#rating").val(),
-      review: $("#review").val().trim()
-    };
-
-    // Send the POST request.
-    $.ajax("/api/movies", {
-      type: "POST",
-      data: newReview
-    }).then(
-      function () {
-        console.log("created new movie rating");
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
-
-    var newUser = {
-      name: $("name").val().trim(),
-      age: $("age").val().trim()
-    };
-
-    $.ajax("/api/users", {
-      type: "POST",
-      data: newUser
-    }).then(
-      function () {
-        console.log("created new user");
-        // Reload the page to get the updated list
-        location.reload();
-      }
-    );
-
-  });
 
 
+  // submit info function for forms
+  submitInfo = function () {
+    $("form.ajax").on("submit", function (event) {
+      // stop the default behavior
+      event.preventDefault();
 
+      // check to make sure the button is working
+      console.log("submit button pressed");
 
-  // function to run getloction if loc button is clicked
-  $("#locationBtn").on("click", getLocation);
+      // grab the information from the form for Movie review data and store it in variables.
+      var newReview = {
+        title: $("#title").val(),
+        year_released: $("#year-released").val(),
+        movie_img_html: $("#movie-img").attr("src"),
+        rating: $("#rating").val(),
+        review: $("#review").val().trim()
+      };
+
+      // Send the POST request.
+      $.ajax("/api/movies", {
+        type: "POST",
+        data: newReview
+      }).then(
+        function () {
+          console.log("created new movie rating");
+        }
+      );
+
+      // grab the information for user and store it in variables.
+      var newUser = {
+        name: $("#name").val().trim(),
+        age: $("#age").val().trim(),
+        userLat: myLat,
+        userLong: myLong
+      };
+
+      // Send the POST request.
+      $.ajax("/api/users", {
+        type: "POST",
+        data: newUser
+      }).then(
+        function () {
+          console.log("created new user");
+          // Reload the page to get the updated list
+          location.reload();
+        }
+      );
+
+    });
+    return false;
+  };
+  submitInfo();
+
+  // run the getloction function on location button press on a form.
+  locationBtnFun = function () {
+    $("form.ajax button[type=button]").on("click", function () {
+      console.log("location button pressed: ")
+
+      getLocation();
+
+    });
+  };
+  // start up listener for non dynamically applied elements.
+  locationBtnFun();
 
 });
 // run the function for the carousel
