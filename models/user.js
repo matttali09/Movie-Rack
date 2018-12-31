@@ -12,13 +12,20 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        geolocation: {
-            type: DataTypes.STRING,
+        userLat: {
+            type: DataTypes.INTEGER,
             allowNull: true,
             validate: {
                 len: [1, 255]
             }
-        }
+        },
+        userLong: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            validate: {
+                len: [1, 255]
+            }
+        },
     });
 
     User.associate = function (models) {
