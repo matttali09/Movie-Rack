@@ -73,6 +73,8 @@ function runCarousel() {
 
 // function for dynamically apply the carousel items
 function carouselAjax(data) {
+  console.log(data.Title)
+  console.log(data.Ratings)
 
   // create a random number to make sure the number applied is dynamic between 1/1000 to make chance of double approx 1%
   let randomNum = Math.round(Math.random() * 1000)
@@ -92,13 +94,17 @@ function carouselAjax(data) {
   let row1 = $("<div>").addClass("row");
   let imgWrap = $("<div>").addClass("col s4 m2 mvImgWrap");
   let image2 = $("<img>").addClass("mvImg").attr("src", data.Poster);
+  // let rating0 = $("<p>").text(data.Ratings[0].Value);
+  // let rating1 = $("<p>").text(data.Ratings[1].Value);
+  // let rating2 = $("<p>").text(data.Ratings[2].Value);
   let titleWrap = $("<div>").addClass("col s8 m10 mvTitle");
   let title = $("<h5>").attr("id", "title").text(data.Title);
   let yearP = $("<p>").addClass("year-released").text(data.Released)
   let formCol = $("<div>").addClass("col col s8 m10");
   let form = $("<form>").attr("method", "post").addClass("ajax");
   let sliderParagraph = $("<p>").addClass("formP").text("Use slider to rate movie");
-  let slider = $("<p>").addClass("range-field").html("<input type='range' id='rating' min='0' max='100' />");
+  let slider = $("<p>").addClass("range-field").html("<input type='range' name='rating' id='rating' min='0' max='100' />");
+  let sliderVal = $("<p>").addClass("center slider-txt").attr("id", "slider-txt");
   let row2 = $("<div>").addClass("row");
   let inputField = $("<div>").addClass("input-field col s12");
   let reviewField = $("<textarea>").addClass("materialize-textarea").attr({
@@ -118,16 +124,22 @@ function carouselAjax(data) {
 
   // append all data to the rows in correct order for the modal
   imgWrap.append(image2);
-  title.append(yearP);
+  // imgWrap.append(rating0);
+  // imgWrap.append(rating1);
+  // imgWrap.append(rating2);
+  // title.append(yearP);
   btnDiv.append(submitButton);
   titleWrap.append(title);
+  titleWrap.append(yearP)
   inputField.append(reviewField);
   row2.append(inputField);
   form.append(sliderParagraph);
   form.append(slider);
+  form.append(sliderVal);
   form.append(row2);
-  form.append(btnDiv);
+  // form.append(btnDiv);
   formCol.append(form);
+  formCol.append(btnDiv)
   row1.append(imgWrap);
   row1.append(titleWrap);
   row1.append(formCol);
@@ -149,6 +161,7 @@ function carouselAjax(data) {
   // $('.modal').modal('destroy');
   $('.modal').modal();
   $('input#input_text, textarea#review').characterCounter();
+  // $("#submitBtn").off();
   submitReview();
 };
 
@@ -162,14 +175,17 @@ function displayMovie(data) {
     let row1 = $("<div>").addClass("row");
     let imgWrap = $("<div>").addClass("col s4 m2 mvImgWrap");
     let image2 = $("<img>").addClass("mvImg").attr("src", data.Poster);
+    // let rating0 = $("<p>").text(data.Ratings[0].Value);
+    // let rating1 = $("<p>").text(data.Ratings[1].Value);
+    // let rating2 = $("<p>").text(data.Ratings[2].Value);
     let titleWrap = $("<div>").addClass("col s8 m10 mvTitle");
     let title = $("<h5>").attr("id", "title").text(data.Title);
     let yearP = $("<p>").addClass("year-released").text(data.Released)
     let formCol = $("<div>").addClass("col col s8 m10");
     let form = $("<form>").addClass("ajax");
     let sliderParagraph = $("<p>").addClass("formP").text("Use slider to rate movie");
-    let slider = $("<p>").addClass("range-field").html("<input type='range' id='rating' min='0' max='100' />");
-    let sliderVal = $("<p>").addClass("center slider-txt").attr("id", "slider-txt")
+    let slider = $("<p>").addClass("range-field").html("<input type='range' name='rating' id='rating' min='0' max='100' />");
+    let sliderVal = $("<p>").addClass("center slider-txt").attr("id", "slider-txt");
     let row2 = $("<div>").addClass("row");
     let inputField = $("<div>").addClass("input-field col s12");
     let reviewField = $("<textarea>").addClass("materialize-textarea").attr({
@@ -188,17 +204,22 @@ function displayMovie(data) {
 
     // append the content together
     imgWrap.append(image2);
-    title.append(yearP);
+    // imgWrap.append(rating0);
+    // imgWrap.append(rating1);
+    // imgWrap.append(rating2);
+    // title.append(yearP);
     btnDiv.append(submitButton);
     titleWrap.append(title);
+    titleWrap.append(yearP)
     inputField.append(reviewField);
     row2.append(inputField);
     form.append(sliderParagraph);
     form.append(slider);
     form.append(sliderVal);
     form.append(row2);
-    form.append(btnDiv);
+    // form.append(btnDiv);
     formCol.append(form);
+    formCol.append(btnDiv)
     row1.append(imgWrap);
     row1.append(titleWrap);
     row1.append(formCol);
@@ -210,6 +231,7 @@ function displayMovie(data) {
     // reset page listeners
     sliderListener();
     $('input#input_text, textarea#review').characterCounter();
+    // $("#submitBtn").off();
     submitReview();
   }
   // alert if data could not be found
@@ -263,7 +285,7 @@ $(document).ready(function () {
   sliderListener = function () {
     $("form.ajax input[type='range']").change(function () {
       // validate data incoming
-      console.log($(this).val().toString());
+      console.log($(this).val());
       // console.log($("form.ajax input[name='name']").val().trim());
       var str = "";
       str = $(this).val().toString();
@@ -278,7 +300,7 @@ $(document).ready(function () {
 
 
   // function to get the information from search movie button
-  $(this).on("click", "#search-movie", function (event) {
+  $("#search-movie").on("click", function (event) {
     // stop the default behavior
     event.preventDefault();
 
@@ -332,8 +354,9 @@ $(document).ready(function () {
           // Reload the page to get the updated list
 
           console.log(response);
+          // save userid to be used for movie review submissions
           userSelect = response.id;
-          // location.reload();
+          console.log(userSelect)
         }
         );
 
@@ -344,30 +367,32 @@ $(document).ready(function () {
 
   // submit info function for forms of user's review
   submitReview = function () {
-    $("form.ajax").on("submit", function (event) {
+    $("div.btn-div").on("click", "#submitBtn", function (event) {
       // stop the default behavior
       event.preventDefault();
-      console.log(this);
+      // console.log( $(this).parents() );
+      // console.log($(".mvImg").attr("src"));
 
       // check to make sure the button is working
-      console.log("review processing");
+      // console.log("review processing");
 
       // store variables must be applied after element
-      var titleInput = $("#title").val();
-      var yearInput = $(".year-released").val();
-      var imgInput = $(".movie-img").attr("src");
-      var ratingInput = $("form.ajax input[name='rating']").val();
-      var reviewInput = $("form.ajax input[name='review']").val().trim();
+      var titleInput = $(this).parents("div.col.s8.m10").siblings("div.mvTitle").children("h5").text();
+      var yearInput = $(this).parents("div.col.s8.m10").siblings("div.mvTitle").children("p").html();
+      var imgInput = $(this).parents("div.col.s8.m10").siblings("div.mvImgWrap").children("img").attr("src");
+      var ratingInput = $(this).parent().siblings("form.ajax").children("p").find("input[type='range']").val();
+      var reviewInput = $(this).parent().siblings("form.ajax").children("div").find("textarea[name='review']").val()
 
       // confirm data being stored
-      console.log(titleInput);
-      console.log(yearInput);
-      console.log(imgInput);
-      console.log(ratingInput);
-      console.log(reviewInput);
+      // console.log(titleInput);
+      // console.log(yearInput);
+      // console.log(imgInput);
+      // console.log(ratingInput);
+      // console.log(reviewInput);
 
       // Wont submit the post if we are missing a body, title, or user
       if (!titleInput || !yearInput || !imgInput || !userSelect) {
+        alert("Please use our signin feature above for database purposes :)")
         return;
       }
       // grab the information from the form for Movie review data and store it in variables.
@@ -377,7 +402,7 @@ $(document).ready(function () {
         movie_img_html: imgInput,
         rating: ratingInput,
         review: reviewInput,
-        user_id: userSelect
+        UserId: userSelect
       };
       console.log(newReview)
 
