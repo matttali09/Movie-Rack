@@ -372,7 +372,7 @@ $(document).ready(function () {
               $.post("/api/users", newUser)
                 .then(function (response) {
                   alert("Thank you for signing in!")
-                  console.log("created new user");
+                  console.log("created new user1");
                   // Reload the page to get the updated list
 
                   console.log(response);
@@ -380,8 +380,9 @@ $(document).ready(function () {
                   userSelect = response.id;
                   console.log(userSelect)
                   $(".user").hide();
-                  return;
+
                 });
+              return;
             };
           }
         }
