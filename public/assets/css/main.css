@@ -100,19 +100,18 @@ body {
   color: #d64700;
   font-size: 1.5em;
   font-weight: 700;
+  margin-top: .5em;
+  margin-bottom: 0;
 }
 
 .mvTitle p {
-  /* color: black; */
-  /* line-height: 115%; */
-  font-size: 80%;
   font-weight: 700;
   color: #647678;
 }
-.year-released {
+/* .year-released {
   float: right;
   text-align: right;
-}
+} */
 
 .formP {
   color: #2f3738;
@@ -139,8 +138,9 @@ body {
 }
 .mvDtl .year-released {
   color: #9fbcbf;
-  font-size: 80%;
+  font-size: 100%;
   font-weight: 700;
+  float: right;
 }
 
 .mvDtl #userName {
@@ -161,8 +161,18 @@ body {
   font-weight: 600;
 }
 
+.mvDtl .mrRating {
+  color: #FFD64F;
+  margin-bottom: .25em;
+  font-weight: 600;
+}
+
 .mvDtl #usrRating {
   color: #FFD64F;
+}
+
+.mvDtl #title {
+  margin-top: 0;
 }
 
 #locationBtn {
