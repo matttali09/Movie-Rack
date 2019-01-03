@@ -363,6 +363,7 @@ $(document).ready(function () {
             console.log(userSelect)
             alert("Thank you for signing in :)");
             $(".user").hide();
+            return;
           }
           else {
             // Send the POST request to create a new user.
