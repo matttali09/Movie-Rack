@@ -455,8 +455,10 @@ $(document).ready(function () {
       // Send the POST request.
       $.post("/api/movies", newReview)
         .then(function (response) {
+          alert("Thank you for submitting a review")
           console.log("created new movie rating");
           console.log(response)
+          Location.reload();
         }
         );
 
