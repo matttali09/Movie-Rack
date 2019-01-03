@@ -367,7 +367,7 @@ $(document).ready(function () {
               return;
             }
             // else create a new user
-            else {
+            else if (userSelect == null) {
               // Send the POST request to create a new user.
               $.post("/api/users", newUser)
                 .then(function (response) {
@@ -392,7 +392,7 @@ $(document).ready(function () {
           $.post("/api/users", newUser)
             .then(function (response) {
               alert("Thank you for signing in!")
-              console.log("created new user");
+              console.log("created new user2");
               // Reload the page to get the updated list
 
               console.log(response);
