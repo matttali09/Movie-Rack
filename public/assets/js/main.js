@@ -73,8 +73,8 @@ function runCarousel() {
 
 // function for dynamically apply the carousel items
 function carouselAjax(data) {
-  console.log(data.Title)
-  console.log(data.Ratings)
+  // console.log(data.Title)
+  // console.log(data.Ratings)
 
   // create a random number to make sure the number applied is dynamic between 1/1000 to make chance of double approx 1%
   let randomNum = Math.round(Math.random() * 1000)
@@ -246,7 +246,7 @@ function displayMovie(data) {
 // function that checks to see if GPS capability is available and then create the map
 function getLocation() {
   event.preventDefault();
-  console.log("getLocation start:")
+  // console.log("getLocation start:")
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
       // set the values of the location and display them
@@ -285,13 +285,13 @@ $(document).ready(function () {
   sliderListener = function () {
     $("form.ajax input[type='range']").change(function () {
       // validate data incoming
-      console.log($(this).val());
+      // console.log($(this).val());
       // console.log($("form.ajax input[name='name']").val().trim());
       var str = "";
       str = $(this).val().toString();
       $("input[type='range'] option:selected").each(function () {
         str += $(this).val() + " ";
-        console.log(str);
+        // console.log(str);
 
       });
       $("form.ajax p[id=slider-txt]").text(str);
@@ -324,20 +324,27 @@ $(document).ready(function () {
       // store variables must be applied after element
       var nameInput = $("#name").val().trim();
       var ageInput = $("#age").val();
-      var latInput = myLat;
-      var longInput = myLong;
+      parseInt(ageInput);
+      // var latInput = myLat;
+      // var longInput = myLong;
 
       // confirm data being stored
-      console.log(nameInput);
-      console.log(ageInput);
-      console.log(latInput);
-      console.log(longInput);
+      // console.log(nameInput);
+      // console.log(ageInput);
+      // console.log(latInput);
+      // console.log(longInput);
+
+      // create anonymous tags
+      if (!nameInput) {
+        nameInput = "Anonymous"
+      }
 
       // Wont submit the post if we are missing an age
       if (!ageInput) {
         alert("age is required please enter the information for security purposes.")
         return;
       }
+
       // grab the information for user and store it in variables.
       var newUser = {
         name: nameInput,
@@ -345,20 +352,41 @@ $(document).ready(function () {
         userLat: myLat,
         userLong: myLong
       };
-      console.log(newUser)
+      // console.log(newUser)
 
-      // Send the POST request.
-      $.post("/api/users", newUser)
-        .then(function (response) {
-          console.log("created new user");
-          // Reload the page to get the updated list
+      // search through users and if name and age are the same
+      $.get("/api/users", function (data) {
+        console.log("users", data);
+        for (i in data) {
+          if (nameInput == data[i].name && ageInput == data[i].age) {
+            userSelect = data[i].id;
+            console.log(userSelect)
+            alert("Thank you for signing in :)");
+            $(".user").hide();
+          }
+          else {
+            // Send the POST request to create a new user.
+            $.post("/api/users", newUser)
+              .then(function (response) {
+                alert("Thank you for signing in!")
+                console.log("created new user");
+                // Reload the page to get the updated list
 
-          console.log(response);
-          // save userid to be used for movie review submissions
-          userSelect = response.id;
-          console.log(userSelect)
-        }
-        );
+                console.log(response);
+                // save userid to be used for movie review submissions
+                userSelect = response.id;
+                console.log(userSelect)
+                $(".user").hide();
+              });
+          }
+        };
+      });
+
+
+
+
+
+
 
     });
     return false;
@@ -408,11 +436,11 @@ $(document).ready(function () {
 
       // Send the POST request.
       $.post("/api/movies", newReview)
-      .then( function (response) {
+        .then(function (response) {
           console.log("created new movie rating");
           console.log(response)
         }
-      );
+        );
 
     });
     return false;
