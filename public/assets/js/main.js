@@ -357,6 +357,7 @@ $(document).ready(function () {
       // search through users and if name and age are the same
       $.get("/api/users", function (data) {
         console.log("users", data);
+        // for when table is empty
         if (data[0]) {
           for (i in data) {
             if (nameInput == data[i].name && ageInput == data[i].age) {
@@ -366,28 +367,11 @@ $(document).ready(function () {
               $(".user").hide();
               return;
             }
-            // else create a new user
-            else if (userSelect == null) {
-              // Send the POST request to create a new user.
-              $.post("/api/users", newUser)
-                .then(function (response) {
-                  alert("Thank you for signing in!")
-                  console.log("created new user1");
-                  // Reload the page to get the updated list
 
-                  console.log(response);
-                  // save userid to be used for movie review submissions
-                  userSelect = response.id;
-                  console.log(userSelect)
-                  $(".user").hide();
-
-                });
-              return;
-            };
           }
         }
         // if no data yet
-        else {
+        else if (userSelect == null) {
           // Send the POST request to create a new user.
           $.post("/api/users", newUser)
             .then(function (response) {
