@@ -73,8 +73,8 @@ function runCarousel() {
 
 // function for dynamically apply the carousel items
 function carouselAjax(data) {
-  console.log(data.Title)
-  console.log(data.Ratings)
+  // console.log(data.Title)
+  // console.log(data.Ratings)
 
   // create a random number to make sure the number applied is dynamic between 1/1000 to make chance of double approx 1%
   let randomNum = Math.round(Math.random() * 1000)
@@ -246,7 +246,7 @@ function displayMovie(data) {
 // function that checks to see if GPS capability is available and then create the map
 function getLocation() {
   event.preventDefault();
-  console.log("getLocation start:")
+  // console.log("getLocation start:")
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function (position) {
       // set the values of the location and display them
@@ -324,6 +324,7 @@ $(document).ready(function () {
       // store variables must be applied after element
       var nameInput = $("#name").val().trim();
       var ageInput = $("#age").val();
+      parseInt(ageInput);
       // var latInput = myLat;
       // var longInput = myLong;
 
@@ -338,6 +339,7 @@ $(document).ready(function () {
         alert("age is required please enter the information for security purposes.")
         return;
       }
+
       // grab the information for user and store it in variables.
       var newUser = {
         name: nameInput,
@@ -347,18 +349,39 @@ $(document).ready(function () {
       };
       // console.log(newUser)
 
-      // Send the POST request.
-      $.post("/api/users", newUser)
-        .then(function (response) {
-          console.log("created new user");
-          // Reload the page to get the updated list
+      // search through users and if name and age are the same
+      $.get("/api/users", function (data) {
+        console.log("users", data);
+        for (i in data) {
+          if (nameInput == data[i].name && ageInput == data[i].age) {
+            userSelect = data[i].id;
+            console.log(userSelect)
+            alert("Thank you for signing in :)");
+            $(".user").hide();
+          }
+          else {
+            // Send the POST request to create a new user.
+            $.post("/api/users", newUser)
+              .then(function (response) {
+                alert("Thank you for signing in!")
+                console.log("created new user");
+                // Reload the page to get the updated list
 
-          console.log(response);
-          // save userid to be used for movie review submissions
-          userSelect = response.id;
-          console.log(userSelect)
-        }
-        );
+                console.log(response);
+                // save userid to be used for movie review submissions
+                userSelect = response.id;
+                console.log(userSelect)
+                $(".user").hide();
+              });
+          }
+        };
+      });
+
+
+
+
+
+
 
     });
     return false;
@@ -408,11 +431,11 @@ $(document).ready(function () {
 
       // Send the POST request.
       $.post("/api/movies", newReview)
-      .then( function (response) {
+        .then(function (response) {
           console.log("created new movie rating");
           console.log(response)
         }
-      );
+        );
 
     });
     return false;
