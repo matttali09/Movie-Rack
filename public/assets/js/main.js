@@ -357,32 +357,53 @@ $(document).ready(function () {
       // search through users and if name and age are the same
       $.get("/api/users", function (data) {
         console.log("users", data);
-        for (i in data) {
-          if (data[i].age) {
+        if (data[1]) {
+          for (i in data) {
             if (nameInput == data[i].name && ageInput == data[i].age) {
               userSelect = data[i].id;
               console.log(userSelect)
               alert("Thank you for signing in :)");
               $(".user").hide();
               return;
+            }
+            // else create a new user
+            else {
+              // Send the POST request to create a new user.
+              $.post("/api/users", newUser)
+                .then(function (response) {
+                  alert("Thank you for signing in!")
+                  console.log("created new user");
+                  // Reload the page to get the updated list
+
+                  console.log(response);
+                  // save userid to be used for movie review submissions
+                  userSelect = response.id;
+                  console.log(userSelect)
+                  $(".user").hide();
+                  return;
+                });
             };
           }
-          else {
-            // Send the POST request to create a new user.
-            $.post("/api/users", newUser)
-              .then(function (response) {
-                alert("Thank you for signing in!")
-                console.log("created new user");
-                // Reload the page to get the updated list
+        }
+        // if no data yet
+        else {
+          // Send the POST request to create a new user.
+          $.post("/api/users", newUser)
+            .then(function (response) {
+              alert("Thank you for signing in!")
+              console.log("created new user");
+              // Reload the page to get the updated list
 
-                console.log(response);
-                // save userid to be used for movie review submissions
-                userSelect = response.id;
-                console.log(userSelect)
-                $(".user").hide();
-              });
-          }
+              console.log(response);
+              // save userid to be used for movie review submissions
+              userSelect = response.id;
+              console.log(userSelect)
+              $(".user").hide();
+              return;
+            });
         };
+
+
       });
 
     });
