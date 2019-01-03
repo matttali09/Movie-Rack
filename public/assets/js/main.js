@@ -285,13 +285,13 @@ $(document).ready(function () {
   sliderListener = function () {
     $("form.ajax input[type='range']").change(function () {
       // validate data incoming
-      console.log($(this).val());
+      // console.log($(this).val());
       // console.log($("form.ajax input[name='name']").val().trim());
       var str = "";
       str = $(this).val().toString();
       $("input[type='range'] option:selected").each(function () {
         str += $(this).val() + " ";
-        console.log(str);
+        // console.log(str);
 
       });
       $("form.ajax p[id=slider-txt]").text(str);
@@ -324,14 +324,14 @@ $(document).ready(function () {
       // store variables must be applied after element
       var nameInput = $("#name").val().trim();
       var ageInput = $("#age").val();
-      var latInput = myLat;
-      var longInput = myLong;
+      // var latInput = myLat;
+      // var longInput = myLong;
 
       // confirm data being stored
-      console.log(nameInput);
-      console.log(ageInput);
-      console.log(latInput);
-      console.log(longInput);
+      // console.log(nameInput);
+      // console.log(ageInput);
+      // console.log(latInput);
+      // console.log(longInput);
 
       // Wont submit the post if we are missing an age
       if (!ageInput) {
@@ -345,7 +345,7 @@ $(document).ready(function () {
         userLat: myLat,
         userLong: myLong
       };
-      console.log(newUser)
+      // console.log(newUser)
 
       // Send the POST request.
       $.post("/api/users", newUser)
