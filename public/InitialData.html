@@ -54,17 +54,10 @@
           <div class="col s10 offset-s1 intro">
             <h3>MOVIE RATINGS BY REAL PEOPLE</h3>
             <p>
-              Hello there everybody, we are a group of students at the UCF Coding Bootcamp.
-              We are designing a web application and need your help
-              populating a database for a project we’re workin on. You will
-              NOT be asked for any personal data. Just rate the movies below.
-              We are trying to get real data for a rating debunker app. Thank you
-              for your help. We are leaving name optional and and the critics rating out
-              for unbiased results on our first iteration. The website is still in prototyping but should
-              be up and running soon!
+                Hello, we are a group of students at the UCF Coding Bootcamp. We are designing a movie rating debunker application and need your help populating a database with real data. You will NOT be asked for any personal data, name is optional. Just rate the movies below. The website is still in prototyping, so if you run into any bugs, rest assured we're working on it. Thank you for your help!
             </p>
             <h6>
-              Please signin (name and geo-location not required). Then choose one of our top movies below
+              Please sign in (name and geo-location NOT required). Then choose one of our top movies below
               or search for a movie by name, and give it your rating. Thank You!
               <span style="font-style: oblique">Thank You!</span>
               </h3>
@@ -72,14 +65,14 @@
         </div>
 
         <!-- user loggin spot -->
-        <div class="user input">
+        <div class="user input col s10 offset-s1 intro">
           <input class="validate" placeholder="Name/Username (optional)" id="name" name="name" type="text" style="color: white">
           <input class="validate" placeholder="Age (required)" id="age" name="age" type="text" style="color: white"
             required="required">
           <button class="waves-effect waves-light btn locationBtn" id="locationBtn" type="button" value="#" name="loc"><i
               class="material-icons right">add_location</i>Location</button>
           <p id="coord"></p>
-          <button class="btn waves-effect waves-light" id="createU" type="button" name="action">sign-in
+          <button class="btn waves-effect waves-light signInBtn" id="createU" type="button" name="action">sign-in
             <i class="material-icons right">send</i>
           </button>
         </div>
