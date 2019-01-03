@@ -159,7 +159,7 @@ function carouselAjax(data) {
   sliderListener();
   // $('.modal').modal();
   // $('.modal').modal('destroy');
-  $('.modal').modal();
+  // $('.modal').modal();
   $('input#input_text, textarea#review').characterCounter();
   // $("#submitBtn").off();
   submitReview();
@@ -459,6 +459,7 @@ $(document).ready(function () {
           console.log("created new movie rating");
           console.log(response)
           location.reload();
+          return;
         }
         );
 
