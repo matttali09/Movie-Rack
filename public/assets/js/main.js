@@ -334,6 +334,11 @@ $(document).ready(function () {
       // console.log(latInput);
       // console.log(longInput);
 
+      // create anonymous tags
+      if (!nameInput) {
+        nameInput = "Anonymous"
+      }
+
       // Wont submit the post if we are missing an age
       if (!ageInput) {
         alert("age is required please enter the information for security purposes.")
