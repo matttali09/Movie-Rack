@@ -5,26 +5,20 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: true,
             validate: {
-                len: [1, 255]
+                len: [0, 255]
             }
         },
         age: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
         },
         userLat: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.FLOAT,
             allowNull: true,
-            validate: {
-                len: [1, 255]
-            }
         },
         userLong: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.FLOAT,
             allowNull: true,
-            validate: {
-                len: [1, 255]
-            }
         },
     });
 
