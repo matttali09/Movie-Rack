@@ -458,7 +458,7 @@ $(document).ready(function () {
           alert("Thank you for submitting a review")
           console.log("created new movie rating");
           console.log(response)
-          Location.reload();
+          location.reload();
         }
         );
 
