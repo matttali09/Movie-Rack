@@ -357,7 +357,7 @@ $(document).ready(function () {
       // search through users and if name and age are the same
       $.get("/api/users", function (data) {
         console.log("users", data);
-        if (data[1]) {
+        if (data[0]) {
           for (i in data) {
             if (nameInput == data[i].name && ageInput == data[i].age) {
               userSelect = data[i].id;
