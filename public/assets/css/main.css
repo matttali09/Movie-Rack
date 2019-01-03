@@ -174,6 +174,14 @@ body {
   background-color: #17607d;
   margin-top: 1em;
 }
+.btn-div {
+  display: block;
+}
+form p {
+  color: black;
+  padding: 11px;
+}
+
 /*  search by name subhead */
 .static-search-p {
   margin-top: 1.5em;
@@ -187,18 +195,16 @@ body {
 #search-movie {
   background-color: #17607d;
 }
-
 .formWrap .row {
   margin-bottom: 0.5em;
 }
-form p {
-  color: black;
-}
+
 
 /* carousel styling */
 .carousel {
   overflow: hidden;
-  height: 300px;
+  
+  /* height: 300px; */
 }
 
 /* footer styling */
@@ -214,7 +220,17 @@ form p {
 }
 
 /* Media Queries */
-@media screen and (max-width: 633px) {
+
+@media screen and (max-width: 817px){
+  .btn-div {
+      display: block;
+  }
+  form p {
+    padding: 0;
+  }
+}
+@media screen and (max-width: 633px){
+
   #footer {
     text-align: center;
   }

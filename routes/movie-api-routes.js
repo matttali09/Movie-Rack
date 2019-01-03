@@ -39,7 +39,11 @@ module.exports = function(app) {
 
   // POST route for saving a new post
   app.post("/api/movies", function(req, res) {
+    
+    console.log("this is the req.body: " +req.body);
     db.Movie.create(req.body).then(function(dbMovie) {
+      console.log("this is the dbMovie: " +dbMovie);
+
       res.json(dbMovie);
     });
   });

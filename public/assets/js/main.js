@@ -19,7 +19,7 @@ let movieName = "";
 
 // initialize lat and long vars for geolocate
 var myLat;
-var mylong;
+var myLong;
 
 // ======================================================================================
 // Ajax Logic
@@ -73,6 +73,8 @@ function runCarousel() {
 
 // function for dynamically apply the carousel items
 function carouselAjax(data) {
+  console.log(data.Title)
+  console.log(data.Ratings)
 
   // create a random number to make sure the number applied is dynamic between 1/1000 to make chance of double approx 1%
   let randomNum = Math.round(Math.random() * 1000)
@@ -92,28 +94,19 @@ function carouselAjax(data) {
   let row1 = $("<div>").addClass("row");
   let imgWrap = $("<div>").addClass("col s4 m2 mvImgWrap");
   let image2 = $("<img>").addClass("mvImg").attr("src", data.Poster);
+  // let rating0 = $("<p>").text(data.Ratings[0].Value);
+  // let rating1 = $("<p>").text(data.Ratings[1].Value);
+  // let rating2 = $("<p>").text(data.Ratings[2].Value);
   let titleWrap = $("<div>").addClass("col s8 m10 mvTitle");
   let title = $("<h5>").attr("id", "title").text(data.Title);
   let yearP = $("<p>").addClass("year-released").text(data.Released)
   let formCol = $("<div>").addClass("col col s8 m10");
-  let form = $("<form>").attr("action", "api-route").attr("method", "post").addClass("ajax");
+  let form = $("<form>").attr("method", "post").addClass("ajax");
   let sliderParagraph = $("<p>").addClass("formP").text("Use slider to rate movie");
-  let slider = $("<p>").addClass("range-field").html("<input type='range' id='rating' min='0' max='100' />");
+  let slider = $("<p>").addClass("range-field").html("<input type='range' name='rating' id='rating' min='0' max='100' />");
+  let sliderVal = $("<p>").addClass("center slider-txt").attr("id", "slider-txt");
   let row2 = $("<div>").addClass("row");
   let inputField = $("<div>").addClass("input-field col s12");
-  let nameField = $("<input>").addClass("validate").attr({
-    placeholder: "Name (optional)",
-    id: "name",
-    name: "name",
-    type: "text",
-  });
-  let ageField = $("<input>").addClass("validate").attr({
-    placeholder: "Age (required)",
-    id: "age",
-    name: "age",
-    type: "text",
-    required: true
-  });
   let reviewField = $("<textarea>").addClass("materialize-textarea").attr({
     placeholder: "Your Review (optional)",
     id: "review",
@@ -122,13 +115,6 @@ function carouselAjax(data) {
     maxlength: "255"
   })
   let btnDiv = $("<div>").addClass("btn-div");
-  let locationButton = $("<button>").addClass("waves-effect waves-light btn locationBtn").attr({
-    id: "locationBtn",
-    type: "button",
-    value: "#",
-    name: "loc"
-  }).html("<i class='material-icons right'>add_location</i>Location");
-  let locationDisplay = $("<p>").attr("id", "coord");
   let submitButton = $("<button>").addClass("btn waves-effect waves-light").attr({
     id: "submitBtn",
     type: "submit",
@@ -138,20 +124,22 @@ function carouselAjax(data) {
 
   // append all data to the rows in correct order for the modal
   imgWrap.append(image2);
-  title.append(yearP);
-  btnDiv.append(locationButton);
-  btnDiv.append(locationDisplay);
+  // imgWrap.append(rating0);
+  // imgWrap.append(rating1);
+  // imgWrap.append(rating2);
+  // title.append(yearP);
   btnDiv.append(submitButton);
   titleWrap.append(title);
-  inputField.append(nameField);
-  inputField.append(ageField);
+  titleWrap.append(yearP)
   inputField.append(reviewField);
   row2.append(inputField);
   form.append(sliderParagraph);
   form.append(slider);
+  form.append(sliderVal);
   form.append(row2);
-  form.append(btnDiv);
+  // form.append(btnDiv);
   formCol.append(form);
+  formCol.append(btnDiv)
   row1.append(imgWrap);
   row1.append(titleWrap);
   row1.append(formCol);
@@ -161,50 +149,45 @@ function carouselAjax(data) {
 
   // put the content on the DOM
   $('.carousel').append(carouselDiv);
+  // $('.carousel').carousel();
+  // $('.carousel').carousel('destroy');
   $('.carousel').carousel();
   $("#carousel-container").append(modal);
 
   // reinitialize listeners
-  $('.modal').modal();
-  $('.modal').modal('destroy');
+  // $(this).trigger("event");
+  sliderListener();
+  // $('.modal').modal();
+  // $('.modal').modal('destroy');
   $('.modal').modal();
   $('input#input_text, textarea#review').characterCounter();
-  locationBtnFun();
-  submitInfo();
+  // $("#submitBtn").off();
+  submitReview();
 };
 
 // function to display a single movie
 function displayMovie(data) {
 
   // verify the user inputed a movie title that could be found
-  if (data) {
+  if (data.Response !== "False") {
     // make the form div
     let formWrap = $("<div>").addClass("formWrap col s12");
     let row1 = $("<div>").addClass("row");
     let imgWrap = $("<div>").addClass("col s4 m2 mvImgWrap");
     let image2 = $("<img>").addClass("mvImg").attr("src", data.Poster);
+    // let rating0 = $("<p>").text(data.Ratings[0].Value);
+    // let rating1 = $("<p>").text(data.Ratings[1].Value);
+    // let rating2 = $("<p>").text(data.Ratings[2].Value);
     let titleWrap = $("<div>").addClass("col s8 m10 mvTitle");
     let title = $("<h5>").attr("id", "title").text(data.Title);
     let yearP = $("<p>").addClass("year-released").text(data.Released)
     let formCol = $("<div>").addClass("col col s8 m10");
-    let form = $("<form>").attr("action", "api-route").attr("method", "post").addClass("ajax");
+    let form = $("<form>").addClass("ajax");
     let sliderParagraph = $("<p>").addClass("formP").text("Use slider to rate movie");
-    let slider = $("<p>").addClass("range-field").html("<input type='range' id='rating' min='0' max='100' />");
+    let slider = $("<p>").addClass("range-field").html("<input type='range' name='rating' id='rating' min='0' max='100' />");
+    let sliderVal = $("<p>").addClass("center slider-txt").attr("id", "slider-txt");
     let row2 = $("<div>").addClass("row");
     let inputField = $("<div>").addClass("input-field col s12");
-    let nameField = $("<input>").addClass("validate").attr({
-      placeholder: "Name (optional)",
-      id: "name",
-      name: "name",
-      type: "text",
-    });
-    let ageField = $("<input>").addClass("validate").attr({
-      placeholder: "Age (required)",
-      id: "age",
-      name: "age",
-      type: "text",
-      required: true
-    });
     let reviewField = $("<textarea>").addClass("materialize-textarea").attr({
       placeholder: "Your Review (optional)",
       id: "review",
@@ -213,13 +196,6 @@ function displayMovie(data) {
       maxlength: "255"
     })
     let btnDiv = $("<div>").addClass("btn-div");
-    let locationButton = $("<button>").addClass("waves-effect waves-light btn locationBtn").attr({
-      id: "locationBtn",
-      type: "button",
-      value: "#",
-      name: "loc"
-    }).html("<i class='material-icons right'>add_location</i>Location");
-    let locationDisplay = $("<p>").attr("id", "coord");
     let submitButton = $("<button>").addClass("btn waves-effect waves-light").attr({
       id: "submitBtn",
       type: "submit",
@@ -228,20 +204,22 @@ function displayMovie(data) {
 
     // append the content together
     imgWrap.append(image2);
-    title.append(yearP);
-    btnDiv.append(locationButton);
-    btnDiv.append(locationDisplay);
+    // imgWrap.append(rating0);
+    // imgWrap.append(rating1);
+    // imgWrap.append(rating2);
+    // title.append(yearP);
     btnDiv.append(submitButton);
     titleWrap.append(title);
-    inputField.append(nameField);
-    inputField.append(ageField);
+    titleWrap.append(yearP)
     inputField.append(reviewField);
     row2.append(inputField);
     form.append(sliderParagraph);
     form.append(slider);
+    form.append(sliderVal);
     form.append(row2);
-    form.append(btnDiv);
+    // form.append(btnDiv);
     formCol.append(form);
+    formCol.append(btnDiv)
     row1.append(imgWrap);
     row1.append(titleWrap);
     row1.append(formCol);
@@ -251,9 +229,10 @@ function displayMovie(data) {
     $("#search").append(formWrap);
 
     // reset page listeners
+    sliderListener();
     $('input#input_text, textarea#review').characterCounter();
-    locationBtnFun();
-    submitInfo();
+    // $("#submitBtn").off();
+    submitReview();
   }
   // alert if data could not be found
   else {
@@ -274,10 +253,9 @@ function getLocation() {
       myLat = parseFloat(position.coords.latitude);
       myLong = parseFloat(position.coords.longitude);
       console.log("Latitude: " + myLat + " Longitude: " + myLong);
-      
+
       // update text
-      $("form.ajax p[id=coord]").html("Latitude: " + myLat + "<br>Longitude: " + myLong);
-      $("form.ajax p[id=coord]").html("Latitude: " + myLat + "<br>Longitude: " + myLong);
+      $("#coord").html("Latitude: " + myLat + "<br>Longitude: " + myLong);
 
       // adds a map to the site for use later
       // mapboxgl.accessToken = 'pk.eyJ1Ijoid2lucGlsZGV1IiwiYSI6ImNqcDJzbnd1aDAwam8zd3BlejczaWwxa2EifQ.bLD5Bdgv8hiiXbaAIqjLdA';
@@ -298,11 +276,31 @@ function getLocation() {
 // Document LOGIC
 // ======================================================================================
 $(document).ready(function () {
-  // carousel control
+  // sidnav control
   $(".sidenav").sidenav();
+  // $(".modal").modal();
+  //   $(this).on("event", function() {
+  //      $(".modal").modal();
+  //   });
+  sliderListener = function () {
+    $("form.ajax input[type='range']").change(function () {
+      // validate data incoming
+      console.log($(this).val());
+      // console.log($("form.ajax input[name='name']").val().trim());
+      var str = "";
+      str = $(this).val().toString();
+      $("input[type='range'] option:selected").each(function () {
+        str += $(this).val() + " ";
+        console.log(str);
 
-  // function to get the information from submit button
-  $(this).on("click", "#search-movie", function (event) {
+      });
+      $("form.ajax p[id=slider-txt]").text(str);
+    }).change();
+  };
+
+
+  // function to get the information from search movie button
+  $("#search-movie").on("click", function (event) {
     // stop the default behavior
     event.preventDefault();
 
@@ -313,64 +311,118 @@ $(document).ready(function () {
     searchMovie();
   });
 
-
-
-  // submit info function for forms
-  submitInfo = function () {
-    $("form.ajax").on("submit", function (event) {
+  var userSelect;
+  // submit info function for forms of user's review
+  submitUser = function () {
+    $("#createU").on("click", function (event) {
       // stop the default behavior
       event.preventDefault();
 
       // check to make sure the button is working
       console.log("submit button pressed");
 
-      // grab the information from the form for Movie review data and store it in variables.
-      var newReview = {
-        title: $("#title").val(),
-        year_released: $("#year-released").val(),
-        movie_img_html: $("#movie-img").attr("src"),
-        rating: $("#rating").val(),
-        review: $("#review").val().trim()
-      };
+      // store variables must be applied after element
+      var nameInput = $("#name").val().trim();
+      var ageInput = $("#age").val();
+      var latInput = myLat;
+      var longInput = myLong;
 
-      // Send the POST request.
-      $.ajax("/api/movies", {
-        type: "POST",
-        data: newReview
-      }).then(
-        function () {
-          console.log("created new movie rating");
-        }
-      );
+      // confirm data being stored
+      console.log(nameInput);
+      console.log(ageInput);
+      console.log(latInput);
+      console.log(longInput);
 
+      // Wont submit the post if we are missing an age
+      if (!ageInput) {
+        alert("age is required please enter the information for security purposes.")
+        return;
+      }
       // grab the information for user and store it in variables.
       var newUser = {
-        name: $("#name").val().trim(),
-        age: $("#age").val().trim(),
+        name: nameInput,
+        age: ageInput,
         userLat: myLat,
         userLong: myLong
       };
+      console.log(newUser)
 
       // Send the POST request.
-      $.ajax("/api/users", {
-        type: "POST",
-        data: newUser
-      }).then(
-        function () {
+      $.post("/api/users", newUser)
+        .then(function (response) {
           console.log("created new user");
           // Reload the page to get the updated list
-          location.reload();
+
+          console.log(response);
+          // save userid to be used for movie review submissions
+          userSelect = response.id;
+          console.log(userSelect)
+        }
+        );
+
+    });
+    return false;
+  };
+  submitUser();
+
+  // submit info function for forms of user's review
+  submitReview = function () {
+    $("div.btn-div").on("click", "#submitBtn", function (event) {
+      // stop the default behavior
+      event.preventDefault();
+      // console.log( $(this).parents() );
+      // console.log($(".mvImg").attr("src"));
+
+      // check to make sure the button is working
+      // console.log("review processing");
+
+      // store variables must be applied after element
+      var titleInput = $(this).parents("div.col.s8.m10").siblings("div.mvTitle").children("h5").text();
+      var yearInput = $(this).parents("div.col.s8.m10").siblings("div.mvTitle").children("p").html();
+      var imgInput = $(this).parents("div.col.s8.m10").siblings("div.mvImgWrap").children("img").attr("src");
+      var ratingInput = $(this).parent().siblings("form.ajax").children("p").find("input[type='range']").val();
+      var reviewInput = $(this).parent().siblings("form.ajax").children("div").find("textarea[name='review']").val()
+
+      // confirm data being stored
+      // console.log(titleInput);
+      // console.log(yearInput);
+      // console.log(imgInput);
+      // console.log(ratingInput);
+      // console.log(reviewInput);
+
+      // Wont submit the post if we are missing a body, title, or user
+      if (!titleInput || !yearInput || !imgInput || !userSelect) {
+        alert("Please use our signin feature above for database purposes :)")
+        return;
+      }
+      // grab the information from the form for Movie review data and store it in variables.
+      var newReview = {
+        title: titleInput,
+        year_released: yearInput,
+        movie_img_html: imgInput,
+        rating: ratingInput,
+        review: reviewInput,
+        UserId: userSelect
+      };
+      console.log(newReview)
+
+      // Send the POST request.
+      $.post("/api/movies", newReview)
+      .then( function (response) {
+          console.log("created new movie rating");
+          console.log(response)
         }
       );
 
     });
     return false;
   };
-  submitInfo();
+  // submitReview();
+
 
   // run the getloction function on location button press on a form.
   locationBtnFun = function () {
-    $("form.ajax button[type=button]").on("click", function () {
+    $("#locationBtn").on("click", function () {
       console.log("location button pressed: ")
 
       getLocation();
@@ -380,6 +432,21 @@ $(document).ready(function () {
   // start up listener for non dynamically applied elements.
   locationBtnFun();
 
+  // run the function for the carousel
+  runCarousel();
+
+  resetCar = function () {
+    $('.carousel').carousel();
+    $('.carousel').carousel();
+  };
+  $("#reset-car").on("click", resetCar)
 });
-// run the function for the carousel
-runCarousel();
+// $(".carousel").carousel('destroy');
+// $(".carousel").carousel();
+// $(".modal").modal('destroy');
+// $(".modal").modal();
+
+
+$(document).on("trigger", function () {
+
+});
