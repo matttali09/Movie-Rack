@@ -358,12 +358,14 @@ $(document).ready(function () {
       $.get("/api/users", function (data) {
         console.log("users", data);
         for (i in data) {
-          if (nameInput == data[i].name && ageInput == data[i].age) {
-            userSelect = data[i].id;
-            console.log(userSelect)
-            alert("Thank you for signing in :)");
-            $(".user").hide();
-            return;
+          if (data) {
+            if (nameInput == data[i].name && ageInput == data[i].age) {
+              userSelect = data[i].id;
+              console.log(userSelect)
+              alert("Thank you for signing in :)");
+              $(".user").hide();
+              return;
+            };
           }
           else {
             // Send the POST request to create a new user.
