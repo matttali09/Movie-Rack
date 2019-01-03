@@ -358,7 +358,7 @@ $(document).ready(function () {
       $.get("/api/users", function (data) {
         console.log("users", data);
         for (i in data) {
-          if (data) {
+          if (data[i].age) {
             if (nameInput == data[i].name && ageInput == data[i].age) {
               userSelect = data[i].id;
               console.log(userSelect)
