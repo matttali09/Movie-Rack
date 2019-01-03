@@ -5,20 +5,21 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: true,
             validate: {
-                len: [1, 255]
+                len: [0, 255]
             }
         },
         age: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
         },
-        geolocation: {
-            type: DataTypes.STRING,
+        userLat: {
+            type: DataTypes.FLOAT,
             allowNull: true,
-            validate: {
-                len: [1, 255]
-            }
-        }
+        },
+        userLong: {
+            type: DataTypes.FLOAT,
+            allowNull: true,
+        },
     });
 
     User.associate = function (models) {
