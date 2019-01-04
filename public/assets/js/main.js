@@ -374,7 +374,7 @@ $(document).ready(function () {
         }
 
         // if no data yet
-        else if (!userSelect) {
+        if (!userSelect) {
           // Send the POST request to create a new user.
           $.post("/api/users", newUser)
             .then(function (response) {
