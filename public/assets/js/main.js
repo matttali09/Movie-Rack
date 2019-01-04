@@ -252,7 +252,7 @@ function getLocation() {
       // set the values of the location and display them
       myLat = parseFloat(position.coords.latitude);
       myLong = parseFloat(position.coords.longitude);
-      console.log("Latitude: " + myLat + " Longitude: " + myLong);
+      console.log("Latitude: %f Longitude: %f", myLat, myLong);
 
       // update text
       $("#coord").html("Latitude: " + myLat + "<br>Longitude: " + myLong);
@@ -379,7 +379,6 @@ $(document).ready(function () {
             .then(function (response) {
               alert("Thank you for signing in!")
               // console.log("created new user2");
-              // Reload the page to get the updated list
 
               // console.log(response);
               // save userid to be used for movie review submissions
