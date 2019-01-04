@@ -100,19 +100,18 @@ body {
   color: #d64700;
   font-size: 1.5em;
   font-weight: 700;
+  margin-top: .5em;
+  margin-bottom: 0;
 }
 
 .mvTitle p {
-  /* color: black; */
-  /* line-height: 115%; */
-  font-size: 80%;
   font-weight: 700;
   color: #647678;
 }
-.year-released {
+/* .year-released {
   float: right;
   text-align: right;
-}
+} */
 
 .formP {
   color: #2f3738;
@@ -139,8 +138,9 @@ body {
 }
 .mvDtl .year-released {
   color: #9fbcbf;
-  font-size: 80%;
+  font-size: 100%;
   font-weight: 700;
+  float: right;
 }
 
 .mvDtl #userName, .mvDtl #userName0, .mvDtl #userName1, .mvDtl #userName2  {
@@ -161,12 +161,23 @@ body {
   font-weight: 600;
 }
 
+
+.mvDtl .mrRating {
+  color: #FFD64F;
+  margin-bottom: .25em;
+  font-weight: 600;
+}
+
 .mvDtl #usrRating, .mvDtl #usrRating0, .mvDtl #usrRating1, .mvDtl #usrRating2 {
   color: #FFD64F;
 }
 
+.mvDtl #title {
+  margin-top: 0;
+}
+
 #locationBtn {
-  background-color: #647678;
+  background-color: #0b9bab;
   margin-top: 1em;
   margin-right: 1em;
 }
@@ -174,6 +185,12 @@ body {
   background-color: #17607d;
   margin-top: 1em;
 }
+
+.signInBtn {
+  background-color: #17607d;
+  margin-top: 1em;
+};
+
 .btn-div {
   display: block;
 }
@@ -220,7 +237,6 @@ form p {
 }
 
 /* Media Queries */
-
 @media screen and (max-width: 817px){
   .btn-div {
       display: block;
@@ -230,7 +246,6 @@ form p {
   }
 }
 @media screen and (max-width: 633px){
-
   #footer {
     text-align: center;
   }
