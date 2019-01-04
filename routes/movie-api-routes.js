@@ -23,13 +23,13 @@ module.exports = function(app) {
   });
 
   // Get route for retrieving a single post
-  app.get("/api/movies/:id", function(req, res) {
+  app.get("/api/movies/:title", function(req, res) {
     // Add an "include" property to our options in our findOne query
     // Set the value to an array of the models we want to include in a left outer join
     // In this case, just db.User
     db.Post.findOne({
       where: {
-        id: req.params.id
+        title: req.params.title
       },
       include: [db.User]
     }).then(function(dbMovie) {
