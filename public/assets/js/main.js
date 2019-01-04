@@ -98,8 +98,8 @@ function carouselAjax(data) {
   // let rating1 = $("<p>").text(data.Ratings[1].Value);
   // let rating2 = $("<p>").text(data.Ratings[2].Value);
   let titleWrap = $("<div>").addClass("col s8 m10 mvTitle");
-  let title = $("<h5>").attr("id", "title").text(data.Title);
-  let yearP = $("<p>").addClass("year-released").text(data.Released)
+  let title = $("<a>").attr("href", "/api/movies/" + data.title).html("<h5 id='title'> "+ data.Title+"</h5>");
+  let yearP = $("<p>").addClass("year-released").text(data.Released);
   let formCol = $("<div>").addClass("col col s8 m10");
   let form = $("<form>").attr("method", "post").addClass("ajax");
   let sliderParagraph = $("<p>").addClass("formP").text("Use slider to rate movie");
@@ -179,8 +179,8 @@ function displayMovie(data) {
     // let rating1 = $("<p>").text(data.Ratings[1].Value);
     // let rating2 = $("<p>").text(data.Ratings[2].Value);
     let titleWrap = $("<div>").addClass("col s8 m10 mvTitle");
-    let title = $("<h5>").attr("id", "title").text(data.Title);
-    let yearP = $("<p>").addClass("year-released").text(data.Released)
+    let title = $("<a>").attr("href", "/api/movies/" + data.title).html("<h5 id='title'> "+ data.Title+"</h5>");
+    let yearP = $("<p>").addClass("year-released").text(data.Released);
     let formCol = $("<div>").addClass("col col s8 m10");
     let form = $("<form>").addClass("ajax");
     let sliderParagraph = $("<p>").addClass("formP").text("Use slider to rate movie");
