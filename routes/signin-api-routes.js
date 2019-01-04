@@ -20,7 +20,9 @@ module.exports = function(app) {
     console.log(req.body);
     db.User.create({
       name: req.body.name,
-      age: req.body.age
+      age: req.body.age,
+      userLat: req.body.userLat,
+      userLong: req.body.userLong
     }).then(function() {
       res.redirect(307, "/api/login");
     }).catch(function(err) {
@@ -48,6 +50,8 @@ module.exports = function(app) {
       res.json({
         name: req.user.name,
         age: req.user.age,
+        userLat: req.user.userLat,
+        userLong: req.user.userLong,
         id: req.user.id
       });
     }
