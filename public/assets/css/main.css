@@ -81,6 +81,22 @@ body {
   padding: 0.75em 0.75em 0.75em 0.75em;
 }
 
+.imgGrid{
+  margin-top: 2em;
+}
+
+.grdImg {
+  transition: .20s ease;
+  opacity: 0.8;
+}
+
+.grdImg:hover {
+ transition: .20s ease;
+ box-shadow: 0 0 20px #FFD64F;
+ transform: scale(1.1);
+ opacity: 1.0;
+}
+
 /* Form Styling */
 .formWrap {
   background-color: white;
@@ -92,6 +108,7 @@ body {
   /* width: 100px; */
   max-width: 100%;
   height: auto;
+  margin-bottom: .5em;
 }
 .mvImgWrap {
   margin-top: 1em;
@@ -201,7 +218,7 @@ form p {
 
 /*  search by name subhead */
 .static-search-p {
-  margin-top: 1.5em;
+  /* margin-top: 1.5em; */
   color: #9fbcbf;
   border-top: 4px solid #9fbcbf;
   padding-top: 0.5em;

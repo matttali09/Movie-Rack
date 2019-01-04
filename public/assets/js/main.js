@@ -79,7 +79,7 @@ function carouselAjax(data) {
   // create a random number to make sure the number applied is dynamic between 1/1000 to make chance of double approx 1%
   let randomNum = Math.round(Math.random() * 1000)
 
-  // make the carousel anchor tag
+  // make the carousel anchor tag 
   let carouselDiv = $("<div>").addClass("carousel-item-div");
   let carouselItem = $("<a>").addClass("carousel-item").attr("href", "#");
 
