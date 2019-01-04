@@ -98,8 +98,8 @@ function carouselAjax(data) {
   // let rating1 = $("<p>").text(data.Ratings[1].Value);
   // let rating2 = $("<p>").text(data.Ratings[2].Value);
   let titleWrap = $("<div>").addClass("col s8 m10 mvTitle");
-  let title = $("<h5>").attr("id", "title").text(data.Title);
-  let yearP = $("<p>").addClass("year-released").text(data.Released)
+  let title = $("<a>").attr("href", "/api/movies/" + data.title).html("<h5 id='title'> "+ data.Title+"</h5>");
+  let yearP = $("<p>").addClass("year-released").text(data.Released);
   let formCol = $("<div>").addClass("col col s8 m10");
   let form = $("<form>").attr("method", "post").addClass("ajax");
   let sliderParagraph = $("<p>").addClass("formP").text("Use slider to rate movie");
@@ -179,8 +179,8 @@ function displayMovie(data) {
     // let rating1 = $("<p>").text(data.Ratings[1].Value);
     // let rating2 = $("<p>").text(data.Ratings[2].Value);
     let titleWrap = $("<div>").addClass("col s8 m10 mvTitle");
-    let title = $("<h5>").attr("id", "title").text(data.Title);
-    let yearP = $("<p>").addClass("year-released").text(data.Released)
+    let title = $("<a>").attr("href", "/api/movies/" + data.title).html("<h5 id='title'> "+ data.Title+"</h5>");
+    let yearP = $("<p>").addClass("year-released").text(data.Released);
     let formCol = $("<div>").addClass("col col s8 m10");
     let form = $("<form>").addClass("ajax");
     let sliderParagraph = $("<p>").addClass("formP").text("Use slider to rate movie");
@@ -252,7 +252,7 @@ function getLocation() {
       // set the values of the location and display them
       myLat = parseFloat(position.coords.latitude);
       myLong = parseFloat(position.coords.longitude);
-      console.log("Latitude: " + myLat + " Longitude: " + myLong);
+      console.log("Latitude: %f Longitude: %f", myLat, myLong);
 
       // update text
       $("#coord").html("Latitude: " + myLat + "<br>Longitude: " + myLong);
@@ -356,49 +356,34 @@ $(document).ready(function () {
 
       // search through users and if name and age are the same
       $.get("/api/users", function (data) {
-        console.log("users", data);
+        // console.log("users", data);
+        // console.log("this" + userSelect);
+        // for when table is empty
         if (data[0]) {
           for (i in data) {
             if (nameInput == data[i].name && ageInput == data[i].age) {
               userSelect = data[i].id;
-              console.log(userSelect)
+              // console.log(userSelect)
               alert("Thank you for signing in :)");
               $(".user").hide();
               return;
             }
-            // else create a new user
-            else {
-              // Send the POST request to create a new user.
-              $.post("/api/users", newUser)
-                .then(function (response) {
-                  alert("Thank you for signing in!")
-                  console.log("created new user1");
-                  // Reload the page to get the updated list
 
-                  console.log(response);
-                  // save userid to be used for movie review submissions
-                  userSelect = response.id;
-                  console.log(userSelect)
-                  $(".user").hide();
-
-                });
-              return;
-            };
           }
         }
+
         // if no data yet
-        else {
+        if (!userSelect) {
           // Send the POST request to create a new user.
           $.post("/api/users", newUser)
             .then(function (response) {
               alert("Thank you for signing in!")
-              console.log("created new user");
-              // Reload the page to get the updated list
+              // console.log("created new user2");
 
-              console.log(response);
+              // console.log(response);
               // save userid to be used for movie review submissions
               userSelect = response.id;
-              console.log(userSelect)
+              // console.log(userSelect)
               $(".user").hide();
               return;
             });
@@ -451,14 +436,14 @@ $(document).ready(function () {
         review: reviewInput,
         UserId: userSelect
       };
-      console.log(newReview)
+      // console.log(newReview)
 
       // Send the POST request.
       $.post("/api/movies", newReview)
         .then(function (response) {
           alert("Thank you for submitting a review")
           console.log("created new movie rating");
-          console.log(response)
+          // console.log(response)
           location.reload();
           return;
         }

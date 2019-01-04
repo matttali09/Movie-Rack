@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Movie Rack | Sign Up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Reset CSS -->
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/reset.css" />
+    <!-- Materialize CSS CDN link. Compiled and minified-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+
+    <!-- Materialize Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!-- Local CSS -->
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/main.css" />
+
+    <!-- Google Fonts Link -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,600,700" rel="stylesheet" />
+
+</head>
+
+<body>
+    <!-- ========================= Nav Bar =======================-->
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo">
+                <div id="navLogoBox">
+                    <img id="navLogo" src="assets/images/MovieRackLogo.png" alt="Movie Rack Logo" /></div>
+            </a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="/signup">Sign Up</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <ul class="sidenav" id="mobile-demo">
+        <li><a href="/signup">Sign Up</a></li>
+    </ul>
+
+    <!-- ====================================== Main Content ==================================================== -->
+    <div class="container">
+        <div class="row">
+            <div class="mainContent col s12">
+                <h5 class="center">Sign In</h5>
+                <!-- ================ user loggin spot ================ -->
+                <div class="user input col s10 offset-s1 intro">
+                    <input class="validate" placeholder="Name/Username (optional)" id="name" name="name" type="text"
+                        style="color: white">
+                    <input class="validate" placeholder="Age (required)" id="age" name="age" type="text" style="color: white"
+                        required="required">
+                    <button class="waves-effect waves-light btn locationBtn" id="locationBtn" type="button" value="#"
+                        name="loc"><i class="material-icons right">add_location</i>Location</button>
+                    <p id="coord"></p>
+                    <button class="btn waves-effect waves-light signInBtn" id="createU" type="button" name="action">sign-in
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ============================================ Footer =================================================-->
+    <footer class="page-footer" id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m4">
+                    <img id="footerLogo" src="assets/images/MovieRackLogo-LtGrey.png" alt="Movie Rack Logo">
+                </div>
+                <div class="col s12 m8">
+                    <h6 class="grey-text text-lighten-1">Team Members</h6>
+                    <p class="grey-text text-lighten-1">This site is a combined effort between Matthew Taliancich, Sam
+                        Clymer,
+                        and Eric Figueroa. We're a group of students at the UCF Coding Bootcamp and are learning to
+                        create web
+                        applications. We hope you enjoy our site.</p>
+                </div>
+
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                <p class="grey-text text-lighten-1">Created by Rack-City</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ======================================== JavaScript Links =========================================== -->
+
+
+    <!-- Jquery CDN Link -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <!-- Materialize JavaScript CDN link. Compiled and minified- -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- Local Javascript -->
+    <script src="./assets/js/signup.js"></script>
+</body>
+
+
+</html>

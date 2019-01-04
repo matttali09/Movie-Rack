@@ -30,5 +30,10 @@ module.exports = function (sequelize, DataTypes) {
         });
     };
 
+    // Creating a custom method for our User model. This will check the age entered by the user compared to the age stored in our database
+    User.prototype.validage = function (age) {
+        return compareSync(age, this.age);
+    };
+
     return User;
 };
