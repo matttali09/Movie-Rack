@@ -312,6 +312,7 @@ $(document).ready(function () {
   });
 
   var userSelect;
+  console.log(userSelect);
   // submit info function for forms of user's review
   submitUser = function () {
     $("#createU").on("click", function (event) {
@@ -357,6 +358,7 @@ $(document).ready(function () {
       // search through users and if name and age are the same
       $.get("/api/users", function (data) {
         console.log("users", data);
+        console.log("this" + userSelect);
         // for when table is empty
         if (data[0]) {
           for (i in data) {
@@ -370,6 +372,7 @@ $(document).ready(function () {
 
           }
         }
+
         // if no data yet
         else if (userSelect == null) {
           // Send the POST request to create a new user.
