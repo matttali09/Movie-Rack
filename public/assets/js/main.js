@@ -312,7 +312,6 @@ $(document).ready(function () {
   });
 
   var userSelect;
-  console.log(userSelect);
   // submit info function for forms of user's review
   submitUser = function () {
     $("#createU").on("click", function (event) {
@@ -357,14 +356,14 @@ $(document).ready(function () {
 
       // search through users and if name and age are the same
       $.get("/api/users", function (data) {
-        console.log("users", data);
-        console.log("this" + userSelect);
+        // console.log("users", data);
+        // console.log("this" + userSelect);
         // for when table is empty
         if (data[0]) {
           for (i in data) {
             if (nameInput == data[i].name && ageInput == data[i].age) {
               userSelect = data[i].id;
-              console.log(userSelect)
+              // console.log(userSelect)
               alert("Thank you for signing in :)");
               $(".user").hide();
               return;
@@ -379,13 +378,13 @@ $(document).ready(function () {
           $.post("/api/users", newUser)
             .then(function (response) {
               alert("Thank you for signing in!")
-              console.log("created new user2");
+              // console.log("created new user2");
               // Reload the page to get the updated list
 
-              console.log(response);
+              // console.log(response);
               // save userid to be used for movie review submissions
               userSelect = response.id;
-              console.log(userSelect)
+              // console.log(userSelect)
               $(".user").hide();
               return;
             });
@@ -438,14 +437,14 @@ $(document).ready(function () {
         review: reviewInput,
         UserId: userSelect
       };
-      console.log(newReview)
+      // console.log(newReview)
 
       // Send the POST request.
       $.post("/api/movies", newReview)
         .then(function (response) {
           alert("Thank you for submitting a review")
           console.log("created new movie rating");
-          console.log(response)
+          // console.log(response)
           location.reload();
           return;
         }
