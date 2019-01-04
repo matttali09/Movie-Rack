@@ -81,6 +81,22 @@ body {
   padding: 0.75em 0.75em 0.75em 0.75em;
 }
 
+.imgGrid{
+  margin-top: 2em;
+}
+
+.grdImg {
+  transition: .20s ease;
+  opacity: 0.8;
+}
+
+.grdImg:hover {
+ transition: .20s ease;
+ box-shadow: 0 0 20px #FFD64F;
+ transform: scale(1.1);
+ opacity: 1.0;
+}
+
 /* Form Styling */
 .formWrap {
   background-color: white;
@@ -92,6 +108,7 @@ body {
   /* width: 100px; */
   max-width: 100%;
   height: auto;
+  margin-bottom: .5em;
 }
 .mvImgWrap {
   margin-top: 1em;
@@ -143,13 +160,13 @@ body {
   float: right;
 }
 
-.mvDtl #userName {
+.mvDtl #userName, .mvDtl #userName0, .mvDtl #userName1, .mvDtl #userName2  {
   margin-top: .5em;
   color: #59d8e5;
   font-weight: 600;
 }
 
-.mvDtl .comment {
+.mvDtl #comment, .mvDtl #comment0, .mvDtl #comment1, .mvDtl #comment2  {
   border-bottom: 2px solid #9fbcbf;
   padding-bottom: 0.5em;
   margin-bottom: .5em;
@@ -161,13 +178,14 @@ body {
   font-weight: 600;
 }
 
+
 .mvDtl .mrRating {
   color: #FFD64F;
   margin-bottom: .25em;
   font-weight: 600;
 }
 
-.mvDtl #usrRating {
+.mvDtl #usrRating, .mvDtl #usrRating0, .mvDtl #usrRating1, .mvDtl #usrRating2 {
   color: #FFD64F;
 }
 
@@ -200,7 +218,7 @@ form p {
 
 /*  search by name subhead */
 .static-search-p {
-  margin-top: 1.5em;
+  /* margin-top: 1.5em; */
   color: #9fbcbf;
   border-top: 4px solid #9fbcbf;
   padding-top: 0.5em;
