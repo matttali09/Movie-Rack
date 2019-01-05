@@ -59,7 +59,13 @@ body {
 }
 
 #dtlBody {
-  background: url("../images/pexels-photo-1353368.jpeg ") no-repeat center
+  background: url("../images/pexels-photo-1353368.jpeg") no-repeat center
+    center fixed;
+  background-size: cover;
+}
+
+#signUpInBody {
+  background: url("../images/pexels-photo-714926.jpeg") no-repeat center
     center fixed;
   background-size: cover;
 }
@@ -68,6 +74,11 @@ body {
   margin-top: 2em;
   margin-bottom: 1em;
   padding: 1em;
+}
+
+
+#minHeight {
+  min-height: 50vh;
 }
 
 .darkerBg {
@@ -80,7 +91,6 @@ body {
   background-color: #647678;
   padding: 0.75em 0.75em 0.75em 0.75em;
 }
-
 .imgGrid{
   margin-top: 2em;
 }
@@ -266,4 +276,5 @@ form p {
   #footer {
     text-align: center;
   }
+
 }
