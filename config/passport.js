@@ -11,6 +11,7 @@ passport.use(new LocalStrategy(
     userageField: "age"
   },
   function(name, age, done) {
+    console.log("err here2.5")
     // When a user tries to sign in this code runs
     db.User.findOne({
       where: {
