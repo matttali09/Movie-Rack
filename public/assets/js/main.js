@@ -136,7 +136,7 @@ $(document).ready(function () {
       // console.log($(this).val());
       // console.log($("form.ajax input[name='name']").val().trim());
       var str = "";
-      str = $(this).val().toString();
+      str = $(this).val().toString() + "%";
       $("input[type='range'] option:selected").each(function () {
         str += $(this).val() + " ";
         // console.log(str);
