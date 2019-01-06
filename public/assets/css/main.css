@@ -93,6 +93,8 @@ body {
 }
 .imgGrid{
   margin-top: 2em;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .grdImg {
@@ -118,7 +120,7 @@ body {
   /* width: 100px; */
   max-width: 100%;
   height: auto;
-  margin-bottom: .5em;
+  margin-bottom: 1em;
 }
 .mvImgWrap {
   margin-top: 1em;
