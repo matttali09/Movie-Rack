@@ -7,6 +7,8 @@ var curLong;
 
 // shorthand for doc.ready
 $(function () {
+    // sidnav control
+    $(".sidenav").sidenav();
     // Getting references to our submit button inputs
     var loginButton = $("#submit");
     var updateButton = $("#update")
@@ -17,7 +19,7 @@ $(function () {
     // When the input is submitted, we validate there's an name and age entered
     loginButton.on("click", function (event) {
         console.log("loggin button pressed");
-        
+
         event.preventDefault();
         var userData = {
             name: nameInput.val().trim(),

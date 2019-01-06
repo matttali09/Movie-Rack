@@ -3,6 +3,8 @@ var myLat;
 var myLong;
 
 $(document).ready(function () {
+    // sidnav control
+    $(".sidenav").sidenav();
     // Getting references to our form and input
     var signUpForm = $("#createU");
     var passwordInput = $("#password")
