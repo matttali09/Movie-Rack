@@ -11,6 +11,7 @@ $(function () {
     var loginButton = $("#submit");
     var updateButton = $("#update")
     var nameInput = $("#name");
+    var passwordInput = $("#password")
     var ageInput = $("#age");
 
     // When the input is submitted, we validate there's an name and age entered
@@ -20,10 +21,10 @@ $(function () {
         event.preventDefault();
         var userData = {
             name: nameInput.val().trim(),
-            age: ageInput.val().trim()
+            password: passwordInput.val().trim()
         };
 
-        if (!userData.age) {
+        if (!userData.password) {
             return;
         };
         if (!userData.name) {
@@ -31,16 +32,16 @@ $(function () {
         };
 
         // If we have an email and age we run the loginUser function and clear the input areas
-        loginUser(userData.name, userData.age);
+        loginUser(userData.name, userData.password);
         nameInput.val("");
-        ageInput.val("");
+        passwordInput.val("");
     });
 
     // loginUser does a post to our "api/signin" route and if successful, redirects us the the home page
-    function loginUser(name, age) {
+    function loginUser(name, password) {
         $.post("/api/signin", {
             name: name,
-            age: age
+            password: password
         }).then(function (data) {
             window.location.replace(data);
             // If there's an error, log the error

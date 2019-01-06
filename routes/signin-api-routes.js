@@ -1,19 +1,15 @@
 // Requiring our models and passport as we've configured it
 var db = require("../models");
 var passport = require("../config/passport");
-var bodyParser = require('body-parser');
 
 
 
 module.exports = function (app) {
-  //if you are getting the info (username and password) through the body 
-  //of the http request you need to use body-parser
-  app.use(bodyParser());
-
+  
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
-  app.post("/api/signin", passport.authenticate('local'), function (req, res) {
+  app.post("/api/signin", passport.authenticate("local"), function (req, res) {
     console.log("err here3")
     // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
     // So we're sending the user back the route to the members page because the redirect will happen on the front end
@@ -28,9 +24,10 @@ module.exports = function (app) {
     console.log(req.body);
     db.User.create({
       name: req.body.name,
+      password: req.body.password,
       age: req.body.age,
-      // userLat: req.body.userLat,
-      // userLong: req.body.userLong
+      userLat: req.body.userLat,
+      userLong: req.body.userLong
     }).then(function () {
       console.log("err here1")
       res.redirect(307, "/api/signin");

@@ -1,43 +1,34 @@
-var express = require('express');
-var app = express();
 var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
-var bodyParser = require('body-parser');
-
-//if you are getting the info (username and password) through the body 
-//of the http request you need to use body-parser
-app.use(bodyParser());
 
 var db = require("../models");
 
-// Telling passport we want to use a Local Strategy. In other words, we want login with a username/age and name
+// Telling passport we want to use a Local Strategy. In other words, we want login with a username/name and password
 passport.use(new LocalStrategy(
-  // Our user will sign in using name and age, rather than a "username"
+  // Our user will sign in using an name, rather than a "username"
   {
-    usernameField: "name",
-    userageField: "age"
+    usernameField: "name"
   },
-  function(name, age, done) {
+  function(name, password, done) {
     console.log("err here2.5")
     // When a user tries to sign in this code runs
     db.User.findOne({
       where: {
-        name: name,
-        age: age
+        name: name
       }
     }).then(function(dbUser) {
-      // If there's no user with the given age and name
+      // If there's no user with the given email
       if (!dbUser) {
         return done(null, false, {
-          message: "Incorrect age or name."
+          message: "Incorrect email."
         });
       }
-      // If there is a user with the given age, but the name the user gives us is incorrect
-      // else if (!dbUser.validName(name)) {
-      //   return done(null, false, {
-      //     message: "Incorrect name."
-      //   });
-      // }
+      // If there is a user with the given email, but the password the user gives us is incorrect
+      else if (!dbUser.validPassword(password)) {
+        return done(null, false, {
+          message: "Incorrect password."
+        });
+      }
       // If none of the above, return the user
       return done(null, dbUser);
     });

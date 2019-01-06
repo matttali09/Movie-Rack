@@ -5,6 +5,7 @@ var myLong;
 $(document).ready(function () {
     // Getting references to our form and input
     var signUpForm = $("#createU");
+    var passwordInput = $("#password")
     var nameInput = $("#name");
     var ageInput = $("#age");
 
@@ -14,30 +15,33 @@ $(document).ready(function () {
         event.preventDefault();
         var userData = {
             name: nameInput.val().trim(),
+            password: passwordInput.val().trim(),
             age: ageInput.val().trim()
         };
         if (!userData.name) {
             userData.name = "Anonymous";
         };
 
-        if (!userData.age) {
+        if (!userData.age || !passwordInput) {
             return;
         };
 
         // If we have an name and age, run the signUpUser function
-        signUpUser(userData.name, userData.age);
+        signUpUser(userData.name, userData.password, userData.age);
         nameInput.val("");
+        passwordInput.val("");
         ageInput.val("");
     });
 
     // Does a post to the signup route. If successful, we are redirected to the members page
     // Otherwise we log any errors
-    function signUpUser(name, age) {
+    function signUpUser(name, password, age) {
         $.post("/api/signup", {
             name: name,
+            password: password,
             age: age,
-            // userLat: myLat,
-            // userLong: myLong
+            userLat: myLat,
+            userLong: myLong
         }).then(function (data) {
             console.log("this ran1")
             window.location.replace(data);
