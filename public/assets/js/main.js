@@ -5,12 +5,10 @@
 let topMovies = [
   "Aquaman",
   "Pulp+Fiction",
-  "Casablanca",
   "Mary+Poppins+Returns",
   "The+Grinch",
   "How+The+Grinch+Stole+Christmas",
   "Venom",
-  "The+House+With+A+Clock+In+Its+Walls",
   "The+Godfather",
   "Avengers+Infinity+War"
 ];
@@ -44,8 +42,8 @@ function searchMovie() {
   });
 }
 
-// function for running the carousel Ajax function
-function runCarousel() {
+// function for running the grid Ajax function
+function runGrid() {
   for (i in topMovies) {
     movieName = topMovies[i]
     let ombdAPIkey = "apikey=trilogy";
@@ -62,7 +60,7 @@ function runCarousel() {
       // console.log(resp);
 
       // add the results to the HTML page
-      carouselAjax(resp);
+      gridAjax(resp);
 
     });
   };
@@ -72,7 +70,7 @@ function runCarousel() {
 
 
 // function for dynamically apply the carousel items
-function carouselAjax(data) {
+function gridAjax(data) {
   // console.log(data.Title)
   // console.log(data.Ratings)
 
@@ -80,13 +78,13 @@ function carouselAjax(data) {
   let randomNum = Math.round(Math.random() * 1000)
 
   // make the carousel anchor tag 
-  let carouselDiv = $("<div>").addClass("carousel-item-div");
-  let carouselItem = $("<a>").addClass("carousel-item").attr("href", "#");
+  let gridDiv = $("<div>").addClass("col s6 m3");
+  let gridAnchor = $("<a>").addClass("modal-trigger").attr("href", "#");
 
   // make the the image tag and append it to the carousel item and the item to the carousel div
-  let image1 = $("<img>").addClass("modal-trigger").attr("src", data.Poster).attr("href", "#modal" + randomNum);
-  carouselItem.append(image1);
-  carouselDiv.append(carouselItem)
+  let image1 = $("<img>").addClass("modal-trigger mvImg grdImg").attr("src", data.Poster).attr("href", "#modal" + randomNum);
+  gridAnchor.append(image1);
+  gridDiv.append(gridAnchor)
 
   // make the modal
   let modal = $("<div>").addClass("modal").attr("id", "modal" + randomNum);
@@ -98,7 +96,7 @@ function carouselAjax(data) {
   // let rating1 = $("<p>").text(data.Ratings[1].Value);
   // let rating2 = $("<p>").text(data.Ratings[2].Value);
   let titleWrap = $("<div>").addClass("col s8 m10 mvTitle");
-  let title = $("<a>").attr("href", "/api/movies/" + data.title).html("<h5 id='title'> "+ data.Title+"</h5>");
+  let title = $("<a>").attr("href", "/api/movies/" + data.title).html("<h5 id='title'> " + data.Title + "</h5>");
   let yearP = $("<p>").addClass("year-released").text(data.Released);
   let formCol = $("<div>").addClass("col col s8 m10");
   let form = $("<form>").attr("method", "post").addClass("ajax");
@@ -108,13 +106,13 @@ function carouselAjax(data) {
   let row2 = $("<div>").addClass("row");
   let inputField = $("<div>").addClass("input-field col s12");
   let reviewField = $("<textarea>").addClass("materialize-textarea").attr({
-    placeholder: "Your Review (optional)",
+    placeholder: "Your Review (required)",
     id: "review",
     name: "review",
     "data-length": "255",
     maxlength: "255"
   })
-  let btnDiv = $("<div>").addClass("btn-div");
+  let btnDiv = $("<div>").addClass("btn-div " + randomNum);
   let submitButton = $("<button>").addClass("btn waves-effect waves-light").attr({
     id: "submitBtn",
     type: "submit",
@@ -148,18 +146,13 @@ function carouselAjax(data) {
   modal.append(modalFooter);
 
   // put the content on the DOM
-  $('.carousel').append(carouselDiv);
-  // $('.carousel').carousel();
-  // $('.carousel').carousel('destroy');
-  $('.carousel').carousel();
-  $("#carousel-container").append(modal);
+  $('.imgGrid').append(gridDiv);
+  $("#modal-spot").append(modal);
 
   // reinitialize listeners
   // $(this).trigger("event");
   sliderListener();
-  // $('.modal').modal();
-  // $('.modal').modal('destroy');
-  // $('.modal').modal();
+  $('.modal').modal();
   $('input#input_text, textarea#review').characterCounter();
   // $("#submitBtn").off();
   submitReview();
@@ -167,6 +160,9 @@ function carouselAjax(data) {
 
 // function to display a single movie
 function displayMovie(data) {
+
+  // create a random number to make sure the number applied is dynamic between 1/1000 to make chance of double approx 1%
+  let randomNum = Math.round(Math.random() * 1000)
 
   // verify the user inputed a movie title that could be found
   if (data.Response !== "False") {
@@ -179,7 +175,7 @@ function displayMovie(data) {
     // let rating1 = $("<p>").text(data.Ratings[1].Value);
     // let rating2 = $("<p>").text(data.Ratings[2].Value);
     let titleWrap = $("<div>").addClass("col s8 m10 mvTitle");
-    let title = $("<a>").attr("href", "/api/movies/" + data.title).html("<h5 id='title'> "+ data.Title+"</h5>");
+    let title = $("<a>").attr("href", "/api/movies/" + data.title).html("<h5 id='title'> " + data.Title + "</h5>");
     let yearP = $("<p>").addClass("year-released").text(data.Released);
     let formCol = $("<div>").addClass("col col s8 m10");
     let form = $("<form>").addClass("ajax");
@@ -189,13 +185,13 @@ function displayMovie(data) {
     let row2 = $("<div>").addClass("row");
     let inputField = $("<div>").addClass("input-field col s12");
     let reviewField = $("<textarea>").addClass("materialize-textarea").attr({
-      placeholder: "Your Review (optional)",
+      placeholder: "Your Review (required)",
       id: "review",
       name: "review",
       "data-length": "255",
       maxlength: "255"
     })
-    let btnDiv = $("<div>").addClass("btn-div");
+    let btnDiv = $("<div>").addClass("btn-div " + i);
     let submitButton = $("<button>").addClass("btn waves-effect waves-light").attr({
       id: "submitBtn",
       type: "submit",
@@ -241,47 +237,13 @@ function displayMovie(data) {
 };
 
 // ======================================================================================
-// GEOLOCATION LOGIC
-// ======================================================================================
-// function that checks to see if GPS capability is available and then create the map
-function getLocation() {
-  event.preventDefault();
-  // console.log("getLocation start:")
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      // set the values of the location and display them
-      myLat = parseFloat(position.coords.latitude);
-      myLong = parseFloat(position.coords.longitude);
-      console.log("Latitude: %f Longitude: %f", myLat, myLong);
-
-      // update text
-      $("#coord").html("Latitude: " + myLat + "<br>Longitude: " + myLong);
-
-      // adds a map to the site for use later
-      // mapboxgl.accessToken = 'pk.eyJ1Ijoid2lucGlsZGV1IiwiYSI6ImNqcDJzbnd1aDAwam8zd3BlejczaWwxa2EifQ.bLD5Bdgv8hiiXbaAIqjLdA';
-      // map = new mapboxgl.Map({
-      //   container: 'map',
-      //   style: 'mapbox://styles/mapbox/streets-v10',
-      //   zoom: 13,
-      //   center: [myLong, myLat]
-      // });
-      // map.addControl(new mapboxgl.NavigationControl());
-    });
-  } else {
-    $("#coord").text("Geolocation is not supported by this browser.");
-  }
-}
-
-// ======================================================================================
 // Document LOGIC
 // ======================================================================================
 $(document).ready(function () {
   // sidnav control
   $(".sidenav").sidenav();
-  // $(".modal").modal();
-  //   $(this).on("event", function() {
-  //      $(".modal").modal();
-  //   });
+
+  // slider listener function to be activated when sliders are created
   sliderListener = function () {
     $("form.ajax input[type='range']").change(function () {
       // validate data incoming
@@ -312,94 +274,12 @@ $(document).ready(function () {
   });
 
   var userSelect;
-  // submit info function for forms of user's review
-  submitUser = function () {
-    $("#createU").on("click", function (event) {
-      // stop the default behavior
-      event.preventDefault();
-
-      // check to make sure the button is working
-      console.log("submit button pressed");
-
-      // store variables must be applied after element
-      var nameInput = $("#name").val().trim();
-      var ageInput = $("#age").val();
-      parseInt(ageInput);
-      // var latInput = myLat;
-      // var longInput = myLong;
-
-      // confirm data being stored
-      // console.log(nameInput);
-      // console.log(ageInput);
-      // console.log(latInput);
-      // console.log(longInput);
-
-      // create anonymous tags
-      if (!nameInput) {
-        nameInput = "Anonymous"
-      }
-
-      // Wont submit the post if we are missing an age
-      if (!ageInput) {
-        alert("age is required please enter the information for security purposes.")
-        return;
-      }
-
-      // grab the information for user and store it in variables.
-      var newUser = {
-        name: nameInput,
-        age: ageInput,
-        userLat: myLat,
-        userLong: myLong
-      };
-      // console.log(newUser)
-
-      // search through users and if name and age are the same
-      $.get("/api/users", function (data) {
-        // console.log("users", data);
-        // console.log("this" + userSelect);
-        // for when table is empty
-        if (data[0]) {
-          for (i in data) {
-            if (nameInput == data[i].name && ageInput == data[i].age) {
-              userSelect = data[i].id;
-              // console.log(userSelect)
-              alert("Thank you for signing in :)");
-              $(".user").hide();
-              return;
-            }
-
-          }
-        }
-
-        // if no data yet
-        if (!userSelect) {
-          // Send the POST request to create a new user.
-          $.post("/api/users", newUser)
-            .then(function (response) {
-              alert("Thank you for signing in!")
-              // console.log("created new user2");
-
-              // console.log(response);
-              // save userid to be used for movie review submissions
-              userSelect = response.id;
-              // console.log(userSelect)
-              $(".user").hide();
-              return;
-            });
-        };
-
-
-      });
-
-    });
-    return false;
-  };
-  submitUser();
+  // get the user select from passport req.user.id
 
   // submit info function for forms of user's review
   submitReview = function () {
-    $("div.btn-div").on("click", "#submitBtn", function (event) {
+    for (var i = 0; i <= 1000; i++) {
+    $("div.btn-div." + i).on("click", "#submitBtn", function (event) {
       // stop the default behavior
       event.preventDefault();
       // console.log( $(this).parents() );
@@ -423,8 +303,8 @@ $(document).ready(function () {
       // console.log(reviewInput);
 
       // Wont submit the post if we are missing a body, title, or user
-      if (!titleInput || !yearInput || !imgInput || !userSelect) {
-        alert("Please use our signin feature above for database purposes :)")
+      if (!titleInput || !yearInput || !imgInput || !reviewInput || !userSelect) {
+        alert("Please fill out the review section one word will do! :)")
         return;
       }
       // grab the information from the form for Movie review data and store it in variables.
@@ -450,38 +330,13 @@ $(document).ready(function () {
         );
 
     });
+    };
     return false;
   };
-  // submitReview();
+  submitReview();
 
 
-  // run the getloction function on location button press on a form.
-  locationBtnFun = function () {
-    $("#locationBtn").on("click", function () {
-      console.log("location button pressed: ")
-
-      getLocation();
-
-    });
-  };
-  // start up listener for non dynamically applied elements.
-  locationBtnFun();
-
-  // run the function for the carousel
-  runCarousel();
-
-  resetCar = function () {
-    $('.carousel').carousel();
-    $('.carousel').carousel();
-  };
-  $("#reset-car").on("click", resetCar)
-});
-// $(".carousel").carousel('destroy');
-// $(".carousel").carousel();
-// $(".modal").modal('destroy');
-// $(".modal").modal();
-
-
-$(document).on("trigger", function () {
+  // run the function for the grid
+  runGrid();
 
 });

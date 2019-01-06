@@ -29,7 +29,7 @@
       border: solid magenta .25px;
     }
   </style> -->
-  
+
   <!-- ========================= Nav Bar =======================-->
   <nav>
     <div class="nav-wrapper">
@@ -61,11 +61,14 @@
           <div class="col s10 offset-s1 intro">
             <h3>MOVIE RATINGS BY REAL PEOPLE</h3>
             <p>
-                Hello, we are a group of students at the UCF Coding Bootcamp. We are designing a movie rating debunker application and need your help populating a database with real data. You will NOT be asked for any personal data, name is optional. Just rate the movies below. The website is still in prototyping, so if you run into any bugs, rest assured we're working on it. Thank you for your help!
+              Hello, we are a group of students at the UCF Coding Bootcamp. We are designing a movie rating debunker
+              application and need your help populating a database with real data. You will NOT be asked for any
+              personal data, name is optional. Just rate the movies below. The website is still in prototyping, so if
+              you run into any bugs, rest assured we're working on it. Thank you for your help!
             </p>
             <h6>
-              Please sign in (name and geo-location NOT required). Then choose one of our top movies below 
-              (modals not working right now so just search for the same movie below) or search for a 
+              Please sign in (name and geo-location NOT required). Then choose one of our top movies below
+              (modals not working right now so just search for the same movie below) or search for a
               movie by name, and give it your rating. Thank You!
               <span style="font-style: oblique">Thank You!</span>
               </h3>
@@ -76,54 +79,16 @@
         <div class="row">
           <div class="col s10 offset-s1">
             <div class="row imgGrid">
-              <div class="imgGridWrapper">
-              <div class="col s6 m3">
-                <a href="#">
-                    <img class ="mvImg grdImg" src="assets/images/Dsdlbj3U4AAJoO7.jpg" alt="Movie Title"/>
-                </a>
-              </div>
-              <div class="col s6 m3"">
-                  <a href="#">
-                      <img class ="mvImg grdImg" src="assets/images/Dsdlbj3U4AAJoO7.jpg" alt="Movie Title"/>
-                  </a>
-              </div>
-              <div class="col s6 m3"">
-                  <a href="#">
-                      <img class ="mvImg grdImg" src="assets/images/Dsdlbj3U4AAJoO7.jpg" alt="Movie Title"/>
-                  </a>
-              </div>
-              <div class="col s6 m3"">
-                  <a href="#">
-                      <img class ="mvImg grdImg" src="assets/images/Dsdlbj3U4AAJoO7.jpg" alt="Movie Title"/>
-                  </a>
-              </div>
-              <div class="col s6 m3">
-                  <a href="#">
-                      <img class ="mvImg grdImg" src="assets/images/Dsdlbj3U4AAJoO7.jpg" alt="Movie Title"/>
-                  </a>
-              </div>
-              <div class="col s6 m3"">
-                  <a href="#">
-                      <img class ="mvImg grdImg" src="assets/images/Dsdlbj3U4AAJoO7.jpg" alt="Movie Title"/>
-                  </a>
-              </div>
-              <div class="col s6 m3"">
-                  <a href="#">
-                      <img class ="mvImg grdImg" src="assets/images/Dsdlbj3U4AAJoO7.jpg" alt="Movie Title"/>
-                  </a>
-                </div>
-              <div class="col s6 m3"">
-                  <a href="#">
-                      <img class ="mvImg grdImg" src="assets/images/Dsdlbj3U4AAJoO7.jpg" alt="Movie Title"/>
-                  </a>
-              </div>
-              </div>
+              <!-- == dynamically apply grid to class imgGrid == -->
+            </div>
+            <div id="modal-spot">
+              <!-- dynamically apply modals -->
             </div>
           </div>
         </div>
         <!-- ================ Search Section ================ -->
-        <div class="row">
-          <div class="col s10 offset-s1" id="search">
+        <div class="row" id="search">
+          <div class="col s10 offset-s1">
             <p class="static-search-p">Search for a Movie by Name!</p>
             <input placeholder="Star Wars" id="movie-name" type="text" style="color: white" class="validate" required>
             <button class="btn waves-effect waves-light" id="search-movie" type="submit" name="action">Submit
