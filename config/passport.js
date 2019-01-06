@@ -1,5 +1,12 @@
+var express = require('express');
+var app = express();
 var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
+var bodyParser = require('body-parser');
+
+//if you are getting the info (username and password) through the body 
+//of the http request you need to use body-parser
+app.use(bodyParser());
 
 var db = require("../models");
 

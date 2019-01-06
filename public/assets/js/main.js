@@ -42,121 +42,7 @@ function searchMovie() {
   });
 }
 
-// function for running the grid Ajax function
-function runGrid() {
-  for (i in topMovies) {
-    movieName = topMovies[i]
-    let ombdAPIkey = "apikey=trilogy";
-    let ombdQueryURL = "https://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&" + ombdAPIkey;
 
-    $.ajax({
-      url: ombdQueryURL,
-      method: "GET",
-      dataType: "json"
-    }).then(function (resp) {
-      // confirm there is data received
-      // console.log(`ombd results:`);
-      // console.log(ombdQueryURL);
-      // console.log(resp);
-
-      // add the results to the HTML page
-      gridAjax(resp);
-
-    });
-  };
-}
-
-
-
-
-// function for dynamically apply the carousel items
-function gridAjax(data) {
-  // console.log(data.Title)
-  // console.log(data.Ratings)
-
-  // create a random number to make sure the number applied is dynamic between 1/1000 to make chance of double approx 1%
-  let randomNum = Math.round(Math.random() * 1000)
-
-  // make the carousel anchor tag 
-  let gridDiv = $("<div>").addClass("col s6 m3");
-  let gridAnchor = $("<a>").addClass("modal-trigger").attr("href", "#");
-
-  // make the the image tag and append it to the carousel item and the item to the carousel div
-  let image1 = $("<img>").addClass("modal-trigger mvImg grdImg").attr("src", data.Poster).attr("href", "#modal" + randomNum);
-  gridAnchor.append(image1);
-  gridDiv.append(gridAnchor)
-
-  // make the modal
-  let modal = $("<div>").addClass("modal").attr("id", "modal" + randomNum);
-  let formWrap = $("<div>").addClass("formWrap col s12");
-  let row1 = $("<div>").addClass("row");
-  let imgWrap = $("<div>").addClass("col s4 m2 mvImgWrap");
-  let image2 = $("<img>").addClass("mvImg").attr("src", data.Poster);
-  // let rating0 = $("<p>").text(data.Ratings[0].Value);
-  // let rating1 = $("<p>").text(data.Ratings[1].Value);
-  // let rating2 = $("<p>").text(data.Ratings[2].Value);
-  let titleWrap = $("<div>").addClass("col s8 m10 mvTitle");
-  let title = $("<a>").attr("href", "/api/movies/" + data.title).html("<h5 id='title'> " + data.Title + "</h5>");
-  let yearP = $("<p>").addClass("year-released").text(data.Released);
-  let formCol = $("<div>").addClass("col col s8 m10");
-  let form = $("<form>").attr("method", "post").addClass("ajax");
-  let sliderParagraph = $("<p>").addClass("formP").text("Use slider to rate movie");
-  let slider = $("<p>").addClass("range-field").html("<input type='range' name='rating' id='rating' min='0' max='100' />");
-  let sliderVal = $("<p>").addClass("center slider-txt").attr("id", "slider-txt");
-  let row2 = $("<div>").addClass("row");
-  let inputField = $("<div>").addClass("input-field col s12");
-  let reviewField = $("<textarea>").addClass("materialize-textarea").attr({
-    placeholder: "Your Review (required)",
-    id: "review",
-    name: "review",
-    "data-length": "255",
-    maxlength: "255"
-  })
-  let btnDiv = $("<div>").addClass("btn-div " + randomNum);
-  let submitButton = $("<button>").addClass("btn waves-effect waves-light").attr({
-    id: "submitBtn",
-    type: "submit",
-    value: "send",
-  }).html("<i class='material-icons right'>send</i>Submit");
-  let modalFooter = $("<div>").addClass("modal-footer").html("<a href='#!' class='modal-close waves-effect waves-green btn-flat'>Close</a>");
-
-  // append all data to the rows in correct order for the modal
-  imgWrap.append(image2);
-  // imgWrap.append(rating0);
-  // imgWrap.append(rating1);
-  // imgWrap.append(rating2);
-  // title.append(yearP);
-  btnDiv.append(submitButton);
-  titleWrap.append(title);
-  titleWrap.append(yearP)
-  inputField.append(reviewField);
-  row2.append(inputField);
-  form.append(sliderParagraph);
-  form.append(slider);
-  form.append(sliderVal);
-  form.append(row2);
-  // form.append(btnDiv);
-  formCol.append(form);
-  formCol.append(btnDiv)
-  row1.append(imgWrap);
-  row1.append(titleWrap);
-  row1.append(formCol);
-  formWrap.append(row1);
-  modal.append(formWrap);
-  modal.append(modalFooter);
-
-  // put the content on the DOM
-  $('.imgGrid').append(gridDiv);
-  $("#modal-spot").append(modal);
-
-  // reinitialize listeners
-  // $(this).trigger("event");
-  sliderListener();
-  $('.modal').modal();
-  $('input#input_text, textarea#review').characterCounter();
-  // $("#submitBtn").off();
-  submitReview();
-};
 
 // function to display a single movie
 function displayMovie(data) {
@@ -335,6 +221,121 @@ $(document).ready(function () {
   };
   submitReview();
 
+  // function for running the grid Ajax function
+function runGrid() {
+  for (i in topMovies) {
+    movieName = topMovies[i]
+    let ombdAPIkey = "apikey=trilogy";
+    let ombdQueryURL = "https://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&" + ombdAPIkey;
+
+    $.ajax({
+      url: ombdQueryURL,
+      method: "GET",
+      dataType: "json"
+    }).then(function (resp) {
+      // confirm there is data received
+      // console.log(`ombd results:`);
+      // console.log(ombdQueryURL);
+      // console.log(resp);
+
+      // add the results to the HTML page
+      gridAjax(resp);
+
+    });
+  };
+}
+
+
+
+
+// function for dynamically apply the grid items
+function gridAjax(data) {
+  // console.log(data.Title)
+  // console.log(data.Ratings)
+
+  // create a random number to make sure the number applied is dynamic between 1/1000 to make chance of double approx 1%
+  let randomNum = Math.round(Math.random() * 1000)
+
+  // make the grid anchor tag 
+  let gridDiv = $("<div>").addClass("col s6 m3");
+  let gridAnchor = $("<a>").addClass("").attr("href", "#");
+
+  // make the the image tag and append it to the grid item and the item to the gid div
+  let image1 = $("<img>").addClass("modal-trigger mvImg grdImg").attr("src", data.Poster).attr("href", "#modal" + randomNum);
+  gridAnchor.append(image1);
+  gridDiv.append(gridAnchor)
+
+  // make the modal for each movie
+  let modal = $("<div>").addClass("modal").attr("id", "modal" + randomNum);
+  let formWrap = $("<div>").addClass("formWrap col s12");
+  let row1 = $("<div>").addClass("row");
+  let imgWrap = $("<div>").addClass("col s4 m2 mvImgWrap");
+  let image2 = $("<img>").addClass("mvImg").attr("src", data.Poster);
+  // let rating0 = $("<p>").text(data.Ratings[0].Value);
+  // let rating1 = $("<p>").text(data.Ratings[1].Value);
+  // let rating2 = $("<p>").text(data.Ratings[2].Value);
+  let titleWrap = $("<div>").addClass("col s8 m10 mvTitle");
+  let title = $("<a>").attr("href", "/api/movies/" + data.title).html("<h5 id='title'> " + data.Title + "</h5>");
+  let yearP = $("<p>").addClass("year-released").text(data.Released);
+  let formCol = $("<div>").addClass("col col s8 m10");
+  let form = $("<form>").attr("method", "post").addClass("ajax");
+  let sliderParagraph = $("<p>").addClass("formP").text("Use slider to rate movie");
+  let slider = $("<p>").addClass("range-field").html("<input type='range' name='rating' id='rating' min='0' max='100' />");
+  let sliderVal = $("<p>").addClass("center slider-txt").attr("id", "slider-txt");
+  let row2 = $("<div>").addClass("row");
+  let inputField = $("<div>").addClass("input-field col s12");
+  let reviewField = $("<textarea>").addClass("materialize-textarea").attr({
+    placeholder: "Your Review (required)",
+    id: "review",
+    name: "review",
+    "data-length": "255",
+    maxlength: "255"
+  })
+  let btnDiv = $("<div>").addClass("btn-div " + randomNum);
+  let submitButton = $("<button>").addClass("btn waves-effect waves-light").attr({
+    id: "submitBtn",
+    type: "submit",
+    value: "send",
+  }).html("<i class='material-icons right'>send</i>Submit");
+  let modalFooter = $("<div>").addClass("modal-footer").html("<a href='#!' class='modal-close waves-effect waves-green btn-flat'>Close</a>");
+
+  // append all data to the rows in correct order for the modal
+  imgWrap.append(image2);
+  // imgWrap.append(rating0);
+  // imgWrap.append(rating1);
+  // imgWrap.append(rating2);
+  // title.append(yearP);
+  btnDiv.append(submitButton);
+  titleWrap.append(title);
+  titleWrap.append(yearP)
+  inputField.append(reviewField);
+  row2.append(inputField);
+  form.append(sliderParagraph);
+  form.append(slider);
+  form.append(sliderVal);
+  form.append(row2);
+  // form.append(btnDiv);
+  formCol.append(form);
+  formCol.append(btnDiv)
+  row1.append(imgWrap);
+  row1.append(titleWrap);
+  row1.append(formCol);
+  formWrap.append(row1);
+  modal.append(formWrap);
+  modal.append(modalFooter);
+
+  // put the content on the DOM
+  $('.imgGridWrapper').append(gridDiv);
+  $("#modal-spot").append(modal);
+
+  // reinitialize listeners
+  // $(this).trigger("event");
+  sliderListener();
+  $('.modal').modal();
+  $('input#input_text, textarea#review').characterCounter();
+  // $("#submitBtn").off();
+  submitReview();
+};
 
   // run the function for the grid
   runGrid();

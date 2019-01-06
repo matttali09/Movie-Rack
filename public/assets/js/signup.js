@@ -1,4 +1,4 @@
-// globals
+// globals (not going to use for now will jus update location in account page)
 var myLat;
 var myLong;
 
@@ -36,8 +36,8 @@ $(document).ready(function () {
         $.post("/api/signup", {
             name: name,
             age: age,
-            userLat: myLat,
-            userLong: myLong
+            // userLat: myLat,
+            // userLong: myLong
         }).then(function (data) {
             console.log("this ran1")
             window.location.replace(data);

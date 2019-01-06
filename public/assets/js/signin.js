@@ -23,9 +23,12 @@ $(function () {
             age: ageInput.val().trim()
         };
 
-        if (!userData.name || !userData.age) {
+        if (!userData.age) {
             return;
-        }
+        };
+        if (!userData.name) {
+            userData.name = "Anonymous";
+        };
 
         // If we have an email and age we run the loginUser function and clear the input areas
         loginUser(userData.name, userData.age);
