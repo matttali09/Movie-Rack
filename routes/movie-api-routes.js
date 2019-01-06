@@ -21,13 +21,12 @@ module.exports = function(app) {
       res.json(dbMovie);
     });
   });
-
   // Get route for retrieving a single post
   app.get("/api/movies/:title", function(req, res) {
     // Add an "include" property to our options in our findOne query
     // Set the value to an array of the models we want to include in a left outer join
     // In this case, just db.User
-    db.Post.findOne({
+    db.Movie.findOne({
       where: {
         title: req.params.title
       },
@@ -45,6 +44,20 @@ module.exports = function(app) {
       console.log("this is the dbMovie: " +dbMovie);
 
       res.json(dbMovie);
+    });
+  });
+
+  app.post("/api/movies/:title", function(req, res) {
+    // Add an "include" property to our options in our findOne query
+    // Set the value to an array of the models we want to include in a left outer join
+    // In this case, just db.User
+    db.Movie.findOne({
+      where: {
+        title: req.params.title
+      },
+      include: [db.User]
+    }).then(function(dbMovie) {
+      res.redirect(301, "/movie_detail")
     });
   });
 

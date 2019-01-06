@@ -10,7 +10,6 @@ passport.use(new LocalStrategy(
     usernameField: "name"
   },
   function(name, password, done) {
-    console.log("err here2.5")
     // When a user tries to sign in this code runs
     db.User.findOne({
       where: {
