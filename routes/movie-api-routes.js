@@ -57,6 +57,23 @@ module.exports = function (app) {
     });
   });
 
+    // GET route for movies based off of the imgHref due to constraints on movie title
+    app.get("/api/movies", function (req, res) {
+      var query = {};
+      if (req.query.user_id) {
+        query.UserId = req.query.user_id;
+      }
+      // Add an "include" property to our options in our findAll query
+      // Set the value to an array of the models we want to include in a left outer join
+      // In this case, just db.User
+      db.Movie.findAll({
+        where: query,
+        include: [db.User]
+      }).then(function (dbMovie) {
+        res.json(dbMovie);
+      });
+    });
+
   // POST route for saving a new post
   app.post("/api/movies", function (req, res) {
 

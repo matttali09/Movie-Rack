@@ -2,12 +2,12 @@
 // Ajax Logic
 // ======================================================================================
 
-var movieTitle = $("#title").val();
+var imgHref = $(".mvImg").attr("src");
 
 // get ratings from movies from the get all movies route then manipulate those
 // ratings to get the median scores we want for the initial image
 getMedianRatings = function () {
-    $.get("/api/movies/:" + movieTitle, function (data) {
+    $.get("/api/movies/:" + imgHref, function (data) {
         // write code to sort by descending rating;
         for (let i = 0; i < data.rating.length; i++) {
             var movieRatingsArray = [];
