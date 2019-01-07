@@ -309,4 +309,9 @@ form p {
     min-height: 20vh;
   }
 }
+@media screen and (min-height: 900px) {
+  .btmSpacer {
+    min-height: 42vh;
+  }
+}
 
