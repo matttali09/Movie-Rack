@@ -26,7 +26,7 @@ module.exports = function (app) {
   });
 
   // Get route for rerouting a page based of the title.
-  app.get("/api/movies/:title",  function (req, res) {
+  app.get("/api/movies/:title", function (req, res) {
     console.log("line 29 req params title: " + req.params.title)
     // Add an "include" property to our options in our findOne query
     // Set the value to an array of the models we want to include in a left outer join
@@ -42,26 +42,60 @@ module.exports = function (app) {
       include: [db.User]
     }).then(function (dbMovie) {
       console.log("this is line 43 dbMovie:" + JSON.stringify(dbMovie))
-      if (dbMovie != null) {
+      if (dbMovie[0] != null) {
+        if (dbMovie.len >= 3) {
+        // get the indexes of the medians, rounding to not get decimals in case not divisible by 4
+        var upperIndex = Math.round(dbMovie.length / 4);
+        var middleIndex = Math.round(dbMovie.length / 2);
+        var lowerIndex = Math.round(dbMovie.length * 3 / 4);
+
+        // create a variable for each of the 3 medians we will want to get the ratings from
+        var upperMedianIndex = dbMovie[upperIndex];
+        var middleMedianIndex = dbMovie[middleIndex];
+        var lowerMedianIndex = dbMovie[lowerIndex];
+
+        // get all the information from those index locations needed.
+        var upperName = upperMedianIndex.User.name;
+        var upperScore = upperMedianIndex.rating;
+        var upperReview = upperMedianIndex.review;
+        var middleName = middleMedianIndex.User.name;
+        var middleScore = middleMedianIndex.rating;
+        var middleReview = middleMedianIndex.review;
+        var lowerName = lowerMedianIndex.User.name;
+        var lowerScore = lowerMedianIndex.rating;
+        var lowerReview = lowerMedianIndex.review;
+
+        }
+
         // get all ratings
         var ratingArray = [];
         for (i in dbMovie) {
           ratingArray.push(dbMovie[i].rating)
         }
+        console.log("rating array:" + ratingArray)
         // same for reviews
         var reviewArray = [];
         for (i in dbMovie) {
           reviewArray.push(dbMovie[i].review)
-        }
+        };
+
         console.log("review array:" + reviewArray)
         var movieObj = {
           title: dbMovie[0].title.replace(/\-/g, " ").toUpperCase(),
           year: dbMovie[0].year_released,
           imgHref: dbMovie[0].movie_img_html,
           ratings: ratingArray,
-          reviews: reviewArray
+          reviews: reviewArray,
+          upperMedianName: upperName,
+          upperMedianScore: upperScore,
+          upperMedianReview: upperReview,
+          middleMedianName: middleName,
+          middleMedianScore: middleScore,
+          middleMedianName: middleReview,
+          lowerMedianName: lowerName,
+          lowerMedianScore: lowerScore,
+          lowerMedianReview: lowerReview,
         };
-        console.log("test variables: " + dbMovie.rating)
         res.render("movie-detail", movieObj);
       }
       else {
