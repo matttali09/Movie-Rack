@@ -12,19 +12,33 @@ getMedianRatings = function () {
         for (let i = 0; i < data.rating.length; i++) {
             var movieRatingsArray = [];
             movieRatingsArray.push(data.rating[i])
-            
+
         }
         // create a variable for each of the 3 medians we will want to get the reviews from
-        var upperMedian;
-        var middleMedian;
-        var lowerMedian;
+        var upperMedian = movieRatingsArray[upperIndex];
+        var middleMedian = movieRatingsArray[middleIndex];
+        var lowerMedian = movieRatingsArray[lowerIndex];
 
         // get the indexes of the medians, rounding to not get decimals in case not divisible by 4
-        var upperIndex = Math.round(data.length / 4);
-        var middleIndex = Math.round(data.length / 2);
-        var lowerIndex = Math.round(data.length * 3 / 4);
+        var upperIndex = Math.round(movieRatingsArray.length / 4);
+        var middleIndex = Math.round(movieRatingsArray.length / 2);
+        var lowerIndex = Math.round(movieRatingsArray.length * 3 / 4);
 
         // get the movies rating information from the median index's
+        /*Top Customer Review (Username / Rating / Comment) - the variable commentHeader can be used again in the Middle and Bottom reviews to be rendered - I only placed it in the Top review section*/
+        let userNameTop = $("<p>").attr("id", "userName").text("???");
+        let userRatingTop = $("<span>").attr("id", "usrRating").text(upperMedian);
+        let commentHeader = $("<p>").text("Comment");
+        let userCommentTop = $("<p>").attr("id", "comment").text("???");
+        //Middle Customer Review (Username / Rating / Comment)
+        let userNameMiddle = $("<p>").attr("id", "userName").text("???");
+        let userRatingMiddle = $("<span>").attr("id", "usrRating").text(middleMedian);
+        let userCommentMiddle = $("<p>").attr("id", "comment").text("???");
+        //Bottom Customer Review (Username / Rating / Comment)
+        let userNameBottom = $("<p>").attr("id", "userName").text("???");
+        let userRatingBottom = $("<span>").attr("id", "usrRating").text(lowerMedian);
+        let userCommentBottom = $("<p>").attr("id", "comment").text("???");
+
 
     });
 };
@@ -71,27 +85,13 @@ function displayReview(data) {
     let imgMain = $("<img>").addClass("mvImg").attr("src", MoviePoster);
 
     //  For Holding Everything Else Below...
-    let infoHolder = $("<div>").addClass("col s8 m9 l10");
+    //let infoHolder = $("<div>").addClass("col s8 m9 l10");
 
     // Title / Date / (Critic Reviews - will need further discussion with team)
-    let titleDateCriticBox = $("<div>");
-    let titleRow = $("<div>").addClass("col s12")
-    let movTitle = $("<h5>").attr("id", "title").text(MovieTitle);
-    let movDate = $("<p>").addClass("year-released").text(movieDate);
-
-    /*Top Customer Review (Username / Rating / Comment) - the variable commentHeader can be used again in the Middle and Bottom reviews to be rendered - I only placed it in the Top review section*/
-    let userNameTop = $("<p>").attr("id", "userName0").text("???");
-    let userRatingTop = $("<span>").attr("id", "usrRating0").text("???");
-    let commentHeader = $("<p>").text("Comment");
-    let userCommentTop = $("<p>").attr("id", "comment0").text("???");
-    //Middle Customer Review (Username / Rating / Comment)
-    let userNameMiddle = $("<p>").attr("id", "userName1").text("???");
-    let userRatingMiddle = $("<span>").attr("id", "usrRating1").text("???");
-    let userCommentMiddle = $("<p>").attr("id", "comment1").text("???");
-    //Bottom Customer Review (Username / Rating / Comment)
-    let userNameBottom = $("<p>").attr("id", "userName2").text("???");
-    let userRatingBottom = $("<span>").attr("id", "usrRating2").text("???");
-    let userCommentBottom = $("<p>").attr("id", "comment2").text("???");
+    //let titleDateCriticBox = $("<div>");
+    //let titleRow = $("<div>").addClass("col s12")
+    //let movTitle = $("<h5>").attr("id", "title").text(MovieTitle);
+    //let movDate = $("<p>").addClass("year-released").text(movieDate);
 
     // var ratingParagraphs = $("<div>");
     // for (i in data.Ratings) {
@@ -127,24 +127,8 @@ function displayReview(data) {
     rowOne.append(infoHolder);
 
     //Place content in the correct location on the DOM
-    $("#review").append(rowOne);
-
-
-
-    // A function for rendering the list of authors to the page
-    function renderAuthorList(rows) {
-        authorList.children().not(":last").remove();
-        authorContainer.children(".alert").remove();
-        if (rows.length) {
-            console.log(rows);
-            authorList.prepend(rows);
-        }
-        else {
-            renderEmpty();
-        }
-    };
-}
-
+    //$("#review").append(rowOne);
+};
 // ======================================================================================
 // Document LOGIC
 // ======================================================================================
