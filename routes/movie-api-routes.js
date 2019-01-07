@@ -41,8 +41,10 @@ module.exports = function (app) {
     }).then(function (dbMovie) {
       var movieObj = {
         title: dbMovie.title.replace(/\-/g, " ").toUpperCase(),
-        year: dbMovie.year_released
+        year: dbMovie.year_released,
+        imgHref: dbMovie.movie_img_html
       };
+      console.log("test variables: " + dbMovie.movie_img_html)
       console.log("this is line 41 dbMovie:" + JSON.stringify(dbMovie))
       res.render("movie-detail", movieObj);
     });
