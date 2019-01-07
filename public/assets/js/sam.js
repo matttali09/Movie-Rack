@@ -39,6 +39,16 @@ $(document).ready(function () {
     // sidnav control
     $(".sidenav").sidenav();
 
-    // run the function for the the initial data to be displayed
-    searchMovie();
+    $(document).ready(function () {
+        // sidnav control
+        $(".sidenav").sidenav();
+        $("#more-reviews").click(function(){
+            $("#hidder").toggle(0250, function(){
+              console.log("The toggle() method is finished!");
+            });
+          });
+     
+        // run the function for the the initial data to be displayed
+        searchMovie();
+     });
 });
