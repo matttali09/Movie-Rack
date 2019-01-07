@@ -25,7 +25,7 @@ module.exports = function (app) {
     });
   });
   // Get route for retrieving a single post
-  app.get("/api/movies/:title",  function (req, res) {
+  app.get("/api/movies/:title", isAuthenticated, function (req, res) {
     console.log("line 29 req params title: " + req.params.title)
     // Add an "include" property to our options in our findOne query
     // Set the value to an array of the models we want to include in a left outer join
@@ -40,16 +40,39 @@ module.exports = function (app) {
       ],
       include: [db.User]
     }).then(function (dbMovie) {
+      console.log("this is line 43 dbMovie:" + JSON.stringify(dbMovie))
+      if (dbMovie != null) {
       var movieObj = {
         title: dbMovie.title.replace(/\-/g, " ").toUpperCase(),
         year: dbMovie.year_released,
         imgHref: dbMovie.movie_img_html
       };
       console.log("test variables: " + dbMovie.movie_img_html)
-      console.log("this is line 41 dbMovie:" + JSON.stringify(dbMovie))
+      console.log("this is line 51 dbMovie:" + JSON.stringify(dbMovie))
       res.render("movie-detail", movieObj);
+    }
+    else {
+      res.render("movie-detail-none", dbMovie)
+    }
     });
   });
+
+    // GET route for movies based off of the imgHref due to constraints on movie title
+    app.get("/api/movies", function (req, res) {
+      var query = {};
+      if (req.query.user_id) {
+        query.UserId = req.query.user_id;
+      }
+      // Add an "include" property to our options in our findAll query
+      // Set the value to an array of the models we want to include in a left outer join
+      // In this case, just db.User
+      db.Movie.findAll({
+        where: query,
+        include: [db.User]
+      }).then(function (dbMovie) {
+        res.json(dbMovie);
+      });
+    });
 
   // POST route for saving a new post
   app.post("/api/movies", function (req, res) {
@@ -59,20 +82,6 @@ module.exports = function (app) {
       console.log("this is the dbMovie: " + dbMovie);
 
       res.json(dbMovie);
-    });
-  });
-
-  app.get("/api/movies/:title", function (req, res) {
-    // Add an "include" property to our options in our findOne query
-    // Set the value to an array of the models we want to include in a left outer join
-    // In this case, just db.User
-    db.Movie.findOne({
-      where: {
-        title: req.params.title
-      },
-      include: [db.User]
-    }).then(function (dbMovie) {
-      res.redirect(301, "/movie_detail")
     });
   });
 
