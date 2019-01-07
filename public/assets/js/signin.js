@@ -70,7 +70,7 @@ $(function () {
         }
 
         var userData = {
-            name: nameInput.val().trim(),
+            name: nameInput.val().trim().replace(/\s+/g, '-').toLowerCase(),
             age: ageInput.val().trim(),
         };
         if (!userData.name) {

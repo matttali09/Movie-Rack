@@ -16,7 +16,7 @@ $(document).ready(function () {
         console.log("create user button pressed")
         event.preventDefault();
         var userData = {
-            name: nameInput.val().trim(),
+            name: nameInput.val().trim().replace(/\s+/g, '-').toLowerCase(),
             password: passwordInput.val().trim(),
             age: ageInput.val().trim()
         };
