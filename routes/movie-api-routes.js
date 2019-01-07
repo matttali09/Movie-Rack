@@ -25,7 +25,7 @@ module.exports = function (app) {
     });
   });
   // Get route for retrieving a single post
-  app.get("/api/movies/:title",  function (req, res) {
+  app.get("/api/movies/:title", isAuthenticated, function (req, res) {
     console.log("line 29 req params title: " + req.params.title)
     // Add an "include" property to our options in our findOne query
     // Set the value to an array of the models we want to include in a left outer join
@@ -46,7 +46,9 @@ module.exports = function (app) {
       };
       console.log("test variables: " + dbMovie.movie_img_html)
       console.log("this is line 41 dbMovie:" + JSON.stringify(dbMovie))
+      if (movieObj) {
       res.render("movie-detail", movieObj);
+      }
     });
   });
 
