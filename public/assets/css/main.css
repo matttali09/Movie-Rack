@@ -56,7 +56,12 @@ body {
   background: url("../images/pexels-photo-436413.jpeg") no-repeat center center
     fixed;
   background-size: cover;
+  /* display: flex;
+  min-height: 100vh;
+  flex-direction: column; */
 }
+
+
 
 #dtlBody {
   background: url("../images/pexels-photo-1353368.jpeg") no-repeat center
@@ -77,9 +82,9 @@ body {
 }
 
 
-#minHeight {
+/* #minHeight {
   min-height: 50vh;
-}
+} */
 
 .darkerBg {
   background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
@@ -253,6 +258,10 @@ form p {
   /* height: 300px; */
 }
 
+.btmSpacer {
+  min-height: 0vh;
+}
+
 /* footer styling */
 #footer {
   background-color: #647678;
@@ -266,6 +275,7 @@ form p {
 }
 
 /* Media Queries */
+
 @media screen and (max-width: 817px){
   .btn-div {
       display: block;
@@ -274,9 +284,27 @@ form p {
     padding: 0;
   }
 }
+
 @media screen and (max-width: 633px){
   #footer {
     text-align: center;
   }
-
 }
+
+@media screen and (min-height: 600px) {
+  .btmSpacer {
+    min-height: 5vh;
+  }
+}
+
+@media screen and (min-height: 640px) {
+  .btmSpacer {
+    min-height: 10vh;
+  }
+}
+@media screen and (min-height: 768px) {
+  .btmSpacer {
+    min-height: 20vh;
+  }
+}
+
