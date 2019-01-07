@@ -256,6 +256,8 @@ form p {
 /* footer styling */
 #footer {
   background-color: #647678;
+  /* position: absolute;
+  bottom: 0; */
 }
 #footer p {
   font-weight: 300;

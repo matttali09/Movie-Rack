@@ -26,6 +26,7 @@ module.exports = function(app) {
     // Add an "include" property to our options in our findOne query
     // Set the value to an array of the models we want to include in a left outer join
     // In this case, just db.User
+    console.log(req.params.title)
     db.Movie.findOne({
       where: {
         title: req.params.title
