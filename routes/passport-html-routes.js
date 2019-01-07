@@ -37,12 +37,5 @@ module.exports = function(app) {
   app.get("/account", isAuthenticated, function(req, res) {
     res.sendFile(path.join(__dirname, "../public/account.html"));
   });
-  app.get("/api/movies/:title", isAuthenticated, function(req, res) {
-    console.log(req.params.title)
-    res.sendFile(path.join(__dirname, "../public/movie_detail.html"));
-  });
-  // app.get("/home", isAuthenticated, function(req, res) {
-  //   res.sendFile(path.join(__dirname, "../public/home.html"));
-  // });
 
 };

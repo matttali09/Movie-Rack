@@ -46,6 +46,8 @@ function searchMovie() {
 
 // function to display a single movie
 function displayMovie(data) {
+  // get title in href form for anchor route
+  var titleHref = data.Title.replace(/\s+/g, '-').toLowerCase();
 
   // create a random number to make sure the number applied is dynamic between 1/1000 to make chance of double approx 1%
   let randomNum = Math.round(Math.random() * 1000)
@@ -61,7 +63,7 @@ function displayMovie(data) {
     // let rating1 = $("<p>").text(data.Ratings[1].Value);
     // let rating2 = $("<p>").text(data.Ratings[2].Value);
     let titleWrap = $("<div>").addClass("col s8 m10 mvTitle");
-    let title = $("<a>").attr("href", "/api/movies/" + data.Title).html("<h5 id='title'> " + data.Title + "</h5>");
+    let title = $("<a>").attr("href", "/api/movies/" + titleHref).html("<h5 id='title'> " + data.Title + "</h5>");
     let yearP = $("<p>").addClass("year-released").text(data.Released);
     let formCol = $("<div>").addClass("col col s8 m10");
     let form = $("<form>").addClass("ajax");
@@ -164,59 +166,59 @@ $(document).ready(function () {
 
   // submit info function for forms of user's review
   submitReview = function (rand) {
-      $("div.btn-div").on("click", "#submitBtn" + rand , function (event) {
-        // stop the default behavior
-        event.preventDefault();
-        // console.log( $(this).parents() );
-        // console.log($(".mvImg").attr("src"));
+    $("div.btn-div").on("click", "#submitBtn" + rand, function (event) {
+      // stop the default behavior
+      event.preventDefault();
+      // console.log( $(this).parents() );
+      // console.log($(".mvImg").attr("src"));
 
-        // check to make sure the button is working
-        // console.log("review processing");
+      // check to make sure the button is working
+      // console.log("review processing");
 
-        // store variables must be applied after element
-        var titleInput = $(this).parents("div.col.s8.m10").siblings("div.mvTitle").children("a").children("h5").text();
-        var yearInput = $(this).parents("div.col.s8.m10").siblings("div.mvTitle").children("p").html();
-        var imgInput = $(this).parents("div.col.s8.m10").siblings("div.mvImgWrap").children("img").attr("src");
-        var ratingInput = $(this).parent().siblings("form.ajax").children("p").find("input[type='range']").val();
-        var reviewInput = $(this).parent().siblings("form.ajax").children("div").find("textarea[name='review']").val()
+      // store variables must be applied after element
+      var titleInput = $(this).parents("div.col.s8.m10").siblings("div.mvTitle").children("a").children("h5").text().trim().replace(/\s+/g, '-').toLowerCase();
+      var yearInput = $(this).parents("div.col.s8.m10").siblings("div.mvTitle").children("p").html();
+      var imgInput = $(this).parents("div.col.s8.m10").siblings("div.mvImgWrap").children("img").attr("src");
+      var ratingInput = $(this).parent().siblings("form.ajax").children("p").find("input[type='range']").val();
+      var reviewInput = $(this).parent().siblings("form.ajax").children("div").find("textarea[name='review']").val()
 
-        // confirm data being stored
-        console.log(titleInput);
-        console.log(yearInput);
-        console.log(imgInput);
-        console.log(ratingInput);
-        console.log(reviewInput);
+      // confirm data being stored
+      console.log(titleInput);
+      console.log(yearInput);
+      console.log(imgInput);
+      console.log(ratingInput);
+      console.log(reviewInput);
 
-        // Wont submit the post if we are missing a body, title, or user
-        if (!titleInput || !yearInput || !imgInput || !reviewInput) {
-          alert("Please fill out the review section one word will do! :)")
-          return;
-        }
-        // grab the information from the form for Movie review data and store it in variables.
-        $.get("/api/cur-user", function (data) {
-          console.log(data.id)
-          var newReview = {
-            title: titleInput,
-            year_released: yearInput,
-            movie_img_html: imgInput,
-            rating: ratingInput,
-            review: reviewInput,
-            UserId: data.id
-          };
-          // Send the POST request.
-          $.post("/api/movies", newReview)
-            .then(function (response) {
-              alert("Thank you for submitting a review")
-              console.log("created new movie rating");
-              // console.log(response)
-              location.reload();
-              return;
-            });
-        });
-
-
-
+      // Wont submit the post if we are missing a body, title, or user
+      if (!titleInput || !yearInput || !imgInput || !reviewInput) {
+        alert("Please fill out the review section one word will do! :)")
+        return;
+      }
+      // grab the information from the form for Movie review data and store it in variables.
+      $.get("/api/cur-user", function (data) {
+        console.log(data.id)
+        var newReview = {
+          title: titleInput,
+          year_released: yearInput,
+          movie_img_html: imgInput,
+          rating: ratingInput,
+          review: reviewInput,
+          UserId: data.id
+        };
+        // Send the POST request.
+        $.post("/api/movies", newReview)
+          .then(function (response) {
+            alert("Thank you for submitting a review")
+            console.log("created new movie rating");
+            // console.log(response)
+            location.reload();
+            return;
+          });
       });
+
+
+
+    });
     return false;
   };
   submitReview();
@@ -252,6 +254,8 @@ $(document).ready(function () {
   function gridAjax(data) {
     // console.log(data.Title)
     // console.log(data.Ratings)
+    // get title in href form for anchor route
+    var titleHref = data.Title.replace(/\s+/g, '-').toLowerCase();
 
     // create a random number to make sure the number applied is dynamic between 1/1000 to make chance of double approx 1%
     let randomNum = Math.round(Math.random() * 1000)
@@ -275,7 +279,7 @@ $(document).ready(function () {
     // let rating1 = $("<p>").text(data.Ratings[1].Value);
     // let rating2 = $("<p>").text(data.Ratings[2].Value);
     let titleWrap = $("<div>").addClass("col s8 m10 mvTitle");
-    let title = $("<a>").attr("href", "/api/movies/" + data.Title).html("<h5 id='title'> " + data.Title + "</h5>");
+    let title = $("<a>").attr("href", "/api/movies/" + titleHref).html("<h5 id='title'> " + data.Title + "</h5>");
     let yearP = $("<p>").addClass("year-released").text(data.Released);
     let formCol = $("<div>").addClass("col col s8 m10");
     let form = $("<form>").attr("method", "post").addClass("ajax");

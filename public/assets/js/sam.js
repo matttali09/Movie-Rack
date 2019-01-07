@@ -2,25 +2,12 @@
 // Ajax Logic
 // ======================================================================================
 
-// req params function to get movie name
-getMovieInfo = function () {
-    $.get("/api/movies/:title", function (data) {
-        // get the movies information that will be needed to display on the poster
-        //  data.title
-        const movieTitle = data.title;
-        //  data.movie_img_html
-        const moviePoster = data.movie_img_html;
-        //  data.year_released
-        const movieDate = data.year_released;
-        //SAM - Do I add in the function of getMedianRatings here??
-
-    });
-};
+var movieTitle = $("#title").val();
 
 // get ratings from movies from the get all movies route then manipulate those
 // ratings to get the median scores we want for the initial image
 getMedianRatings = function () {
-    $.get("/api/movies", function (data) {
+    $.get("/api/movies" + movieTitle, function (data) {
         // write code to sort by descending rating;
         // create a variable for each of the 3 medians we will want to get the reviews from
         var upperMedian;
