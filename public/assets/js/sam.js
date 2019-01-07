@@ -7,8 +7,13 @@ var movieTitle = $("#title").val();
 // get ratings from movies from the get all movies route then manipulate those
 // ratings to get the median scores we want for the initial image
 getMedianRatings = function () {
-    $.get("/api/movies" + movieTitle, function (data) {
+    $.get("/api/movies/:" + movieTitle, function (data) {
         // write code to sort by descending rating;
+        for (let i = 0; i < data.rating.length; i++) {
+            var movieRatingsArray = [];
+            movieRatingsArray.push(data.rating[i])
+            
+        }
         // create a variable for each of the 3 medians we will want to get the reviews from
         var upperMedian;
         var middleMedian;
@@ -28,7 +33,7 @@ getMedianRatings = function () {
 
 // have to get the users with median scores and then maybe create the elements here to add later
 // Function for retrieving review and getting them ready to be rendered to the page
-function getTopReview() {
+/*function getTopReview() {
     $.get("/api/users/:id", function (data) {
         var rowsToAdd = [];
         for (var i = 0; i < data.length; i++) {
@@ -37,7 +42,7 @@ function getTopReview() {
         renderAuthorList(rowsToAdd);
         nameInput.val("");
     });
-};
+};*/
 
 // ajax functiion for a single movie
 function searchMovie() {
@@ -63,7 +68,7 @@ function displayReview(data) {
     // Movie Poster Image
     let rowOne = $("<div>").addClass("row");
     let imgBox = $("<div>").addClass("col s4 m3 l2");
-    let imgMain = $("<img>").addClass("mvImg").attr("src", data.Poster);
+    let imgMain = $("<img>").addClass("mvImg").attr("src", MoviePoster);
 
     //  For Holding Everything Else Below...
     let infoHolder = $("<div>").addClass("col s8 m9 l10");
@@ -71,8 +76,8 @@ function displayReview(data) {
     // Title / Date / (Critic Reviews - will need further discussion with team)
     let titleDateCriticBox = $("<div>");
     let titleRow = $("<div>").addClass("col s12")
-    let movTitle = $("<h5>").attr("id", "title").text(data.Title);
-    let movDate = $("<p>").addClass("year-released").text(data.Released);
+    let movTitle = $("<h5>").attr("id", "title").text(MovieTitle);
+    let movDate = $("<p>").addClass("year-released").text(movieDate);
 
     /*Top Customer Review (Username / Rating / Comment) - the variable commentHeader can be used again in the Middle and Bottom reviews to be rendered - I only placed it in the Top review section*/
     let userNameTop = $("<p>").attr("id", "userName0").text("???");
@@ -90,7 +95,7 @@ function displayReview(data) {
 
     // var ratingParagraphs = $("<div>");
     // for (i in data.Ratings) {
-    //     ratingParagraphs.append($("<p>").addClass("otherRatings").text(data.Ratings[i].Source + " " + data.Ratings[i].Value));
+    // ratingParagraphs.append($("<p>").addClass("otherRatings").text(data.Ratings[i].Source + " " + data.Ratings[i].Value));
     // }
 
 

@@ -265,6 +265,8 @@ form p {
 /* footer styling */
 #footer {
   background-color: #647678;
+  /* position: absolute;
+  bottom: 0; */
 }
 #footer p {
   font-weight: 300;
@@ -305,6 +307,11 @@ form p {
 @media screen and (min-height: 768px) {
   .btmSpacer {
     min-height: 20vh;
+  }
+}
+@media screen and (min-height: 900px) {
+  .btmSpacer {
+    min-height: 42vh;
   }
 }
 
