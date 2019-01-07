@@ -9,11 +9,7 @@
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
             <li><a href="/home">Home</a></li>
-<<<<<<< HEAD
-            <li><a href="#">Rate</a></li>
-=======
             <li><a href="/ratings">Ratings</a></li>
->>>>>>> 31a119a2ba35a67784b3e617e572f1062e5101da
             <li><a href="/account">Account</a></li>
         </ul>
     </div>
@@ -21,11 +17,7 @@
 
 <ul class="sidenav" id="mobile-demo">
     <li><a href="/home">Home</a></li>
-<<<<<<< HEAD
-    <li><a href="#">Rate</a></li>
-=======
     <li><a href="/rating">Ratings</a></li>
->>>>>>> 31a119a2ba35a67784b3e617e572f1062e5101da
     <li><a href="/account">Account</a></li>
 </ul>
 
@@ -40,7 +32,7 @@
                         <!-- poster image -->
                         <div class="col s4 m3 l2">
                             {{!-- img from movieObj --}}
-                            <img class="mvImg" src={{imgHref}} />
+                            <img class="mvImg" src="/assets/images/Dsdlbj3U4AAJoO7.jpg" />
                         </div>
                         <!-- Titles, Year, Rating-->
                         <div class="col s8 m9 l10">
@@ -48,52 +40,30 @@
                                 <!-- Title, Year -->
                                 <div class="row">
                                     <div class="col s12">
-                                        <h5 class="left" id="title">{{title}}</h5>
-                                        <p class="year-released">{{year}}</p>
+                                        <h5 class="left" id="title">This title does not have a rating yet</h5>
                                     </div>
                                 </div>
                                 <!--Ratings (sam part) -->
-                                <p class="otherRatings">Rotten Tomatoes 80</p>
-                                <p class="otherRatings">IMDB 85</p>
-                                <p class="mrRating">MovieRack 70</p>
+                                <p class="mrRating">Be the First to rate it!!</p>
                             </div>
 
                             <!--  Username Rating, Comment (sam part medians) -->
-                            <p id="userName">{{upperMedianName}} <span id="usrRating">{{upperMedianScore}}</span></p>
+                            <p id="userName">UserName <span id="usrRating">95</span></p>
                             <p>Comment</p>
                             <p id="comment">
-                                {{upperMedianReview}}
+                                This was a great movie. After watching it I was able to swim
+                                very long distances and talk to dolphins. I'd see it again.
                             </p>
-                            <!--  Username Rating, Comment (sam part medians) -->
-                            <p id="userName">{{middleMedianName}} <span id="usrRating">{{middleMedianScore}}</span></p>
+                            <!-- Ratings, Username, Comment -->
+                            <p id="userName">AnotherUserName <span id="usrRating">10</span></p>
                             <p>Comment</p>
                             <p id="comment">
-                                {{middleMedianName}}
-                            </p>
-                            <!--  Username Rating, Comment (sam part medians) -->
-                            <p id="userName">{{lowerMedianName}} <span id="usrRating">{{lowerMedianScore}}</span></p>
-                            <p>Comment</p>
-                            <p id="comment">
-                                {{lowerMedianReview}}
+                                This movie was terrible. Aquaman can't even fly or nothing.
                             </p>
                         </div>
                     </div>
                     <!--Take section above and apply dynamically (SAM NOTES) -->
-                    <button class="btn waves-effect waves-light signInBtn" id="more-reviews" type="button" name="action">
-                        Show-All-Reviews <i class="material-icons right">send</i>
-                    </button>
                 </div>
-
-            </div>
-            <div>
-                <ul id="hidder">
-                    {{#each ratings}}
-                    {{> ratings-block}}
-                    {{/each}}
-                </ul>
-                {{#each reviews}}
-                <p>{{this}}</p>
-                {{/each}}
             </div>
         </div>
     </div>

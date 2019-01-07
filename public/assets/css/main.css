@@ -74,6 +74,12 @@ body {
     center fixed;
   background-size: cover;
 }
+
+#accountBody {
+  background: url("../images/299862-P7FMVN-692.jpg") no-repeat center
+    center fixed;
+  background-size: cover;
+}
 .mainContent {
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
   margin-top: 2em;
