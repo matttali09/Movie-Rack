@@ -24,14 +24,15 @@ module.exports = function (app) {
       res.json(dbMovie);
     });
   });
-  // Get route for retrieving a single post
-  app.get("/api/movies/:title", isAuthenticated, function (req, res) {
+
+  // Get route for rerouting a page based of the title.
+  app.get("/api/movies/:title",  function (req, res) {
     console.log("line 29 req params title: " + req.params.title)
     // Add an "include" property to our options in our findOne query
     // Set the value to an array of the models we want to include in a left outer join
     // In this case, just db.User
     console.log(req.params.title)
-    db.Movie.findOne({
+    db.Movie.findAll({
       where: {
         title: req.params.title
       },
@@ -42,37 +43,49 @@ module.exports = function (app) {
     }).then(function (dbMovie) {
       console.log("this is line 43 dbMovie:" + JSON.stringify(dbMovie))
       if (dbMovie != null) {
-      var movieObj = {
-        title: dbMovie.title.replace(/\-/g, " ").toUpperCase(),
-        year: dbMovie.year_released,
-        imgHref: dbMovie.movie_img_html
-      };
-      console.log("test variables: " + dbMovie.movie_img_html)
-      console.log("this is line 51 dbMovie:" + JSON.stringify(dbMovie))
-      res.render("movie-detail", movieObj);
-    }
-    else {
-      res.render("movie-detail-none", dbMovie)
-    }
+        // get all ratings
+        var ratingArray = [];
+        for (i in dbMovie) {
+          ratingArray.push(dbMovie[i].rating)
+        }
+        // same for reviews
+        var reviewArray = [];
+        for (i in dbMovie) {
+          reviewArray.push(dbMovie[i].review)
+        }
+        console.log("review array:" + reviewArray)
+        var movieObj = {
+          title: dbMovie[0].title.replace(/\-/g, " ").toUpperCase(),
+          year: dbMovie[0].year_released,
+          imgHref: dbMovie[0].movie_img_html,
+          ratings: ratingArray,
+          reviews: reviewArray
+        };
+        console.log("test variables: " + dbMovie.rating)
+        res.render("movie-detail", movieObj);
+      }
+      else {
+        res.render("movie-detail-none", dbMovie)
+      }
     });
   });
 
-    // GET route for movies based off of the imgHref due to constraints on movie title
-    app.get("/api/movies", function (req, res) {
-      var query = {};
-      if (req.query.user_id) {
-        query.UserId = req.query.user_id;
-      }
-      // Add an "include" property to our options in our findAll query
-      // Set the value to an array of the models we want to include in a left outer join
-      // In this case, just db.User
-      db.Movie.findAll({
-        where: query,
-        include: [db.User]
-      }).then(function (dbMovie) {
-        res.json(dbMovie);
-      });
+  // GET route for movies based off of the imgHref due to constraints on movie title
+  app.get("/api/movies:imgHref", function (req, res) {
+    var query = {};
+    if (req.query.user_id) {
+      query.UserId = req.query.user_id;
+    }
+    // Add an "include" property to our options in our findAll query
+    // Set the value to an array of the models we want to include in a left outer join
+    // In this case, just db.User
+    db.Movie.findAll({
+      where: query,
+      include: [db.User]
+    }).then(function (dbMovie) {
+      res.json(dbMovie);
     });
+  });
 
   // POST route for saving a new post
   app.post("/api/movies", function (req, res) {

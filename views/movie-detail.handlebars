@@ -66,8 +66,24 @@
                         </div>
                     </div>
                     <!--Take section above and apply dynamically (SAM NOTES) -->
+                                    <button
+                class="btn waves-effect waves-light signInBtn"
+                id="more-reviews"
+                type="button"
+                name="action"
+                >
+                Show-All-Reviews <i class="material-icons right">send</i>
+              </button>
                 </div>
+
             </div>
+            <div>
+<ul>
+  {{#each ratings}}
+      {{> ratings/ratings-block}}
+  {{/each}}
+</ul>
+</div>
         </div>
     </div>
     <div class="btmSpacer s12"></div>
