@@ -24,9 +24,14 @@ module.exports = function (app) {
       res.json(dbMovie);
     });
   });
+<<<<<<< HEAD
+  // Get route for retrieving a single post
+  app.get("/api/movies/:title", isAuthenticated, function (req, res) {
+=======
 
   // Get route for rerouting a page based of the title.
   app.get("/api/movies/:title", function (req, res) {
+>>>>>>> 31a119a2ba35a67784b3e617e572f1062e5101da
     console.log("line 29 req params title: " + req.params.title)
     // Add an "include" property to our options in our findOne query
     // Set the value to an array of the models we want to include in a left outer join
@@ -41,6 +46,18 @@ module.exports = function (app) {
       ],
       include: [db.User]
     }).then(function (dbMovie) {
+<<<<<<< HEAD
+      var movieObj = {
+        title: dbMovie.title.replace(/\-/g, " ").toUpperCase(),
+        year: dbMovie.year_released,
+        imgHref: dbMovie.movie_img_html
+      };
+      console.log("test variables: " + dbMovie.movie_img_html)
+      console.log("this is line 41 dbMovie:" + JSON.stringify(dbMovie))
+      if (movieObj) {
+      res.render("movie-detail", movieObj);
+      }
+=======
       console.log("this is line 43 dbMovie:" + JSON.stringify(dbMovie))
       if (dbMovie[0] != null) {
         if (dbMovie.len >= 3) {
@@ -118,6 +135,7 @@ module.exports = function (app) {
       include: [db.User]
     }).then(function (dbMovie) {
       res.json(dbMovie);
+>>>>>>> 31a119a2ba35a67784b3e617e572f1062e5101da
     });
   });
 
