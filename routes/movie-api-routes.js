@@ -52,22 +52,20 @@ module.exports = function (app) {
           var lowerMedianIndex = dbMovie[lowerIndex];
 
           // get all the information from those index locations needed. (custom replace function to turn first letter into capital)
-          var upperName = upperMedianIndex.User.name.replace(/\-/g, " ").replace( /\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+          var upperName = upperMedianIndex.User.name.replace(/\-/g, " ").replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
           var upperScore = upperMedianIndex.rating;
           var upperReview = upperMedianIndex.review;
-          var middleName = middleMedianIndex.User.name.replace(/\-/g, " ").replace( /\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+          var middleName = middleMedianIndex.User.name.replace(/\-/g, " ").replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
           var middleScore = middleMedianIndex.rating;
           var middleReview = middleMedianIndex.review;
-          var lowerName = lowerMedianIndex.User.name.replace(/\-/g, " ").replace( /\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+          var lowerName = lowerMedianIndex.User.name.replace(/\-/g, " ").replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
           var lowerScore = lowerMedianIndex.rating;
           var lowerReview = lowerMedianIndex.review;
 
-          // create object for all reviews arrays
-          var reviews;
           // create an array of usernames for all reviews button
           var nameArray = [];
           for (var i = 0; i < dbMovie.length; i++) {
-            nameArray.push(dbMovie[i].User.name.replace(/\-/g, " ").replace( /\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}))
+            nameArray.push(dbMovie[i].User.name.replace(/\-/g, " ").replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); }))
           };
 
           // get all ratings
@@ -87,14 +85,20 @@ module.exports = function (app) {
           // add the average to the movie object with the movie rack tag in front
           var movieRackAver = "MovieRack " + average();
 
+          // create object for all reviews arrays
+          var reviewsObj = {
+            ratings: ratingArray,
+            reviews: reviewArray,
+            allUsers: nameArray,
+          };
+          console.log(reviewsObj)
+
           // create the object to pass to handlebars
           var movieObj = {
             title: dbMovie[0].title.replace(/\-/g, " ").toUpperCase(),
             year: dbMovie[0].year_released,
             imgHref: dbMovie[0].movie_img_html,
-            ratings: ratingArray,
-            reviews: reviewArray,
-            allUsers: nameArray,
+            reviews: reviewsObj,
             upperMedianName: upperName,
             upperMedianScore: upperScore,
             upperMedianReview: upperReview,
@@ -119,17 +123,17 @@ module.exports = function (app) {
           var middleMedianIndex = dbMovie[middleIndex];
 
           // get all the information from those index locations needed.
-          var upperName = upperMedianIndex.User.name.replace(/\-/g, " ").replace( /\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});;
+          var upperName = upperMedianIndex.User.name.replace(/\-/g, " ").replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });;
           var upperScore = upperMedianIndex.rating;
           var upperReview = upperMedianIndex.review;
-          var middleName = middleMedianIndex.User.name.replace(/\-/g, " ").replace( /\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});;
+          var middleName = middleMedianIndex.User.name.replace(/\-/g, " ").replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });;
           var middleScore = middleMedianIndex.rating;
           var middleReview = middleMedianIndex.review;
 
           // create an array of usernames for all reviews button
           var nameArray = [];
           for (var i = 0; i < dbMovie.length; i++) {
-            nameArray.push(dbMovie[i].User.name.replace(/\-/g, " ").replace( /\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}));
+            nameArray.push(dbMovie[i].User.name.replace(/\-/g, " ").replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); }));
           };
 
           // get all ratings
@@ -149,14 +153,19 @@ module.exports = function (app) {
           // add the average to the movie object with the movie rack tag in front
           var movieRackAver = "MovieRack " + average();
 
+          // create object for all reviews arrays
+          var reviewsObj = {
+            ratings: ratingArray,
+            reviews: reviewArray,
+            allUsers: nameArray,
+          };
+
           // create the object to pass to handlebars
           var movieObj = {
             title: dbMovie[0].title.replace(/\-/g, " ").toUpperCase(),
             year: dbMovie[0].year_released,
             imgHref: dbMovie[0].movie_img_html,
-            ratings: ratingArray,
-            reviews: reviewArray,
-            allUsers: nameArray,
+            reviews: reviewsObj,
             middleMedianName: middleName,
             middleMedianScore: middleScore,
             middleMedianReview: middleReview,
@@ -173,14 +182,14 @@ module.exports = function (app) {
           var middleMedianIndex = dbMovie[upperIndex];
 
           // get all the information from those index locations needed.
-          var middleName = middleMedianIndex.User.name.replace(/\-/g, " ").replace( /\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+          var middleName = middleMedianIndex.User.name.replace(/\-/g, " ").replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
           var middleScore = middleMedianIndex.rating;
           var middleReview = middleMedianIndex.review;
 
           // create an array of usernames for all reviews button
           var nameArray = [];
           for (var i = 0; i < dbMovie.length; i++) {
-            nameArray.push(dbMovie[i].User.name.replace(/\-/g, " ").replace( /\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}))
+            nameArray.push(dbMovie[i].User.name.replace(/\-/g, " ").replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); }))
           };
 
           // get all ratings
@@ -200,14 +209,19 @@ module.exports = function (app) {
           // add the average to the movie object with the movie rack tag in front
           var movieRackAver = "MovieRack " + average();
 
+          // create object for all reviews arrays
+          var reviewsObj = {
+            ratings: ratingArray,
+            reviews: reviewArray,
+            allUsers: nameArray,
+          };
+
           // create the object to pass to handlebars
           var movieObj = {
             title: dbMovie[0].title.replace(/\-/g, " ").toUpperCase(),
             year: dbMovie[0].year_released,
             imgHref: dbMovie[0].movie_img_html,
-            ratings: ratingArray,
-            reviews: reviewArray,
-            allUsers: nameArray,
+            reviews: reviewsObj,
             upperMedianName: upperName,
             upperMedianScore: upperScore,
             upperMedianReview: upperReview,

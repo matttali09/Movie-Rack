@@ -1,0 +1,11 @@
+<li class="mvDtl">
+
+    {{#each reviews.allUsers}}
+    <p>User Name:</p>
+    <p id="userName">{{this}}<span id="usrRating">{{this}} <!-- {{ratings}} --></span></p>
+    <p>Comment</p>
+    <p id="comment">
+        {{this}}{{!-- {{lookup reviews @index}} --}}
+    </p>
+{{/each}}
+</li>

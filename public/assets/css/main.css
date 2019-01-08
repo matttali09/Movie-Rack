@@ -188,7 +188,9 @@ body {
   color: #59d8e5;
   font-weight: 600;
 }
-
+#usrRating{
+  margin-top: 10px;
+}
 .mvDtl #comment, .mvDtl #comment0, .mvDtl #comment1, .mvDtl #comment2  {
   border-bottom: 2px solid #9fbcbf;
   padding-bottom: 0.5em;
@@ -321,3 +323,8 @@ form p {
   }
 }
 
+/* user grid display */
+/* #user-grid {
+  display: grid;
+  grid-template-columns: auto auto auto;
+} */
