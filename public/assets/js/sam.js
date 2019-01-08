@@ -2,10 +2,10 @@
 // Ajax Logic
 // ======================================================================================
 
-var movieName = $("#title");
+var movieName = $("#title").text();
 
 // ajax functiion for a single movie
-function searchMovie() {
+getReviews = function () {
     let ombdAPIkey = "apikey=trilogy";
     let ombdQueryURL = "https://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&" + ombdAPIkey;
 
@@ -15,9 +15,9 @@ function searchMovie() {
         dataType: "json"
     }).then(function (resp) {
         // confirm there is data received
-        console.log(`ombd results:`);
-        console.log(ombdQueryURL);
-        console.log(resp);
+        // console.log(`ombd results:`);
+        // console.log(ombdQueryURL);
+        // console.log(resp);
 
         // add the results to the HTML page
         displayReviews(resp);
@@ -26,11 +26,15 @@ function searchMovie() {
 
 //================ movie review ================
 function displayReviews(data) {
-    // display the ratings for the response data
-    
-    // for (i in data.Ratings) {
-    // ratingParagraphs.append($("<p>").addClass("otherRatings").text(data.Ratings[i].Source + " " + data.Ratings[i].Value));
-    // }
+
+    // create paragraphs of the ratings with the name and rating    
+    for (i in data.Ratings) {
+        var ratingParagraphs = $("<p>").addClass("otherRatings").text(data.Ratings[i].Source + " " + data.Ratings[i].Value);
+        // append to dom
+        $("#otherRatings").append(ratingParagraphs)
+    }
+
+
 }
 
 // ======================================================================================
@@ -39,22 +43,13 @@ function displayReviews(data) {
 $(document).ready(function () {
     // sidnav control
     $(".sidenav").sidenav();
-    $("#more-reviews").click(function(){
-        $("#hidder").toggle(0250, function(){
-          console.log("The toggle() method is finished!");
-        });
-      });
 
-    $(document).ready(function () {
-        // sidnav control
-        $(".sidenav").sidenav();
-        $("#more-reviews").click(function(){
-            $("#hidder").toggle(0250, function(){
-              console.log("The toggle() method is finished!");
-            });
-          });
-     
-        // run the function for the the initial data to be displayed
-        searchMovie();
-     });
+    // set up the display all section button
+    $("#more-reviews").click(function () {
+        $("#hidder").toggle(2000, function () {
+        });
+    });
+
+    // run the function to get reviews and then append to DOM
+    getReviews();
 });

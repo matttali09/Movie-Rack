@@ -45,9 +45,10 @@
                                     </div>
                                 </div>
                                 <!--Ratings (sam part) -->
-                                <p class="otherRatings">Rotten Tomatoes 80</p>
-                                <p class="otherRatings">IMDB 85</p>
-                                <p class="mrRating">MovieRack 70</p>
+                                <div id="otherRatings">
+                                    {{!-- dynamically apply movie ratings from OMBD --}}
+                                </div>
+                                <p class="mrRating">{{average}}</p>
                             </div>
 
                             <!--  Username Rating, Comment (sam part medians) -->
@@ -60,7 +61,7 @@
                             <p id="userName">{{middleMedianName}} <span id="usrRating">{{middleMedianScore}}</span></p>
                             <p>Comment</p>
                             <p id="comment">
-                                {{middleMedianName}}
+                                {{middleMedianReview}}
                             </p>
                             <!--  Username Rating, Comment (sam part medians) -->
                             <p id="userName">{{lowerMedianName}} <span id="usrRating">{{lowerMedianScore}}</span></p>
@@ -72,21 +73,35 @@
                     </div>
                     <!--Take section above and apply dynamically (SAM NOTES) -->
                     <button class="btn waves-effect waves-light signInBtn" id="more-reviews" type="button" name="action">
-                        Show-All-Reviews <i class="material-icons right">send</i>
+                        Show-All-Reviews <i class="material-icons right">list</i>
                     </button>
                 </div>
 
             </div>
-            <div>
-                <ul id="hidder">
+            <div class="mvDtl" id="hidder" style="display: none;">
+                {{!-- username column --}}
+                <div class="col s4">
+                    <p>User Name:</p>
+                    {{#each allUsers}}
+                    <p id="userName">{{this}}</p>
+                    {{/each}}
+                </div>
+                {{!-- ratings column --}}
+                <div class="col s4">
+                    <p>Ratings:</p>
                     {{#each ratings}}
-                    {{> ratings-block}}
+                    <p id="usrRating">{{this}}</p>
                     {{/each}}
+                </div>
+                {{!-- reviews column--}}
+                <div class="col s4">
+                    <p>Comments:</p>
                     {{#each reviews}}
-                    <p>{{this}}</p>
+                    <p id="comment">
+                        {{this}}
+                    </p>
                     {{/each}}
-                </ul>
-
+                </div>
             </div>
         </div>
     </div>
