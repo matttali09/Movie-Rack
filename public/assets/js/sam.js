@@ -23,6 +23,7 @@ function searchMovie() {
         displayReviews(resp);
     });
 }
+
 //================ movie review ================
 function displayReviews(data) {
     // display the ratings for the response data
@@ -38,6 +39,11 @@ function displayReviews(data) {
 $(document).ready(function () {
     // sidnav control
     $(".sidenav").sidenav();
+    $("#more-reviews").click(function(){
+        $("#hidder").toggle(0250, function(){
+          console.log("The toggle() method is finished!");
+        });
+      });
 
     $(document).ready(function () {
         // sidnav control
