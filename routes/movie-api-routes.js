@@ -62,6 +62,8 @@ module.exports = function (app) {
           var lowerScore = lowerMedianIndex.rating;
           var lowerReview = lowerMedianIndex.review;
 
+          // create object for all reviews arrays
+          var reviews;
           // create an array of usernames for all reviews button
           var nameArray = [];
           for (var i = 0; i < dbMovie.length; i++) {

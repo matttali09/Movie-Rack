@@ -7,7 +7,7 @@ let topMovies = [
   "Pulp+Fiction",
   "Mary+Poppins+Returns",
   "The+Grinch",
-  "How+The+Grinch+Stole+Christmas",
+  "Star+Wars",
   "Venom",
   "The+Godfather",
   "Avengers+Infinity+War",
