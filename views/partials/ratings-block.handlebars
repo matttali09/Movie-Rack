@@ -1,11 +1,22 @@
 <li class="mvDtl">
 
-    {{#each reviews.allUsers}}
-    <p>User Name:</p>
-    <p id="userName">{{this}}<span id="usrRating">{{this}} <!-- {{ratings}} --></span></p>
-    <p>Comment</p>
+    {{!-- User name and rating paragraph --}}
+    <p id="userName">
+
+        {{#each reviews.allUser}}
+        <span style="color: white">User Name: </span> {{this}}
+        {{/each}}
+        {{#each reviews.rating}}
+        <span id="usrRating"><span style="color: white">User Rating: </span>{{this}}
+            <!-- {{ratings}} --></span>
+        {{/each}}
+    </p>
+
+    {{!-- User comment section --}}
+    {{#each reviews.review}}
+    <p>Comment:</p>
     <p id="comment">
         {{this}}{{!-- {{lookup reviews @index}} --}}
     </p>
-{{/each}}
+    {{/each}}
 </li>

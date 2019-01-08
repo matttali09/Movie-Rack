@@ -1,5 +1,6 @@
 // Requiring our models
 var db = require("../models");
+require("dotenv").config();
 
 // Requiring our custom middleware for checking if a user is logged in
 var isAuthenticated = require("../config/middleware/isAuthenticated");
@@ -87,11 +88,11 @@ module.exports = function (app) {
 
           // create object for all reviews arrays
           var reviewsObj = {
-            ratings: ratingArray,
-            reviews: reviewArray,
-            allUsers: nameArray,
+            rating: ratingArray,
+            review: reviewArray,
+            allUser: nameArray,
           };
-          console.log(reviewsObj)
+          console.log("reviews Object = " + reviewsObj.rating)
 
           // create the object to pass to handlebars
           var movieObj = {
@@ -115,8 +116,8 @@ module.exports = function (app) {
         // if only two reviews only display the upper and middle index converted for the math round
         else if (dbMovie.length === 2) {
           // get the indexes of the medians, rounding to not get decimals in case not divisible by 4
-          var upperIndex = Math.round(dbMovie.length / 4);
-          var middleIndex = dbMovie.length;
+          var upperIndex = 0;
+          var middleIndex = 1;
 
           // create a variable for each of the 3 medians we will want to get the ratings from
           var upperMedianIndex = dbMovie[upperIndex];
@@ -166,6 +167,9 @@ module.exports = function (app) {
             year: dbMovie[0].year_released,
             imgHref: dbMovie[0].movie_img_html,
             reviews: reviewsObj,
+            upperMedianName: upperName,
+            upperMedianScore: upperScore,
+            upperMedianReview: upperReview,
             middleMedianName: middleName,
             middleMedianScore: middleScore,
             middleMedianReview: middleReview,

@@ -79,28 +79,9 @@
 
             </div>
             <div class="mvDtl" id="hidder" style="display: none;">
-                {{!-- username column --}}
-                <div class="col s4">
-                    <p>User Name:</p>
-                    {{#each reviews.allUsers}}
-                    <p id="userName">{{this}}</p>
-                    {{/each}}
-                </div>
-                {{!-- ratings column --}}
-                <div class="col s4">
-                    <p>Ratings:</p>
-                    {{#each reviews.ratings}}
-                    <p id="usrRating">{{this}}</p>
-                    {{/each}}
-                </div>
-                {{!-- reviews column--}}
-                <div class="col s4">
-                    <p>Comment</p>
-                    {{#each reviews.reviews}}
-                    <p id="comment">
-                        {{this}}
-                    </p>
-                    {{/each}}
+                {{>ratings-block}}
+
+
                 </div>
             </div>
         </div>
