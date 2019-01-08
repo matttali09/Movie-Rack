@@ -7,4 +7,4 @@ Movie Rack allows users to choose from our top debated movies or search for them
 
 Real users will then rate the movies (anonamously if they wish) in order for the truth about highly debated movies to be gathered and displayed.
 
-![gif2](assets/images/gif2.gif?raw=true "gif2")
+![gif2](/public/assets/images/gif2.gif?raw=true "gif2")
