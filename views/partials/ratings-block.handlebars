@@ -4,13 +4,14 @@
     <p id="userName">
         <span class="col s4">
             {{#each reviews.allUser}}
-            <span style="color: white">User Name: </span> {{this}}
+            <p style="color: white">User Name: </p> {{this}}
             {{/each}}
         </span>
         <span class="col s4">
             {{#each reviews.rating}}
-            <span id="usrRating"><span style="color: white">User Rating: </span>{{this}}
-                <!-- {{ratings}} --></span>
+            <span id="usrRating">
+                <p style="color: white">User Rating: </p>{{this}}
+            </span>
             {{/each}}
         </span>
     </p>
