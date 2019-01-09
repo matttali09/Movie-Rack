@@ -17,7 +17,7 @@ and reviews from real Users.
 ![gif3](/public/assets/images/gif3.gif?raw=true "gif3")
 
 
-#FUTURE UPDATES
+###FUTURE UPDATES
 
 -we are going to install a route to display all data from users
 
