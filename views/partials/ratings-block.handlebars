@@ -1,24 +1,28 @@
 <li class="mvDtl col s8 m9 l10">
 
     {{!-- User name and rating paragraph --}}
-    <div class="col s4">
-        {{#each reviews.allUser}}
-        <p id="userName">User Name: {{this}}</p>
-        {{/each}}
-    </div>
-    <div class="col s4">
-        {{#each reviews.rating}}
-        <p id="usrRating">User Rating: {{this}}</p>
-        {{/each}}
-    </div>
+    <div id="user-paragraph">
+        {{!-- user name span --}}
+        <span class="col s4">
+            {{#each reviews.allUser}}
+            <p id="userName">User Name: {{this}} </p>
+            {{/each}}
+        </span>
 
-    {{!-- User comment section --}}
-    <div class="col s4">
-        {{#each reviews.review}}
-        <p>Review/Comment:</p>
-        <p id="comment">
-            {{this}}{{!-- {{lookup reviews @index}} --}}
-        </p>
-        {{/each}}
-    </div>
+        {{!-- user rating span --}}
+        <span class="col s4">
+            {{#each reviews.rating}}
+            <p id="usrRating">User Rating: {{this}}</p>
+            {{/each}}
+        </span>
+
+        {{!-- user review span --}}
+        <span class="col s4">
+            {{#each reviews.review}}
+            <p>Review/Comment:</p>
+            <p id="comment">{{this}}</p>
+            {{/each}}
+        </span>
+    </p>
+
 </li>

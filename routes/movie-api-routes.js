@@ -83,7 +83,7 @@ module.exports = function (app) {
           };
           // console.log("review array:" + reviewArray);
 
-          // add the average to the movie object with the movie rack tag in front
+          // add the average to the movie object with the movie rack string tag in front
           var movieRackAver = "MovieRack " + average();
 
           // create object for all reviews arrays

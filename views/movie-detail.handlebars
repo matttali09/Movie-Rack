@@ -74,16 +74,18 @@
                                 Show-All-Reviews <i class="material-icons right">list</i>
                             </button>
                         </div>
+
+                    </div>
+                    <div id="hidder" style="display: none;">
+                        {{!-- ratings block partial is called --}}
+                        <ul>
+                            {{>ratings-block}}
+                        </ul>
                     </div>
                 </div>
 
             </div>
-            <div id="hidder" style="display: none;">
-                {{!-- ratings block partial is called --}}
-                <ul>
-                    {{>ratings-block}}
-                </ul>
-            </div>
+
         </div>
     </div>
     <div class="btmSpacer s12"></div>
