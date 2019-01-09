@@ -2,12 +2,12 @@
 
     {{!-- User name and rating paragraph --}}
     <p id="userName">
-        <span class="">
+        <span class="col s4">
             {{#each reviews.allUser}}
             <span style="color: white">User Name: </span> {{this}}
             {{/each}}
         </span>
-        <span class="">
+        <span class="col s4">
             {{#each reviews.rating}}
             <span id="usrRating"><span style="color: white">User Rating: </span>{{this}}
                 <!-- {{ratings}} --></span>
@@ -16,7 +16,7 @@
     </p>
 
     {{!-- User comment section --}}
-    <div class="">
+    <div class="col s4">
         {{#each reviews.review}}
         <p>Comment:</p>
         <p id="comment">
