@@ -69,19 +69,19 @@
                             <p id="comment">
                                 {{lowerMedianReview}}
                             </p>
+                            <!--Take section above and apply dynamically (SAM NOTES) -->
+                            <button class="btn waves-effect waves-light signInBtn" id="more-reviews" type="button" name="action">
+                                Show-All-Reviews <i class="material-icons right">list</i>
+                            </button>
                         </div>
                     </div>
-                    <!--Take section above and apply dynamically (SAM NOTES) -->
-                    <button class="btn waves-effect waves-light signInBtn" id="more-reviews" type="button" name="action">
-                        Show-All-Reviews <i class="material-icons right">list</i>
-                    </button>
                 </div>
 
             </div>
             <div id="hidder" style="display: none;">
                 {{!-- ratings block partial is called --}}
                 <ul>
-                {{>ratings-block}}
+                    {{>ratings-block}}
                 </ul>
             </div>
         </div>
