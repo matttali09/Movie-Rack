@@ -19,8 +19,10 @@ and reviews from real Users.
 
 # FUTURE UPDATES
 
--we are going to install a route to display all data from users
+-we are going to install a route to display all data from users.
 
--we also are going to add a feature to search our database by inputing name
+-we also are going to add a feature to search our database by inputing name.
 
--we want to add a section that will be more messageboard styled
+-create the update account route and get email password recovery on login.
+
+-we want to add a section that will be more messageboard styled.
