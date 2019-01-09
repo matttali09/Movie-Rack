@@ -180,7 +180,7 @@ body {
   float: right;
 }
 
-.mvDtl #userName, .mvDtl #userName0, .mvDtl #userName1, .mvDtl #userName2  {
+.mvDtl #userName, .mvDtl .userName, .mvDtl #userName0, .mvDtl #userName1, .mvDtl #userName2  {
   margin-top: .5em;
   color: #59d8e5;
   font-weight: 700;

@@ -4,6 +4,7 @@
 // get the movie title from the page
 var movieName = $("#title").text();
 
+
 // ajax functiion for a single movie
 getReviews = function () {
     let ombdAPIkey = "apikey=trilogy";
@@ -44,11 +45,36 @@ $(document).ready(function () {
     // sidnav control
     $(".sidenav").sidenav();
 
+    // This grabs the values for the all users hidden paragraphs and stores it into the right spot
+    var i = 0;
+    while ($(".userNames"+i).html() != undefined) { 
+    var userNames = $(".userNames" +i).html();
+    $("#userName"+i).text(userNames)
+    i++;
+    };
+
+    var i = 0;
+    while ($(".userRatings"+i).html() != undefined) { 
+    var userRating = $(".userRatings" +i).html();
+    $("#userName" + i).append("<span id='usrRating'>:  "+ userRating + "%</span>")
+    i++;
+    };
+
+
     // set up the display all section button
-    $("#more-reviews").click(function () {
-        $("#hidder").toggle(2000, function () {
+    function moreReviewsBtn() {
+        $("#more-reviews").click(function () {
+            $("#hidder").toggle(2000, function () {
+
+                // second button at bottom to hide reviews
+                $("#hide-reviews").click(function () {
+                    $("#hidder").hide(2000, function () {
+                    });
+                })
+            });
         });
-    });
+    };
+    moreReviewsBtn();
 
     // run the function to get reviews and then append to DOM
     getReviews();

@@ -34,7 +34,7 @@ module.exports = function (app) {
           return total
         }
         // use the prototype funtion to get the total and then devide by the len to get the average
-        var avg = dbMovie.sum('rating') / dbMovie.length;
+        var avg = Math.round(dbMovie.sum('rating') / dbMovie.length);
         return avg;
       };
 
@@ -101,15 +101,15 @@ module.exports = function (app) {
             imgHref: dbMovie[0].movie_img_html,
             reviews: reviewsObj,
             upperMedianName: upperName,
-            upperMedianScore: upperScore,
+            upperMedianScore: upperScore + "%",
             upperMedianReview: upperReview,
             middleMedianName: middleName,
-            middleMedianScore: middleScore,
+            middleMedianScore: middleScore + "%",
             middleMedianReview: middleReview,
             lowerMedianName: lowerName,
-            lowerMedianScore: lowerScore,
+            lowerMedianScore: lowerScore + "%",
             lowerMedianReview: lowerReview,
-            average: movieRackAver,
+            average: movieRackAver + "%",
           };
         }
 
@@ -168,12 +168,12 @@ module.exports = function (app) {
             imgHref: dbMovie[0].movie_img_html,
             reviews: reviewsObj,
             upperMedianName: upperName,
-            upperMedianScore: upperScore,
+            upperMedianScore: upperScore + "%",
             upperMedianReview: upperReview,
             middleMedianName: middleName,
-            middleMedianScore: middleScore,
+            middleMedianScore: middleScore + "%",
             middleMedianReview: middleReview,
-            average: movieRackAver,
+            average: movieRackAver + "%",
           };
         }
 
@@ -227,9 +227,9 @@ module.exports = function (app) {
             imgHref: dbMovie[0].movie_img_html,
             reviews: reviewsObj,
             upperMedianName: upperName,
-            upperMedianScore: upperScore,
+            upperMedianScore: upperScore + "%",
             upperMedianReview: upperReview,
-            average: movieRackAver,
+            average: movieRackAver + "%",
           };
         };
         res.render("movie-detail", movieObj);

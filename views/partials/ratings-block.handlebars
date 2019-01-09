@@ -3,26 +3,20 @@
     {{!-- User name and rating paragraph --}}
     <div id="user-paragraph">
         {{!-- user name span --}}
-        <span class="col s4">
-            {{#each reviews.allUser}}
-            <p id="userName">User Name: {{this}} </p>
-            {{/each}}
-        </span>
+        {{#each reviews.review}}
+        <p id="userName{{@index}}" class="userName"> <span id="userRating{{@index}}" class="userRating" ></span></p>
+        <p>Review/ Comment:</p>
+        <p id="comment">{{this}}</p>
+        {{/each}}
 
-        {{!-- user rating span --}}
-        <span class="col s4">
-            {{#each reviews.rating}}
-            <p id="usrRating">User Rating: {{this}}</p>
-            {{/each}}
-        </span>
+        {{!-- user users hidden span --}}
+        {{#each reviews.allUser}}
+        <p class="userNames{{@index}}" style="display: none">{{this}}</p>
+        {{/each}}
 
-        {{!-- user review span --}}
-        <span class="col s4">
-            {{#each reviews.review}}
-            <p>Review/Comment:</p>
-            <p id="comment">{{this}}</p>
-            {{/each}}
-        </span>
-    </p>
+        {{!-- user rating hidden span --}}
+        {{#each reviews.rating}}
+        <p class="userRatings{{@index}}" style="display: none">User Rating: {{this}}</p>
+        {{/each}}
 
 </li>
