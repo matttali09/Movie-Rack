@@ -56,7 +56,7 @@ $(document).ready(function () {
     var i = 0;
     while ($(".userRatings"+i).html() != undefined) { 
     var userRating = $(".userRatings" +i).html();
-    $("#userName" + i).append("<span id='usrRating'>:  "+ userRating + "%</span>")
+    $("#userName" + i).append("<span id='usrRating'>    "+ userRating + "%</span>")
     i++;
     };
 
