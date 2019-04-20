@@ -4,7 +4,7 @@
     <div id="user-paragraph">
         {{!-- user name span --}}
         {{#each reviews.review}}
-        <p id="userName{{@index}}" class="userName"> <span id="userRating{{@index}}" class="userRating" ></span></p>
+        <p id="userName{{@index}}" class="userName"> {{!-- applied dynamically in sam.js <span id="userRating{{}}" class="userRating" >User Rating: (next one in loop)</span> --}}</p>
 
         <p id="comment">{{this}}</p>
         {{/each}}
